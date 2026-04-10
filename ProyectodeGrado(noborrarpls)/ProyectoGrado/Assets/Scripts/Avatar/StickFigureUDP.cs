@@ -7,11 +7,11 @@ using UnityEngine;
 public class StickFigureUDP : MonoBehaviour
 {
     [Header("Visual")]
-    public float sphereSize = 0.08f;
+    public float sphereSize = 0.3f;
     public Color jointColor = Color.cyan;
     public Color boneColor = Color.white;
-    public float scale = 5f;
-    public Vector3 offset = new Vector3(0, 2, 0);
+    public float scale = 3f;
+    public Vector3 offset = new Vector3(0, 0, 0);
 
     private GameObject[] joints = new GameObject[33];
     private LineRenderer[] bones;
