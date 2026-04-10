@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-/// <summary>
-/// Recibe landmarks de MediaPipe vía UDP desde Python.
-/// Singleton persistente entre escenas con suavizado Lerp.
-/// Puerto: 5052
-/// </summary>
+[Serializable]
+public class PoseData
+{
+    public bool detected;
+    public float[][] landmarks;
+}
+
 public class PoseReceiverUDP : MonoBehaviour
 {
     public static PoseReceiverUDP Instance { get; private set; }
@@ -31,28 +33,17 @@ public class PoseReceiverUDP : MonoBehaviour
     private readonly object lockObj = new object();
     private Vector3[] rawLandmarks = new Vector3[33];
     private bool newDataAvailable = false;
+    private bool tempDetected = false;
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        for (int i = 0; i < 33; i++)
-        {
-            landmarks[i] = Vector3.zero;
-            rawLandmarks[i] = Vector3.zero;
-        }
+        for (int i = 0; i < 33; i++) { landmarks[i] = Vector3.zero; rawLandmarks[i] = Vector3.zero; }
     }
 
-    void Start()
-    {
-        StartReceiving();
-    }
+    void Start() { StartReceiving(); }
 
     void StartReceiving()
     {
@@ -65,10 +56,7 @@ public class PoseReceiverUDP : MonoBehaviour
             receiveThread.Start();
             Debug.Log($"[PoseReceiverUDP] Escuchando puerto {port}");
         }
-        catch (Exception e)
-        {
-            Debug.LogError($"[PoseReceiverUDP] Error al iniciar: {e.Message}");
-        }
+        catch (Exception e) { Debug.LogError($"[PoseReceiverUDP] Error al iniciar: {e.Message}"); }
     }
 
     void ReceiveLoop()
@@ -79,15 +67,12 @@ public class PoseReceiverUDP : MonoBehaviour
             try
             {
                 byte[] data = udpClient.Receive(ref remoteEP);
-                string json = Encoding.UTF8.GetString(data);
-                ParseJson(json);
+            string json = Encoding.UTF8.GetString(data);
+            ParseJson(json); 
             }
             catch (SocketException) { break; }
             catch (ThreadAbortException) { break; }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"[PoseReceiverUDP] {e.Message}");
-            }
+            catch (Exception e) { Debug.LogWarning($"[PoseReceiverUDP] {e.Message}"); }
         }
     }
 
@@ -95,52 +80,62 @@ public class PoseReceiverUDP : MonoBehaviour
     {
         try
         {
-            // Formato esperado: {"detected":true,"landmarks":[[x,y,z],[x,y,z],...]}
-            int detectedIdx = json.IndexOf("\"detected\"");
-            bool detected = json.IndexOf("true", detectedIdx) > 0 && json.IndexOf("true", detectedIdx) < json.IndexOf(",", detectedIdx) + 10;
+            // Parser manual robusto: busca todos los grupos [x,y,z]
+            bool detected = json.Contains("\"detected\": true") || json.Contains("\"detected\":true");
 
-            int startIdx = json.IndexOf("[[");
-            int endIdx = json.LastIndexOf("]]");
-            if (startIdx < 0 || endIdx < 0) return;
+            int idx = 0;
+            int landmarkIdx = 0;
+            Vector3[] tempLandmarks = new Vector3[33];
 
-            string body = json.Substring(startIdx + 2, endIdx - startIdx - 2);
-            string[] points = body.Split(new string[] { "],[" }, StringSplitOptions.None);
+            // Saltar hasta encontrar "landmarks"
+            int lmStart = json.IndexOf("\"landmarks\"");
+            if (lmStart < 0) return;
+            idx = json.IndexOf("[[", lmStart);
+            if (idx < 0) return;
+            idx += 2; // saltar [[
+
+            while (landmarkIdx < 33 && idx < json.Length)
+            {
+                // Buscar 3 numeros separados por coma
+                float[] coords = new float[3];
+                for (int c = 0; c < 3; c++)
+                {
+                    // Saltar espacios y caracteres no numericos hasta encontrar digito o signo
+                    while (idx < json.Length && json[idx] != '-' && (json[idx] < '0' || json[idx] > '9')) idx++;
+                    int numStart = idx;
+                    while (idx < json.Length && (json[idx] == '-' || json[idx] == '.' || (json[idx] >= '0' && json[idx] <= '9') || json[idx] == 'e' || json[idx] == 'E' || json[idx] == '+')) idx++;
+                    if (numStart == idx) break;
+                    string numStr = json.Substring(numStart, idx - numStart);
+                    float.TryParse(numStr, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out coords[c]);
+                }
+                tempLandmarks[landmarkIdx] = new Vector3(coords[0], coords[1], coords[2]);
+                landmarkIdx++;
+
+                // Buscar siguiente '[' o salir si encuentra ']]'
+                while (idx < json.Length && json[idx] != '[' && json[idx] != ']') idx++;
+                if (idx >= json.Length || json[idx] == ']') break;
+                idx++; // saltar [
+            }
 
             lock (lockObj)
             {
-                for (int i = 0; i < points.Length && i < 33; i++)
-                {
-                    string clean = points[i].Replace("[", "").Replace("]", "");
-                    string[] coords = clean.Split(',');
-                    if (coords.Length >= 3)
-                    {
-                        float x = float.Parse(coords[0], System.Globalization.CultureInfo.InvariantCulture);
-                        float y = float.Parse(coords[1], System.Globalization.CultureInfo.InvariantCulture);
-                        float z = float.Parse(coords[2], System.Globalization.CultureInfo.InvariantCulture);
-                        rawLandmarks[i] = new Vector3(x, y, z);
-                    }
-                }
-                poseDetected = detected;
+                for (int i = 0; i < 33; i++) rawLandmarks[i] = tempLandmarks[i];
+                tempDetected = detected;
                 newDataAvailable = true;
             }
         }
-        catch (Exception e)
-        {
-            Debug.LogWarning($"[PoseReceiverUDP] Parse error: {e.Message}");
-        }
+        catch (Exception e) { Debug.LogWarning($"[PoseReceiverUDP] Parse error: {e.Message}"); }
     }
 
     void Update()
     {
-        // Aplicar suavizado Lerp en el hilo principal
         lock (lockObj)
         {
             if (newDataAvailable)
             {
                 for (int i = 0; i < 33; i++)
-                {
                     landmarks[i] = Vector3.Lerp(landmarks[i], rawLandmarks[i], smoothing);
-                }
+                poseDetected = tempDetected;
                 newDataAvailable = false;
             }
         }
