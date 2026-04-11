@@ -112,9 +112,15 @@ public class PoseReceiverUDP : MonoBehaviour
                 landmarkIdx++;
 
                 // Buscar siguiente '[' o salir si encuentra ']]'
-                while (idx < json.Length && json[idx] != '[' && json[idx] != ']') idx++;
-                if (idx >= json.Length || json[idx] == ']') break;
-                idx++; // saltar [
+                // Saltar el ']' de cierre del landmark actual
+                    while (idx < json.Length && json[idx] != ']') idx++;
+                    if (idx >= json.Length) break;
+                    idx++; // saltar el ']'
+
+                    // Ahora buscar el siguiente '[' o el ']' final del array
+                    while (idx < json.Length && json[idx] != '[' && json[idx] != ']') idx++;
+                    if (idx >= json.Length || json[idx] == ']') break;
+                    idx++; // saltar el '['
             }
 
             lock (lockObj)
