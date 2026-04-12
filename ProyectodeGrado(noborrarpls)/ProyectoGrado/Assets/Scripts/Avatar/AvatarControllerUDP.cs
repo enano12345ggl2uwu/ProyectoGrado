@@ -2,7 +2,8 @@ using UnityEngine;
 
 /// <summary>
 /// Controla un avatar Humanoid (Amy de Mixamo) usando landmarks de MediaPipe.
-/// Version 4: restaura T-pose cada frame, detecta eje automatico y mueve el cuerpo en el espacio.
+/// Version 8: giro por diferencial de hombros + extremidades + desplazamiento.
+/// Animator Controller debe estar en None.
 /// </summary>
 public class AvatarControllerUDP : MonoBehaviour
 {
@@ -11,14 +12,14 @@ public class AvatarControllerUDP : MonoBehaviour
 
     [Header("Config")]
     public float smoothing = 10f;
+    public float torsoRotationSpeed = 5f;
     public bool mirrorMode = true;
 
     [Header("Movimiento corporal")]
-    public float positionScale = 4f;
+    public float positionScale = 5f;
     public float positionSmoothing = 8f;
     public Vector3 positionOffset = new Vector3(0, 0, 0);
 
-    // Huesos
     private Transform hips, spine;
     private Transform leftUpperArm, rightUpperArm;
     private Transform leftLowerArm, rightLowerArm;
@@ -27,14 +28,12 @@ public class AvatarControllerUDP : MonoBehaviour
     private Transform leftLowerLeg, rightLowerLeg;
     private Transform leftFoot, rightFoot;
 
-    // Rotaciones iniciales (T-pose) en espacio local
     private Quaternion initHips, initSpine;
     private Quaternion initLUpperArm, initRUpperArm;
     private Quaternion initLLowerArm, initRLowerArm;
     private Quaternion initLUpperLeg, initRUpperLeg;
     private Quaternion initLLowerLeg, initRLowerLeg;
 
-    // Ejes locales de cada hueso en T-pose (calculados automaticamente)
     private Vector3 axisLUpperArm, axisRUpperArm;
     private Vector3 axisLLowerArm, axisRLowerArm;
     private Vector3 axisLUpperLeg, axisRUpperLeg;
@@ -51,7 +50,7 @@ public class AvatarControllerUDP : MonoBehaviour
         }
 
         hips = animator.GetBoneTransform(HumanBodyBones.Hips);
-        spine = animator.GetBoneTransform(HumanBodyBones.Spine);
+        spine = animator.GetBoneTransform(HumanBodyBones.Chest);
         leftUpperArm = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
         rightUpperArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
         leftLowerArm = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
@@ -65,7 +64,6 @@ public class AvatarControllerUDP : MonoBehaviour
         leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
         rightFoot = animator.GetBoneTransform(HumanBodyBones.RightFoot);
 
-        // Guardar rotaciones iniciales LOCALES
         initHips = hips.localRotation;
         initSpine = spine ? spine.localRotation : Quaternion.identity;
         initLUpperArm = leftUpperArm.localRotation;
@@ -77,7 +75,6 @@ public class AvatarControllerUDP : MonoBehaviour
         initLLowerLeg = leftLowerLeg.localRotation;
         initRLowerLeg = rightLowerLeg.localRotation;
 
-        // Calcular el eje local de cada hueso mirando a su hijo
         axisLUpperArm = GetBoneAxis(leftUpperArm, leftLowerArm);
         axisRUpperArm = GetBoneAxis(rightUpperArm, rightLowerArm);
         axisLLowerArm = GetBoneAxis(leftLowerArm, leftHand);
@@ -88,9 +85,6 @@ public class AvatarControllerUDP : MonoBehaviour
         axisRLowerLeg = GetBoneAxis(rightLowerLeg, rightFoot);
     }
 
-    /// <summary>
-    /// Calcula el eje local hacia el que apunta un hueso en T-pose, usando la posicion de su hijo.
-    /// </summary>
     Vector3 GetBoneAxis(Transform bone, Transform child)
     {
         if (bone == null || child == null) return Vector3.down;
@@ -102,7 +96,7 @@ public class AvatarControllerUDP : MonoBehaviour
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
 
-        // PASO 1: restaurar T-pose (evita acumulacion)
+        // PASO 1: restaurar T-pose
         hips.localRotation = initHips;
         if (spine) spine.localRotation = initSpine;
         leftUpperArm.localRotation = initLUpperArm;
@@ -114,7 +108,7 @@ public class AvatarControllerUDP : MonoBehaviour
         leftLowerLeg.localRotation = initLLowerLeg;
         rightLowerLeg.localRotation = initRLowerLeg;
 
-        // PASO 2: obtener landmarks en espacio Unity
+        // PASO 2: obtener landmarks
         Vector3 lShoulder = L(11), rShoulder = L(12);
         Vector3 lElbow = L(13), rElbow = L(14);
         Vector3 lWrist = L(15), rWrist = L(16);
@@ -122,8 +116,10 @@ public class AvatarControllerUDP : MonoBehaviour
         Vector3 lKnee = L(25), rKnee = L(26);
         Vector3 lAnkle = L(27), rAnkle = L(28);
 
-        // PASO 3: rotar cada hueso
-        // Con mirror activo, izquierda y derecha se intercambian
+        // PASO 3: rotar torso PRIMERO
+        RotateTorso();
+
+        // PASO 4: rotar extremidades
         Transform luArm = mirrorMode ? rightUpperArm : leftUpperArm;
         Transform ruArm = mirrorMode ? leftUpperArm : rightUpperArm;
         Transform llArm = mirrorMode ? rightLowerArm : leftLowerArm;
@@ -151,13 +147,10 @@ public class AvatarControllerUDP : MonoBehaviour
         AimBone(llLeg, lKnee, lAnkle, axLLL);
         AimBone(rlLeg, rKnee, rAnkle, axRLL);
 
-        // PASO 4: mover el cuerpo en el espacio segun el centro de las caderas
+        // PASO 5: mover en el espacio
         MoveBody(lHip, rHip, lShoulder, rShoulder);
     }
 
-    /// <summary>
-    /// Rota un hueso para que su eje local apunte de "from" hacia "to" en espacio mundo.
-    /// </summary>
     void AimBone(Transform bone, Vector3 from, Vector3 to, Vector3 localAxis)
     {
         if (bone == null) return;
@@ -165,38 +158,64 @@ public class AvatarControllerUDP : MonoBehaviour
         if (dir.sqrMagnitude < 0.0001f) return;
         dir.Normalize();
 
-        // Direccion actual del hueso en mundo (segun T-pose restaurada)
         Vector3 currentWorldDir = bone.TransformDirection(localAxis);
-
-        // Rotacion adicional para alinear la direccion actual con la deseada
         Quaternion delta = Quaternion.FromToRotation(currentWorldDir, dir);
         bone.rotation = delta * bone.rotation;
     }
 
-    /// <summary>
-    /// Mueve todo el cuerpo de Amy en el espacio segun el centro del torso detectado.
-    /// </summary>
+    void RotateTorso()
+    {
+        if (spine == null || hips == null) return;
+
+        Vector3 lS = L(11);
+        Vector3 rS = L(12);
+        Vector3 lH = L(23);
+        Vector3 rH = L(24);
+
+        Vector3 hipCenter = (lH + rH) * 0.5f;
+        Vector3 shoulderCenter = (lS + rS) * 0.5f;
+        Vector3 spineUp = (shoulderCenter - hipCenter).normalized;
+        Vector3 hipRight = (rH - lH).normalized;
+        Vector3 forward = Vector3.Cross(hipRight, spineUp).normalized;
+
+        if (forward.sqrMagnitude < 0.01f) return;
+
+        hips.localRotation = initHips;
+        spine.localRotation = initSpine;
+
+        Quaternion targetRot = Quaternion.LookRotation(forward, spineUp);
+
+        hips.rotation = Quaternion.Slerp(hips.rotation, targetRot, Time.deltaTime * torsoRotationSpeed);
+        spine.rotation = Quaternion.Slerp(spine.rotation, targetRot, Time.deltaTime * (torsoRotationSpeed * 1.2f));
+
+        Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
+        if (head != null)
+        {
+            head.rotation = Quaternion.Slerp(head.rotation, targetRot, Time.deltaTime * torsoRotationSpeed);
+        }
+    }
+    
     void MoveBody(Vector3 lHip, Vector3 rHip, Vector3 lShoulder, Vector3 rShoulder)
     {
-        // Centro del cuerpo (promedio caderas + hombros)
         Vector3 bodyCenter = (lHip + rHip + lShoulder + rShoulder) * 0.25f;
-
-        // Escalar y aplicar offset
-        Vector3 targetPos = bodyCenter * positionScale + positionOffset;
-
-        // Mover suave
+        Vector3 targetPos = new Vector3(
+            bodyCenter.x * positionScale,
+            bodyCenter.y * positionScale,
+            bodyCenter.z * positionScale
+        ) + positionOffset;
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * positionSmoothing);
     }
 
-    /// <summary>
-    /// Convierte landmark MediaPipe a espacio Unity.
-    /// </summary>
     Vector3 L(int index)
     {
         Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(index);
-        float x = mirrorMode ? -(lm.x - 0.5f) : (lm.x - 0.5f);
-        float y = -(lm.y - 0.5f);
-        float z = -lm.z;
+        // World landmarks: en metros desde el centro de las caderas
+        // X: positivo a la derecha del usuario
+        // Y: positivo hacia arriba
+        // Z: positivo hacia atras (lejos de la camara)
+        float x = mirrorMode ? -lm.x : lm.x;
+        float y = -lm.y; // invertir porque MediaPipe Y va hacia abajo
+        float z = -lm.z; // invertir para que adelante sea +Z
         return new Vector3(x, y, z);
     }
 }

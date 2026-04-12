@@ -82,11 +82,11 @@ def main():
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = pose.process(rgb)
 
-            if results.pose_landmarks:
+            if results.pose_world_landmarks:
                 landmarks = [
                     [lm.x, lm.y, lm.z]
-                    for lm in results.pose_landmarks.landmark
-                ]
+                    for lm in results.pose_world_landmarks.landmark
+    ]
                 payload = {"detected": True, "landmarks": landmarks}
 
                 if SHOW_PREVIEW:
