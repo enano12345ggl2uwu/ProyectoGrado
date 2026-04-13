@@ -758,12 +758,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 985016772}
-  smoothing: 5
-  torsoRotationSpeed: 20
+  groundY: 0
+  rotationSpeed: 10
   mirrorMode: 1
-  positionScale: 1
-  positionSmoothing: 8
-  positionOffset: {x: 0, y: -1.2, z: 0}
+  mostrarLogs: 1
+  displacementScale: 8
+  displacementSpeed: 5
 --- !u!95 &985016772 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e04b313c4835a3345b7b86952b48e79b, type: 3}
