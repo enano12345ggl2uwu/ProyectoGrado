@@ -762,7 +762,7 @@ MonoBehaviour:
   rotationSpeed: 10
   mirrorMode: 1
   mostrarLogs: 1
-  displacementScale: 8
+  displacementScale: 20
   displacementSpeed: 5
 --- !u!95 &985016772 stripped
 Animator:
