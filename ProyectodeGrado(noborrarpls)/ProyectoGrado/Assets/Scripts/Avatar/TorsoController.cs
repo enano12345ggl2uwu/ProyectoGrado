@@ -34,6 +34,9 @@ public class TorsoController : MonoBehaviour
     [Tooltip("Invertir direccion del giro")]
     public bool invertDirection = false;
 
+    [Tooltip("Angulo minimo antes de mover el target (evita jitter en reposo)")]
+    public float deadzone = 5f;
+
     [Header("Debug (solo lectura)")]
     public float currentTurnAngle = 0f;
     public float maxRatioSeen = 0.01f;
@@ -113,8 +116,11 @@ public class TorsoController : MonoBehaviour
     {
         if (torsoTarget == null) return;
 
+        // Aplicar deadzone para evitar jitter en reposo
+        float angle = (Mathf.Abs(currentTurnAngle) > deadzone) ? currentTurnAngle : 0f;
+
         // Convertir angulo (-90 a +90) a desplazamiento X (-swing a +swing)
-        float offsetX = (currentTurnAngle / 90f) * targetSwingDistance;
+        float offsetX = (angle / 90f) * targetSwingDistance;
 
         Vector3 nuevaPos = targetBasePosition;
         nuevaPos.x += offsetX;
