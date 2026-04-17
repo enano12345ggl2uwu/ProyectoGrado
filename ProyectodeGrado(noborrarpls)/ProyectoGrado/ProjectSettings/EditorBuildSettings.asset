@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 768e45b73488ece4292c7121cc2ea10a
+  - enabled: 1
+    path: Assets/Scenes/ColorJump.unity
+    guid: 58d348cfd91bc03448f7a6e55c422c67
   m_configObjects: {}
