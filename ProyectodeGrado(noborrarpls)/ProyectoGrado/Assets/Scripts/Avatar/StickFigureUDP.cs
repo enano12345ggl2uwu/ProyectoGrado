@@ -4,6 +4,9 @@ using UnityEngine;
 /// Dibuja los 33 landmarks de MediaPipe como esferas + líneas.
 /// Útil para debug visual durante el desarrollo.
 /// </summary>
+/// 
+/// 
+
 public class StickFigureUDP : MonoBehaviour
 {
     [Header("Visual")]
