@@ -46,13 +46,15 @@ public class PoseSilhouette : MonoBehaviour
 
     void Start()
     {
+        Shader unlit = Shader.Find("Unlit/Color") ?? Shader.Find("Sprites/Default");
+
         joints = new GameObject[33];
         foreach (int i in usedJoints)
         {
             var s = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             s.transform.parent     = transform;
             s.transform.localScale = Vector3.one * (i == 0 ? sphereSize * 2f : sphereSize);
-            s.GetComponent<Renderer>().material.color = color;
+            s.GetComponent<Renderer>().material = new Material(unlit) { color = color };
             Destroy(s.GetComponent<Collider>());
             joints[i] = s;
         }
@@ -65,7 +67,7 @@ public class PoseSilhouette : MonoBehaviour
             go.transform.parent = transform;
             var lr = go.AddComponent<LineRenderer>();
             lr.startWidth = lr.endWidth = lineWidth;
-            lr.material      = new Material(Shader.Find("Sprites/Default"));
+            lr.material      = new Material(unlit) { color = color };
             lr.startColor    = lr.endColor = color;
             lr.positionCount = 2;
             bones[i] = lr;

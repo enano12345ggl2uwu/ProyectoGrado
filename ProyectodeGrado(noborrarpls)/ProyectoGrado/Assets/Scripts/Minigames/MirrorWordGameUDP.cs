@@ -309,17 +309,20 @@ public class MirrorWordGameUDP : MonoBehaviour
             }
             case Pose.OneArmUp:
             {
-                float tolY = sw * 0.4f * tolMult;
+                float tolY     = sw * 0.4f * tolMult;
+                float downTol  = tolY * 0.3f;
                 return new[] {
                     new PosePart {
-                        joints = new[] {11,13,15},
-                        bones  = new[] {1,2},
-                        validator = () => (lm(11).y - lm(15).y) > tolY
-                    },
-                    new PosePart {
-                        joints = new[] {12,14,16},
-                        bones  = new[] {3,4},
-                        validator = () => (lm(12).y - lm(16).y) < tolY * 0.3f
+                        joints = new[] {11,12,13,14,15,16},
+                        bones  = new[] {1,2,3,4},
+                        validator = () =>
+                        {
+                            bool leftUp    = (lm(11).y - lm(15).y) > tolY;
+                            bool rightUp   = (lm(12).y - lm(16).y) > tolY;
+                            bool leftDown  = (lm(11).y - lm(15).y) < downTol;
+                            bool rightDown = (lm(12).y - lm(16).y) < downTol;
+                            return (leftUp && rightDown) || (rightUp && leftDown);
+                        }
                     }
                 };
             }
