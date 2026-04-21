@@ -9,6 +9,8 @@ using TMPro;
 /// </summary>
 public class ColorJumpGameUDP : MonoBehaviour
 {
+    public enum DifficultyMode { Easy, Medium, Hard }
+
     [Header("Referencias")]
     public Renderer leftPlatform;
     public Renderer rightPlatform;
@@ -23,6 +25,9 @@ public class ColorJumpGameUDP : MonoBehaviour
     public float roundTime = 4f;
     public float feedbackTime = 1.5f;
     public float moveThreshold = 0.15f;
+
+    [Header("Difficulty")]
+    public DifficultyMode difficulty = DifficultyMode.Medium;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -44,12 +49,43 @@ public class ColorJumpGameUDP : MonoBehaviour
     private int leftIndex, rightIndex;
     private bool roundActive = false;
     private bool targetOnLeft;
+    private int activeColorCount;
 
     void Start()
     {
         if (feedbackText) feedbackText.text = "";
         UpdateScoreUI();
+        // No arranca solo: espera StartGame()
+    }
+
+    /// <summary>Llamado por DifficultySelector. level: 0=Easy 1=Medium 2=Hard</summary>
+    public void StartGame(int level)
+    {
+        difficulty = (DifficultyMode)level;
+        ApplyDifficulty();
         StartCoroutine(GameLoop());
+    }
+
+    void ApplyDifficulty()
+    {
+        switch (difficulty)
+        {
+            case DifficultyMode.Easy:
+                roundTime        = 6f;
+                moveThreshold    = 0.10f;
+                activeColorCount = 4;
+                break;
+            case DifficultyMode.Medium:
+                roundTime        = 4f;
+                moveThreshold    = 0.15f;
+                activeColorCount = colorNames.Length;
+                break;
+            case DifficultyMode.Hard:
+                roundTime        = 2.5f;
+                moveThreshold    = 0.20f;
+                activeColorCount = colorNames.Length;
+                break;
+        }
     }
 
     IEnumerator GameLoop()
@@ -70,8 +106,8 @@ public class ColorJumpGameUDP : MonoBehaviour
 
             if (roundActive)
             {
-                // Tiempo agotado, feedback neutro
                 ShowFeedback("Try again!", Color.white);
+                PlayClip(wrongClip);
                 roundActive = false;
             }
 
@@ -82,9 +118,10 @@ public class ColorJumpGameUDP : MonoBehaviour
 
     void SetupRound()
     {
-        targetIndex = Random.Range(0, colorNames.Length);
+        int pool = activeColorCount > 0 ? activeColorCount : colorNames.Length;
+        targetIndex = Random.Range(0, pool);
         int other;
-        do { other = Random.Range(0, colorNames.Length); } while (other == targetIndex);
+        do { other = Random.Range(0, pool); } while (other == targetIndex);
 
         targetOnLeft = Random.value < 0.5f;
         leftIndex = targetOnLeft ? targetIndex : other;
@@ -109,13 +146,9 @@ public class ColorJumpGameUDP : MonoBehaviour
         float centerX = (leftHip.x + rightHip.x) / 2f - 0.5f;
 
         if (centerX < -moveThreshold)
-        {
             EvaluateAnswer(true);
-        }
         else if (centerX > moveThreshold)
-        {
             EvaluateAnswer(false);
-        }
     }
 
     void EvaluateAnswer(bool playerWentLeft)

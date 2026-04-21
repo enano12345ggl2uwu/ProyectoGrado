@@ -7,26 +7,26 @@ using TMPro;
 
 /// <summary>
 /// Minijuego: Mirror the Word
-/// Muestra una palabra de pose en inglés. El niño imita la pose.
-/// Las partes implicadas se pintan VERDE (ok) o ROJO (mal) en vivo.
-/// Mantener 1.5 s → acierto (+10 pts).
+/// Muestra una palabra de pose en ingles (HANDS UP, T POSE, etc). El niño imita
+/// la pose; se valida por geometria sobre landmarks MediaPipe.
+/// NO se inicia solo: espera a que DifficultySelector llame StartGame(level).
 /// </summary>
 public class MirrorWordGameUDP : MonoBehaviour
 {
-    enum Pose { HandsUp, TPose, TouchHead, ArmsWide, HandsDown }
+    enum Pose { HandsUp, TPose, TouchHead, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips }
 
     [Header("UI")]
     public TextMeshProUGUI wordText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI countdownText;
-    /// <summary>Image tipo Filled. Se llena durante el hold.</summary>
     public Image holdFillBar;
 
     [Header("Referencias")]
-    public StickFigureUDP stickFigure;
+    public StickFigureUDP  stickFigure;
+    public PoseSilhouette  silhouette;
 
-    [Header("Config")]
+    [Header("Config base")]
     public float roundTime    = 8f;
     public float holdTime     = 1.5f;
     public float feedbackTime = 1.8f;
@@ -37,12 +37,14 @@ public class MirrorWordGameUDP : MonoBehaviour
     public AudioClip   wrongClip;
 
     [Header("Colores feedback")]
-    public Color colorOk  = new Color(0.2f, 1f, 0.3f, 1f);   // verde neon
-    public Color colorBad = new Color(1f, 0.2f, 0.25f, 1f);  // rojo neon
+    public Color colorOk  = new Color(0.2f, 1f, 0.3f, 1f);
+    public Color colorBad = new Color(1f, 0.2f, 0.25f, 1f);
 
-    // Nombres legibles de las poses
+    private float tolMult = 1f;
+
     private readonly string[] poseNames = {
-        "HANDS UP", "T POSE", "TOUCH HEAD", "ARMS WIDE", "HANDS DOWN"
+        "HANDS UP", "T POSE", "TOUCH HEAD", "ARMS WIDE", "HANDS DOWN",
+        "SQUAT", "ONE ARM UP", "HANDS ON HIPS"
     };
 
     // Estado
@@ -52,7 +54,6 @@ public class MirrorWordGameUDP : MonoBehaviour
     private bool  roundActive = false;
     private float holdTimer   = 0f;
 
-    // Partes pintadas este frame (para restaurar el siguiente)
     private readonly HashSet<int> paintedJoints = new HashSet<int>();
     private readonly HashSet<int> paintedBones  = new HashSet<int>();
 
@@ -68,7 +69,39 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (feedbackText) feedbackText.text = "";
         if (holdFillBar)  holdFillBar.fillAmount = 0f;
         UpdateScoreUI();
+        
+        // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
+        if (FindObjectOfType<DifficultySelector>() == null)
+            StartGame(1);
+    }
+
+    /// <summary>Llamado por DifficultySelector. level: 0=Easy 1=Medium 2=Hard</summary>
+    public void StartGame(int level)
+    {
+        ApplyDifficulty(level);
         StartCoroutine(GameLoop());
+    }
+
+    void ApplyDifficulty(int level)
+    {
+        switch (level)
+        {
+            case 0: // Easy
+                holdTime  = 2.25f;
+                roundTime = 10f;
+                tolMult   = 1.5f;
+                break;
+            case 2: // Hard
+                holdTime  = 1.2f;
+                roundTime = 6f;
+                tolMult   = 0.75f;
+                break;
+            default: // Medium
+                holdTime  = 1.5f;
+                roundTime = 8f;
+                tolMult   = 1f;
+                break;
+        }
     }
 
     IEnumerator GameLoop()
@@ -91,14 +124,12 @@ public class MirrorWordGameUDP : MonoBehaviour
                     holdTimer += Time.deltaTime;
                     if (holdFillBar) holdFillBar.fillAmount = holdTimer / holdTime;
 
-                    // Mostrar "HOLD IT!" mientras mantiene la pose
                     if (feedbackText)
                     {
                         feedbackText.text  = "HOLD IT!";
                         feedbackText.color = colorOk;
                     }
 
-                    // Word text se pone verde gradualmente
                     if (wordText) wordText.color = Color.Lerp(Color.white, colorOk, holdTimer / holdTime);
 
                     if (holdTimer >= holdTime)
@@ -119,7 +150,6 @@ public class MirrorWordGameUDP : MonoBehaviour
                 yield return null;
             }
 
-            // Tiempo agotado sin completar
             if (roundActive)
             {
                 ShowFeedback("Try again!", Color.white);
@@ -127,12 +157,11 @@ public class MirrorWordGameUDP : MonoBehaviour
                 roundActive = false;
             }
 
-            // Reset visual entre rondas
             if (stickFigure) stickFigure.ResetColors();
             paintedJoints.Clear();
             paintedBones.Clear();
             if (holdFillBar)  holdFillBar.fillAmount  = 0f;
-            if (wordText)     wordText.color           = Color.white;
+            if (wordText)     wordText.color          = Color.white;
 
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
@@ -150,6 +179,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (feedbackText) feedbackText.text = "";
         holdTimer = 0f;
         if (stickFigure) stickFigure.ResetColors();
+        if (silhouette)  silhouette.ShowPose(poseNames[poseIdx]);
     }
 
     bool ValidateAndPaint()
@@ -162,7 +192,6 @@ public class MirrorWordGameUDP : MonoBehaviour
 
         bool allOk = true;
 
-        // Restaurar color base de las partes pintadas el frame anterior
         if (stickFigure)
         {
             foreach (int j in paintedJoints) stickFigure.SetJointColor(j, stickFigure.jointColor);
@@ -201,80 +230,116 @@ public class MirrorWordGameUDP : MonoBehaviour
         {
             case Pose.HandsUp:
             {
-                float tol = sw * 0.25f; // más permisivo
-                return new[]
-                {
+                float tolY = sw * 0.4f * tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 13, 15}, bones = new[] {1, 2},
-                        validator = () => (lm(11).y - lm(15).y) > tol
+                        joints = new[] {11,13,15}, bones = new[] {1,2},
+                        validator = () => (lm(11).y - lm(15).y) > tolY
                     },
                     new PosePart {
-                        joints = new[] {12, 14, 16}, bones = new[] {3, 4},
-                        validator = () => (lm(12).y - lm(16).y) > tol
+                        joints = new[] {12,14,16}, bones = new[] {3,4},
+                        validator = () => (lm(12).y - lm(16).y) > tolY
                     }
                 };
             }
-
             case Pose.TPose:
             {
-                float tolY  = sw * 0.25f; // más permisivo
-                float extTh = sw * 0.6f;  // más fácil de alcanzar
-                return new[]
-                {
+                float tolY  = sw * 0.35f * tolMult;
+                float extTh = sw * 0.8f / tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 13, 15}, bones = new[] {1, 2},
-                        validator = () =>
-                            Mathf.Abs(lm(15).y - lm(11).y) < tolY &&
-                            (lm(11).x - lm(15).x) > extTh
+                        joints = new[] {11,13,15}, bones = new[] {1,2},
+                        validator = () => Mathf.Abs(lm(15).y - lm(11).y) < tolY && (lm(11).x - lm(15).x) > extTh
                     },
                     new PosePart {
-                        joints = new[] {12, 14, 16}, bones = new[] {3, 4},
-                        validator = () =>
-                            Mathf.Abs(lm(16).y - lm(12).y) < tolY &&
-                            (lm(16).x - lm(12).x) > extTh
+                        joints = new[] {12,14,16}, bones = new[] {3,4},
+                        validator = () => Mathf.Abs(lm(16).y - lm(12).y) < tolY && (lm(16).x - lm(12).x) > extTh
                     }
                 };
             }
-
             case Pose.TouchHead:
             {
-                float tol = sw * 0.55f; // zona de toque más grande
-                return new[]
-                {
+                float tolDist = sw * 0.35f * tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {0, 15, 16}, bones = new[] {2, 4},
+                        joints = new[] {0,15,16}, bones = new[] {2,4},
                         validator = () =>
-                            Vector3.Distance(lm(15), lm(0)) < tol ||
-                            Vector3.Distance(lm(16), lm(0)) < tol
+                            Vector3.Distance(lm(15), lm(0)) < tolDist ||
+                            Vector3.Distance(lm(16), lm(0)) < tolDist
                     }
                 };
             }
-
             case Pose.ArmsWide:
             {
-                float thr = sw * 1.1f; // más fácil
-                return new[]
-                {
+                float threshold = sw * 1.5f / tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 12, 15, 16}, bones = new[] {1, 2, 3, 4},
-                        validator = () => Mathf.Abs(lm(16).x - lm(15).x) > thr
+                        joints = new[] {11,12,15,16}, bones = new[] {1,2,3,4},
+                        validator = () => Mathf.Abs(lm(16).x - lm(15).x) > threshold
                     }
                 };
             }
-
             case Pose.HandsDown:
             {
-                float tol  = sw * 0.15f; // más permisivo
+                float tolY = sw * 0.3f * tolMult;
                 float hipY = (lm(23).y + lm(24).y) * 0.5f;
-                return new[]
-                {
+                return new[] {
                     new PosePart {
-                        joints = new[] {15, 23}, bones = new[] {1, 2},
-                        validator = () => (lm(15).y - hipY) > tol
+                        joints = new[] {15,23}, bones = new[] {1,2},
+                        validator = () => (lm(15).y - hipY) > tolY
                     },
                     new PosePart {
-                        joints = new[] {16, 24}, bones = new[] {3, 4},
-                        validator = () => (lm(16).y - hipY) > tol
+                        joints = new[] {16,24}, bones = new[] {3,4},
+                        validator = () => (lm(16).y - hipY) > tolY
+                    }
+                };
+            }
+            case Pose.Squat:
+            {
+                float squatTh = sw * 0.5f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {23,24,25,26},
+                        bones  = new[] {8,9,10,11},
+                        validator = () =>
+                            (lm(25).y - lm(23).y) < squatTh &&
+                            (lm(26).y - lm(24).y) < squatTh
+                    }
+                };
+            }
+            case Pose.OneArmUp:
+            {
+                float tolY = sw * 0.4f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {11,13,15},
+                        bones  = new[] {1,2},
+                        validator = () => (lm(11).y - lm(15).y) > tolY
+                    },
+                    new PosePart {
+                        joints = new[] {12,14,16},
+                        bones  = new[] {3,4},
+                        validator = () => (lm(12).y - lm(16).y) < tolY * 0.3f
+                    }
+                };
+            }
+            case Pose.HandsOnHips:
+            {
+                float tolDist = sw * 0.45f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {11,13,15,23},
+                        bones  = new[] {1,2,5},
+                        validator = () =>
+                            Mathf.Abs(lm(15).y - lm(23).y) < tolDist &&
+                            Mathf.Abs(lm(15).x - lm(23).x) < tolDist
+                    },
+                    new PosePart {
+                        joints = new[] {12,14,16,24},
+                        bones  = new[] {3,4,6},
+                        validator = () =>
+                            Mathf.Abs(lm(16).y - lm(24).y) < tolDist &&
+                            Mathf.Abs(lm(16).x - lm(24).x) < tolDist
                     }
                 };
             }
@@ -298,6 +363,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         UpdateScoreUI();
         ShowFeedback("Perfect!", colorOk);
         PlayClip(correctClip);
+
         if (stickFigure)
         {
             stickFigure.SetAllJointsColor(colorOk);
