@@ -8,36 +8,29 @@ using TMPro;
 /// <summary>
 /// Minijuego 3: Mirror the Word
 /// Muestra una palabra de pose en ingles (HANDS UP, T POSE, etc). El niño imita
-/// la pose; se valida por geometria sobre landmarks MediaPipe. Mantener la
-/// pose 1.5 s → acierto (+10 pts).
-///
-/// Feedback visual en vivo:
-///  - Partes del stickman implicadas en la pose actual se pintan ROJO si
-///    no cumplen, VERDE si cumplen.
-///  - Partes no implicadas quedan del color neon base.
-///  - Barra de progreso del hold (fillBar) se llena mientras la pose es valida.
-///  - El wordText pulsa verde durante el hold.
+/// la pose; se valida por geometria sobre landmarks MediaPipe.
+/// Mantener la pose holdTime segundos → acierto (+10 pts).
+/// NO se inicia solo: espera a que DifficultySelector llame StartGame(level).
 /// </summary>
 public class MirrorWordGameUDP : MonoBehaviour
 {
-    enum Pose { HandsUp, TPose, TouchHead, ArmsWide, HandsDown }
+    enum Pose { HandsUp, TPose, TouchHead, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips }
 
     [Header("UI")]
     public TextMeshProUGUI wordText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI countdownText;
-    /// <summary>Imagen con Image.fillAmount (tipo Filled). Se llena durante el hold.</summary>
     public Image holdFillBar;
 
     [Header("Referencias")]
-    /// <summary>Referencia al stickman para pintar partes en vivo.</summary>
-    public StickFigureUDP stickFigure;
+    public StickFigureUDP  stickFigure;
+    public PoseSilhouette  silhouette;
 
-    [Header("Config")]
-    public float roundTime    = 6f;
+    [Header("Config base")]
+    public float roundTime    = 8f;
     public float holdTime     = 1.5f;
-    public float feedbackTime = 1.5f;
+    public float feedbackTime = 1.8f;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -45,26 +38,25 @@ public class MirrorWordGameUDP : MonoBehaviour
     public AudioClip   wrongClip;
 
     [Header("Colores feedback")]
-    public Color colorOk   = new Color(0.2f, 1f, 0.3f, 1f);   // verde neon
-    public Color colorBad  = new Color(1f, 0.2f, 0.25f, 1f);  // rojo neon
+    public Color colorOk  = new Color(0.2f, 1f, 0.3f, 1f);
+    public Color colorBad = new Color(1f, 0.2f, 0.25f, 1f);
 
-    // --- Nombres legibles
+    private float tolMult = 1f;
+
     private readonly string[] poseNames = {
-        "HANDS UP", "T POSE", "TOUCH HEAD", "ARMS WIDE", "HANDS DOWN"
+        "HANDS UP", "T POSE", "TOUCH HEAD", "ARMS WIDE", "HANDS DOWN",
+        "SQUAT", "ONE ARM UP", "HANDS ON HIPS"
     };
 
-    // --- Estado
     private int   score       = 0;
     private Pose  currentPose;
     private int   lastPoseIdx = -1;
     private bool  roundActive = false;
     private float holdTimer   = 0f;
 
-    // Partes que se estan pintando esta ronda (para restaurar al terminar)
     private readonly HashSet<int> paintedJoints = new HashSet<int>();
     private readonly HashSet<int> paintedBones  = new HashSet<int>();
 
-    /// <summary>Una subcondicion de una pose: joints y bones que cambian color segun pase o no.</summary>
     private class PosePart
     {
         public int[]      joints;
@@ -77,7 +69,38 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (feedbackText) feedbackText.text = "";
         if (holdFillBar)  holdFillBar.fillAmount = 0f;
         UpdateScoreUI();
+        // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
+        if (FindObjectOfType<DifficultySelector>() == null)
+            StartGame(1);
+    }
+
+    /// <summary>Llamado por DifficultySelector. level: 0=Easy 1=Medium 2=Hard</summary>
+    public void StartGame(int level)
+    {
+        ApplyDifficulty(level);
         StartCoroutine(GameLoop());
+    }
+
+    void ApplyDifficulty(int level)
+    {
+        switch (level)
+        {
+            case 0: // Easy
+                holdTime  = 2.25f;
+                roundTime = 10f;
+                tolMult   = 1.5f;
+                break;
+            case 2: // Hard
+                holdTime  = 1.2f;
+                roundTime = 6f;
+                tolMult   = 0.75f;
+                break;
+            default: // Medium
+                holdTime  = 1.5f;
+                roundTime = 8f;
+                tolMult   = 1f;
+                break;
+        }
     }
 
     IEnumerator GameLoop()
@@ -93,7 +116,6 @@ public class MirrorWordGameUDP : MonoBehaviour
             {
                 if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
 
-                // Validar la pose (pinta joints/bones segun cada parte)
                 bool allOk = ValidateAndPaint();
 
                 if (allOk)
@@ -110,13 +132,9 @@ public class MirrorWordGameUDP : MonoBehaviour
                     holdTimer = 0f;
                 }
 
-                // UI del hold
                 if (holdFillBar) holdFillBar.fillAmount = holdTimer / holdTime;
                 if (wordText)
-                {
-                    float t = holdTimer / holdTime;
-                    wordText.color = Color.Lerp(Color.white, colorOk, t);
-                }
+                    wordText.color = Color.Lerp(Color.white, colorOk, holdTimer / holdTime);
 
                 timer -= Time.deltaTime;
                 yield return null;
@@ -125,10 +143,10 @@ public class MirrorWordGameUDP : MonoBehaviour
             if (roundActive)
             {
                 ShowFeedback("Try again!", Color.white);
+                PlayClip(wrongClip);
                 roundActive = false;
             }
 
-            // Reset visual entre rondas
             if (stickFigure) stickFigure.ResetColors();
             paintedJoints.Clear();
             paintedBones.Clear();
@@ -154,12 +172,9 @@ public class MirrorWordGameUDP : MonoBehaviour
 
         holdTimer = 0f;
         if (stickFigure) stickFigure.ResetColors();
+        if (silhouette)  silhouette.ShowPose(poseNames[poseIdx]);
     }
 
-    /// <summary>
-    /// Valida la pose actual parte por parte. Pinta los joints/bones de cada parte en
-    /// verde (ok) o rojo (mal). Devuelve true si todas las partes pasan.
-    /// </summary>
     bool ValidateAndPaint()
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected)
@@ -170,8 +185,6 @@ public class MirrorWordGameUDP : MonoBehaviour
 
         bool allOk = true;
 
-        // Primero restauro a color base las partes que pintamos el frame anterior
-        // pero que ya no son relevantes (por si cambia la pose).
         if (stickFigure)
         {
             foreach (int j in paintedJoints) stickFigure.SetJointColor(j, stickFigure.jointColor);
@@ -180,7 +193,6 @@ public class MirrorWordGameUDP : MonoBehaviour
         paintedJoints.Clear();
         paintedBones.Clear();
 
-        // Validar cada parte y pintar
         foreach (var p in parts)
         {
             bool ok = p.validator();
@@ -199,13 +211,11 @@ public class MirrorWordGameUDP : MonoBehaviour
         return allOk;
     }
 
-    /// <summary>Devuelve la lista de subcondiciones (partes) de la pose indicada.</summary>
     PosePart[] GetParts(Pose pose)
     {
         float sw = ShoulderDist();
         if (sw < 0.05f) return null;
 
-        // Aliases cortos para legibilidad
         var I = PoseReceiverUDP.Instance;
         Vector3 lm(int k) => I.GetLandmark(k);
 
@@ -213,90 +223,119 @@ public class MirrorWordGameUDP : MonoBehaviour
         {
             case Pose.HandsUp:
             {
-                float tolY = sw * 0.4f;
-                return new []
-                {
+                float tolY = sw * 0.4f * tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 13, 15},
-                        bones  = new[] {1, 2},
+                        joints = new[] {11,13,15}, bones = new[] {1,2},
                         validator = () => (lm(11).y - lm(15).y) > tolY
                     },
                     new PosePart {
-                        joints = new[] {12, 14, 16},
-                        bones  = new[] {3, 4},
+                        joints = new[] {12,14,16}, bones = new[] {3,4},
                         validator = () => (lm(12).y - lm(16).y) > tolY
                     }
                 };
             }
-
             case Pose.TPose:
             {
-                float tolY  = sw * 0.35f;
-                float extTh = sw * 0.8f;
-                return new []
-                {
-                    // brazo izq: muñeca a altura de hombro + extendida
+                float tolY  = sw * 0.35f * tolMult;
+                float extTh = sw * 0.8f / tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 13, 15},
-                        bones  = new[] {1, 2},
-                        validator = () =>
-                            Mathf.Abs(lm(15).y - lm(11).y) < tolY &&
-                            (lm(11).x - lm(15).x) > extTh
+                        joints = new[] {11,13,15}, bones = new[] {1,2},
+                        validator = () => Mathf.Abs(lm(15).y - lm(11).y) < tolY && (lm(11).x - lm(15).x) > extTh
                     },
-                    // brazo der: muñeca a altura de hombro + extendida
                     new PosePart {
-                        joints = new[] {12, 14, 16},
-                        bones  = new[] {3, 4},
-                        validator = () =>
-                            Mathf.Abs(lm(16).y - lm(12).y) < tolY &&
-                            (lm(16).x - lm(12).x) > extTh
+                        joints = new[] {12,14,16}, bones = new[] {3,4},
+                        validator = () => Mathf.Abs(lm(16).y - lm(12).y) < tolY && (lm(16).x - lm(12).x) > extTh
                     }
                 };
             }
-
             case Pose.TouchHead:
             {
-                float tolDist = sw * 0.35f;
-                return new []
-                {
+                float tolDist = sw * 0.35f * tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {0, 15, 16},
-                        bones  = new[] {2, 4},
+                        joints = new[] {0,15,16}, bones = new[] {2,4},
                         validator = () =>
                             Vector3.Distance(lm(15), lm(0)) < tolDist ||
                             Vector3.Distance(lm(16), lm(0)) < tolDist
                     }
                 };
             }
-
             case Pose.ArmsWide:
             {
-                float threshold = sw * 1.5f;
-                return new []
-                {
+                float threshold = sw * 1.5f / tolMult;
+                return new[] {
                     new PosePart {
-                        joints = new[] {11, 12, 15, 16},
-                        bones  = new[] {1, 2, 3, 4},
+                        joints = new[] {11,12,15,16}, bones = new[] {1,2,3,4},
                         validator = () => Mathf.Abs(lm(16).x - lm(15).x) > threshold
                     }
                 };
             }
-
             case Pose.HandsDown:
             {
-                float tolY = sw * 0.3f;
+                float tolY = sw * 0.3f * tolMult;
                 float hipY = (lm(23).y + lm(24).y) * 0.5f;
-                return new []
-                {
+                return new[] {
                     new PosePart {
-                        joints = new[] {15, 23},
-                        bones  = new[] {1, 2},
+                        joints = new[] {15,23}, bones = new[] {1,2},
                         validator = () => (lm(15).y - hipY) > tolY
                     },
                     new PosePart {
-                        joints = new[] {16, 24},
-                        bones  = new[] {3, 4},
+                        joints = new[] {16,24}, bones = new[] {3,4},
                         validator = () => (lm(16).y - hipY) > tolY
+                    }
+                };
+            }
+            case Pose.Squat:
+            {
+                // Rodillas dobladas: distancia vertical cadera→rodilla < umbral
+                float squatTh = sw * 0.5f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {23,24,25,26},
+                        bones  = new[] {8,9,10,11},
+                        validator = () =>
+                            (lm(25).y - lm(23).y) < squatTh &&
+                            (lm(26).y - lm(24).y) < squatTh
+                    }
+                };
+            }
+            case Pose.OneArmUp:
+            {
+                float tolY = sw * 0.4f * tolMult;
+                return new[] {
+                    // Brazo izquierdo arriba
+                    new PosePart {
+                        joints = new[] {11,13,15},
+                        bones  = new[] {1,2},
+                        validator = () => (lm(11).y - lm(15).y) > tolY
+                    },
+                    // Brazo derecho NO arriba (abajo del hombro)
+                    new PosePart {
+                        joints = new[] {12,14,16},
+                        bones  = new[] {3,4},
+                        validator = () => (lm(12).y - lm(16).y) < tolY * 0.3f
+                    }
+                };
+            }
+            case Pose.HandsOnHips:
+            {
+                float tolDist = sw * 0.45f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {11,13,15,23},
+                        bones  = new[] {1,2,5},
+                        validator = () =>
+                            Mathf.Abs(lm(15).y - lm(23).y) < tolDist &&
+                            Mathf.Abs(lm(15).x - lm(23).x) < tolDist
+                    },
+                    new PosePart {
+                        joints = new[] {12,14,16,24},
+                        bones  = new[] {3,4,6},
+                        validator = () =>
+                            Mathf.Abs(lm(16).y - lm(24).y) < tolDist &&
+                            Mathf.Abs(lm(16).x - lm(24).x) < tolDist
                     }
                 };
             }
@@ -304,7 +343,6 @@ public class MirrorWordGameUDP : MonoBehaviour
         return null;
     }
 
-    /// <summary>Distancia entre hombros como unidad de normalizacion.</summary>
     float ShoulderDist()
     {
         if (PoseReceiverUDP.Instance == null) return 0f;
@@ -322,7 +360,6 @@ public class MirrorWordGameUDP : MonoBehaviour
         ShowFeedback("Great job!", colorOk);
         PlayClip(correctClip);
 
-        // Flash de todo el stickman en verde
         if (stickFigure)
         {
             stickFigure.SetAllJointsColor(colorOk);
@@ -332,11 +369,7 @@ public class MirrorWordGameUDP : MonoBehaviour
 
     void ShowFeedback(string msg, Color color)
     {
-        if (feedbackText)
-        {
-            feedbackText.text  = msg;
-            feedbackText.color = color;
-        }
+        if (feedbackText) { feedbackText.text = msg; feedbackText.color = color; }
     }
 
     void UpdateScoreUI()
@@ -349,79 +382,8 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (audioSource && clip) audioSource.PlayOneShot(clip);
     }
 
-    /// <summary>Vuelve al menu principal. Enlazar desde Button OnClick en el Inspector.</summary>
     public void BackToMenu()
     {
-        if (GameManager.Instance != null)
-            GameManager.Instance.LoadMainMenu();
+        if (GameManager.Instance != null) GameManager.Instance.LoadMainMenu();
     }
 }
-
-/*
-═══════════════════════════════════════════════════════════════════════════════
-INSTRUCCIONES: Armar la escena "Island3" en Unity
-═══════════════════════════════════════════════════════════════════════════════
-
-1. Crear la escena
-   → File > New Scene > Basic (Built-in)
-   → Save As "Island3" en Assets/Scenes/
-
-2. GameObject StickFigure (esqueleto en vivo)
-   → Hierarchy > Create Empty → renombrar "StickFigure"
-   → Position (0, 0, 0)
-   → Add Component: StickFigureUDP
-   → Inspector: CenterOnHips = ✓, Scale = 4
-
-3. GameObject MirrorGame
-   → Hierarchy > Create Empty → renombrar "MirrorGame"
-   → Add Component: MirrorWordGameUDP
-   → Add Component: AudioSource (Spatial Blend = 0)
-
-4. Canvas de UI
-   → Hierarchy > UI > Canvas (Render Mode: Screen Space - Overlay)
-   → Dentro del Canvas crear:
-     a) TMP Text "WordText"           - anchor top-center, fontSize 120
-     b) TMP Text "ScoreText"          - anchor top-left,   fontSize 40
-     c) TMP Text "FeedbackText"       - anchor center,     fontSize 60
-     d) TMP Text "CountdownText"      - anchor top-right,  fontSize 80
-     e) UI Image "HoldFillBar"
-        - anchor bottom-center, size (600, 30)
-        - Image Type: Filled
-        - Fill Method: Horizontal, Fill Origin: Left
-        - Color: verde neon
-     f) UI Button "BackButton"
-        - anchor bottom-left, size (150, 60)
-
-5. Enlazar referencias en MirrorGame
-   Inspector de MirrorGame > MirrorWordGameUDP:
-     - wordText        → WordText
-     - scoreText       → ScoreText
-     - feedbackText    → FeedbackText
-     - countdownText   → CountdownText
-     - holdFillBar     → HoldFillBar
-     - stickFigure     → StickFigure (arrastrar el GameObject)
-     - audioSource     → el AudioSource del mismo GameObject
-     - correctClip / wrongClip → SFX
-
-6. Enlazar boton BackToMenu
-   BackButton > Button (Script) > OnClick > "+"
-   Arrastrar "MirrorGame" → dropdown: MirrorWordGameUDP > BackToMenu()
-
-7. Camara
-   → Main Camera: Position (0, 0, -6), Rotation (0, 0, 0)
-   → Clear Flags: Solid Color, Background: negro u oscuro
-     (los colores neon destacan mas sobre fondo oscuro)
-
-8. PoseReceiverUDP
-   → Verificar que existe un GameObject con PoseReceiverUDP (Port 5052).
-   → Si no: Create Empty "PoseReceiver" → Add Component PoseReceiverUDP.
-
-9. Play Mode
-   → Lanzar Python UDP en puerto 5052
-   → La palabra aparece, el stickman se pinta por partes:
-     * rojo en las partes que no cumplen la pose
-     * verde en las que si cumplen
-     * al completar 1.5 s sostenidos → +10 pts y todo el stickman verde
-
-═══════════════════════════════════════════════════════════════════════════════
-*/

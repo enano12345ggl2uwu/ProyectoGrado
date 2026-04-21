@@ -1233,7 +1233,7 @@ MonoBehaviour:
   boneWidth: 0.08
   jointColor: {r: 0.2, g: 1, b: 1, a: 1}
   boneColor: {r: 1, g: 0.25, b: 0.9, a: 1}
-  scale: 4
+  scale: 5
   offset: {x: 0, y: 0, z: 0}
   centerOnHips: 1
 --- !u!4 &1130868154
@@ -1422,6 +1422,7 @@ MonoBehaviour:
   countdownText: {fileID: 939442692}
   holdFillBar: {fileID: 945357087}
   stickFigure: {fileID: 1130868153}
+  silhouette: {fileID: 0}
   roundTime: 6
   holdTime: 1.5
   feedbackTime: 1.5
