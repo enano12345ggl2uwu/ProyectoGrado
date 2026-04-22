@@ -372,6 +372,9 @@ public class MirrorWordGameUDP : MonoBehaviour
             stickFigure.SetAllJointsColor(colorOk);
             stickFigure.SetAllBonesColor(colorOk);
         }
+
+        if (CelebrationBurst.Instance != null)
+            CelebrationBurst.Instance.Trigger(transform.position);
     }
 
     void ShowFeedback(string msg, Color color)

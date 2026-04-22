@@ -161,6 +161,9 @@ public class ColorJumpGameUDP : MonoBehaviour
             UpdateScoreUI();
             ShowFeedback("Great job!", Color.green);
             PlayClip(correctClip);
+
+            if (CelebrationBurst.Instance != null)
+                CelebrationBurst.Instance.Trigger(transform.position);
         }
         else
         {
