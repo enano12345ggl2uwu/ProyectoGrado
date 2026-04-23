@@ -37,7 +37,7 @@ public class PoseReceiverUDP : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this) { Destroy(gameObject); enabled = false; return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
         for (int i = 0; i < 33; i++) { landmarks[i] = Vector3.zero; rawLandmarks[i] = Vector3.zero; }
@@ -49,7 +49,10 @@ public class PoseReceiverUDP : MonoBehaviour
     {
         try
         {
-            udpClient = new UdpClient(port);
+            udpClient = new UdpClient();
+            udpClient.ExclusiveAddressUse = false;
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, port));
             running = true;
             receiveThread = new Thread(ReceiveLoop);
             receiveThread.IsBackground = true;

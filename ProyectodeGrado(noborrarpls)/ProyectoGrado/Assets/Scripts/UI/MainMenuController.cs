@@ -30,6 +30,7 @@ public class MainMenuController : MonoBehaviour
     public string colorJumpScene   = "ColorJump";
     public string mirrorWorldScene = "Island3";
     public string sizeSortScene    = "SizeSort";
+    public string balloonPopScene  = "BalloonPop";
     public string calibrationScene = "Calibration";
 
     void Start()
@@ -55,6 +56,7 @@ public class MainMenuController : MonoBehaviour
     public void PlayColorJump()   { SceneManager.LoadScene(colorJumpScene); }
     public void PlayMirrorWorld() { SceneManager.LoadScene(mirrorWorldScene); }
     public void PlaySizeSort()    { SceneManager.LoadScene(sizeSortScene); }
+    public void PlayBalloonPop()  { SceneManager.LoadScene(balloonPopScene); }
     public void OpenCalibration() { SceneManager.LoadScene(calibrationScene); }
 
     public void OpenInstructions()

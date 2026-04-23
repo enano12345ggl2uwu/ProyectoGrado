@@ -20,7 +20,7 @@ import sys
 
 # Config
 UDP_IP = "127.0.0.1"
-UDP_PORT = 5052
+UDP_PORT = 7777
 CAM_WIDTH = 640
 CAM_HEIGHT = 480
 CAM_FPS = 30

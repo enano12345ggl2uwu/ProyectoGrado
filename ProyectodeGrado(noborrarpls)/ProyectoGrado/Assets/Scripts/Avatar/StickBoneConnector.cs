@@ -1,5 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// Une visualmente dos Transforms con un LineRenderer (ej: hombro - codo).
+/// SETUP:
+///  1. Crea un GameObject con LineRenderer (Component > Effects > Line Renderer).
+///  2. Pon este script y arrastra los dos Transforms (point1, point2) y el LineRenderer.
+///  3. El LineRenderer debe tener un Material con shader tipo "Sprites/Default".
+/// </summary>
 public class StickBoneConnector : MonoBehaviour {
     public LineRenderer lineRenderer;
     public Transform point1; // Ej: Hombro (11)

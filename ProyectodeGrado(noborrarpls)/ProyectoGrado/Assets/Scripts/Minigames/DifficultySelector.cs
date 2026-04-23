@@ -32,6 +32,8 @@ public class DifficultySelector : MonoBehaviour
     [Header("Juego (asignar solo el que este en la escena)")]
     public ColorJumpGameUDP colorJumpGame;
     public MirrorWordGameUDP mirrorWordGame;
+    public SizeSortGameUDP sizeSortGame;
+    public BalloonPopGameUDP balloonPopGame;
 
     [Header("Botones de dificultad")]
     public Image easyBtnImage;
@@ -83,8 +85,10 @@ public class DifficultySelector : MonoBehaviour
         if (difficultyPanel) difficultyPanel.SetActive(false);
         if (gamePanel)       gamePanel.SetActive(true);
 
-        if (colorJumpGame  != null) colorJumpGame.StartGame(selectedLevel);
-        if (mirrorWordGame != null) mirrorWordGame.StartGame(selectedLevel);
+        if (colorJumpGame   != null) colorJumpGame.StartGame(selectedLevel);
+        if (mirrorWordGame  != null) mirrorWordGame.StartGame(selectedLevel);
+        if (sizeSortGame    != null) sizeSortGame.StartGame(selectedLevel);
+        if (balloonPopGame  != null) balloonPopGame.StartGame(selectedLevel);
     }
 
     void UpdateUI()
