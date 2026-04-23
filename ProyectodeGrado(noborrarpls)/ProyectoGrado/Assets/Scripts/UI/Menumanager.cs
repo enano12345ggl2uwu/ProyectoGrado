@@ -6,14 +6,14 @@ public class Menumanager : MonoBehaviour
     [Header("Paneles del Menú")]
     public GameObject panelOpciones;
 
-    // Función para el botón PLAY
+    
     public void Jugar()
     {
-        // Ya puse el nombre exacto de tu escena: ColorJump
-        SceneManager.LoadScene("ColorJump"); 
+        
+        SceneManager.LoadScene("Islandselector"); 
     }
 
-    // Funciones para el panel de SETTINGS
+    
     public void AbrirOpciones()
     {
         panelOpciones.SetActive(true);
