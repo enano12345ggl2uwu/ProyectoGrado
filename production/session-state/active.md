@@ -1,35 +1,76 @@
 # Session State — Move & Learn
 
 <!-- STATUS -->
-Epic: Mirror World Implementation
-Feature: Island3 Scene + UI + Audio + Difficulty
-Task: Mañana: construir escena, UI, sonidos, dificultad
+Epic: Color Jump Implementation
+Feature: Island1 Scene — Jerarquía + DifficultySelector
+Task: Configurar hierarchy completo y conectar referencias en Inspector
 <!-- /STATUS -->
 
 ## Current Task
-Implementar Mirror the Word completamente para presentación.
-Python fix aplicado (pose_landmarks). StickFigure v4 con cuello, cabeza, movimiento en espacio.
-Plan detallado para mañana guardado en `production/session-state/plan-mañana.md`.
+Configurar la escena de ColorJump (Island1) desde cero en Unity.
+El StickFigure ya funciona y se mueve. Las plataformas existen en escena.
+El juego no arrancaba porque ColorJumpGameUDP.Start() no llama StartGame().
+Solución elegida: agregar DifficultySelector con DifficultyPanel + GamePanel.
 
 ## Progress Checklist
-- [x] Game concept — `design/gdd/game-concept.md`
-- [x] Engine configurado — Unity 2021.3.17f1 LTS
-- [x] StickFigureUDP.cs — cilindros 3D, cuello, cabeza (orejas), ojos, glow, movimiento
-- [x] MirrorWordGameUDP.cs — thresholds mejorados, HOLD IT!, wrongClip fix, 8s
-- [x] Python fix — pose_landmarks (el stickman ahora se mueve en espacio)
+
+### ColorJump (Island1)
+- [x] Scripts escritos — ColorJumpGameUDP.cs, DifficultySelector.cs
+- [x] Scripts escritos — SizeContourDisplay.cs, SizeSortGameUDP.cs
+- [x] StickFigureUDP.cs — funciona, el stickman se mueve
+- [x] Plataformas 3D en escena (LeftPlatform, RightPlatform visibles)
+- [x] Texto "RED" visible — ColorWordText conectado
+- [ ] PoseReceiver — verificar que está en escena con PoseReceiverUDP
+- [ ] ColorJumpManager — Add Component AudioSource
+- [ ] DifficultySelector — crear GameObject + conectar campos
+- [ ] DifficultyPanel — crear con 3 botones dificultad + StartBtn
+- [ ] GamePanel — mover UI actual adentro
+- [ ] Conectar todos los campos en Inspector (plataformas, textos, audio)
+- [ ] Conectar OnClick botones → DifficultySelector.SelectEasy/Medium/Hard/StartGame
+- [ ] Probar end-to-end: DifficultyPanel aparece → START → juego arranca + countdown
+
+### Mirror the Word (Island3) — PENDIENTE
+- [x] MirrorWordGameUDP.cs — thresholds mejorados, HOLD IT!, 8s
+- [x] Python fix — pose_landmarks
 - [ ] Island3 escena construida
-- [ ] UI mejorada (hold bar, score, feedback)
+- [ ] UI: WordText, ScoreText, FeedbackText, CountdownText, HoldFillBar
 - [ ] Sonidos conectados
-- [ ] Dificultad implementada
-- [ ] Mirror the Word jugable end-to-end
+- [ ] Jugable end-to-end
+
+## Jerarquía ColorJump (lo que debe quedar)
+```
+Scene
+├── Main Camera
+├── PoseReceiver          [PoseReceiverUDP — Port 5052]
+├── StickFigure           [StickFigureUDP]
+├── ColorJumpManager      [ColorJumpGameUDP + AudioSource]
+├── Platforms
+│   ├── LeftPlatform      [Renderer]
+│   └── RightPlatform     [Renderer]
+├── DifficultySelector    [DifficultySelector]
+└── Canvas
+    ├── DifficultyPanel   (activo al inicio)
+    │   ├── TitleText
+    │   ├── EasyBtn
+    │   ├── MediumBtn
+    │   ├── HardBtn
+    │   └── StartBtn
+    └── GamePanel         (inactivo al inicio)
+        ├── ColorWordText
+        ├── ScoreText
+        ├── FeedbackText
+        └── CountdownText
+```
 
 ## Key Decisions
+- DifficultySelector es por escena (no global) — cada escena conecta su propio juego
+- ColorJumpGameUDP NO auto-arranca — depende de DifficultySelector.StartGame()
 - pose_landmarks (no pose_world_landmarks) — da traslación real en cámara
 - StickFigure: joints = gris oscuro, bones = cyan, cabeza = midpoint orejas [7,8]
-- emissionIntensity multiplica colores para Bloom HDR
-- Cada joint posicionado directo desde coordenadas [0..1] + offset
 
-## Archivos Modificados Esta Sesión
-- `Assets/Scripts/Avatar/StickFigureUDP.cs` — v4 completa
-- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` — thresholds + UX
-- `ProyectoGrado_Python/pose_sender_udp.py` — pose_world → pose_landmarks
+## Archivos de Script (sin cambios esta sesión)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs`
+- `Assets/Scripts/Minigames/DifficultySelector.cs`
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs`
+- `Assets/Scripts/Avatar/StickFigureUDP.cs`
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs`
