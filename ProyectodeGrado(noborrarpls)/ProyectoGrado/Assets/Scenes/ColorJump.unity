@@ -4455,6 +4455,8 @@ MonoBehaviour:
   gamePanel: {fileID: 1841568839}
   colorJumpGame: {fileID: 1502290657}
   mirrorWordGame: {fileID: 0}
+  sizeSortGame: {fileID: 0}
+  balloonPopGame: {fileID: 0}
   easyBtnImage: {fileID: 313269222}
   mediumBtnImage: {fileID: 1017782710}
   hardBtnImage: {fileID: 1950135834}
