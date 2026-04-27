@@ -7,7 +7,7 @@ using UnityEngine;
 public class AvatarControllerUDP : MonoBehaviour
 {
     [Header("Config")]
-    public float groundY = 0f;
+    public float groundY = 2.11f;
     public bool mirrorMode = true;
 
     [Header("Desplazamiento lateral")]
