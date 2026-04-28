@@ -40,21 +40,26 @@ public class PoseCursor : MonoBehaviour
     public int handLandmark = 16;
 
     [Header("Smoothing")]
-    [Range(1f, 40f)] public float cursorSmoothing = 18f;
+    [Tooltip("Mas alto = mas rapido/1:1 con la mano. Mas bajo = mas suave/lento. 25 = casi directo.")]
+    [Range(1f, 40f)] public float cursorSmoothing = 25f;
+    [Tooltip("Pixeles de movimiento minimo para reaccionar (filtra micro-temblor de la mano).")]
+    public float deadzonePixels = 2f;
 
     [Header("Push click")]
-    [Tooltip("Velocidad minima (Z por segundo, hacia camara) para contar como push.")]
+    [Tooltip("Velocidad minima (Z por segundo, hacia camara) para contar como push. Mas bajo = mas sensible.")]
     public float pushVelocityThreshold = 1.2f;
     [Tooltip("Segundos de cooldown tras un click para evitar dobles.")]
     public float clickCooldown = 0.8f;
 
     [Header("Dwell fallback")]
-    public bool  dwellFallbackEnabled = true;
-    public float dwellTime = 1.5f;
+    [Tooltip("Si esta OFF, el cursor solo hace click por push (gesto hacia camara). Recomendado OFF.")]
+    public bool  dwellFallbackEnabled = false;
+    [Tooltip("Segundos que hay que mantener el cursor sobre un boton para hacer click.")]
+    public float dwellTime = 3.5f;
 
     [Header("Screen mapping")]
-    [Tooltip("Expande el area util — 1.0 = mapeo directo. 1.3 = mas faciles las esquinas.")]
-    public float mappingGain = 1.25f;
+    [Tooltip("Expande el area util — 1.0 = mapeo directo. >1 amplifica (mas rapido). <1 ralentiza.")]
+    public float mappingGain = 1.0f;
     public bool  mirrorX = false;
 
     // --- internos ---
@@ -77,7 +82,11 @@ public class PoseCursor : MonoBehaviour
             Debug.LogWarning("[PoseCursor] No hay EventSystem en la escena. Crea uno: GameObject > UI > Event System.");
         }
         _ped = new PointerEventData(EventSystem.current);
-        if (dwellRingImage != null) dwellRingImage.fillAmount = 0f;
+        if (dwellRingImage != null)
+        {
+            dwellRingImage.fillAmount = 0f;
+            dwellRingImage.gameObject.SetActive(dwellFallbackEnabled);
+        }
     }
 
     void Update()
@@ -98,9 +107,13 @@ public class PoseCursor : MonoBehaviour
         if (mirrorX) nx = 1f - nx;
         _cursorScreenPos = new Vector2(nx * Screen.width, ny * Screen.height);
 
-        // 3. suavizar
-        float t = Mathf.Clamp01(Time.deltaTime * cursorSmoothing);
-        _cursorSmoothed = Vector2.Lerp(_cursorSmoothed, _cursorScreenPos, t);
+        // 3. suavizar (con deadzone para ignorar micro-temblor)
+        float dist = Vector2.Distance(_cursorScreenPos, _cursorSmoothed);
+        if (dist > deadzonePixels)
+        {
+            float t = Mathf.Clamp01(Time.deltaTime * cursorSmoothing);
+            _cursorSmoothed = Vector2.Lerp(_cursorSmoothed, _cursorScreenPos, t);
+        }
         if (cursorRect) cursorRect.position = _cursorSmoothed;
 
         // 4. velocidad Z (push detection)

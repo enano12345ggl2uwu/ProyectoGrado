@@ -50,8 +50,15 @@ PoseCursor listo para agregar a cualquier menú (push-forward + dwell fallback).
 
 ### PoseCursor — SCRIPT LISTO
 - [x] PoseCursor.cs — escrito (push-forward + dwell fallback)
+- [x] dwellFallbackEnabled default = false (evita auto-click por hover)
+- [x] AutoDeselectButton.cs — evita que botones se queden "Selected" tras hover/click
 - [ ] Probado en una escena (recomendado: MainMenu primero)
-- [ ] Si Z muy ruidoso → subir pushVelocityThreshold o cambiar a Hybrid (dos manos)
+- [ ] Agregar PoseCursor a todas las escenas (MainMenu, ColorJump, SizeSort, BalloonPop, Island3)
+
+### MainMenu — Settings Panel
+- [x] OpenSettings() / CloseSettings() agregados a MainMenuController
+- [x] Campo settingsPanel agregado al Inspector
+- [ ] Crear SettingsPanel GO en escena MainMenu y conectar OnClick del boton SETTINGS
 
 ### Mirror the Word (Island3) — PENDIENTE
 - [x] MirrorWordGameUDP.cs — thresholds mejorados, HOLD IT!, 8s
