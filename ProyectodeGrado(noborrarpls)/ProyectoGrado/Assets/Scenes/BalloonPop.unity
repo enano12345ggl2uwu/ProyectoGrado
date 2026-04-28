@@ -1141,12 +1141,10 @@ MonoBehaviour:
   sizeSortGame: {fileID: 0}
   balloonPopGame: {fileID: 0}
   numberBalloonGame: {fileID: 445650367}
-  easyBtnImage: {fileID: 1661317368}
-  mediumBtnImage: {fileID: 388570764}
-  hardBtnImage: {fileID: 1350227432}
+  easyBtnStyle: {fileID: 0}
+  mediumBtnStyle: {fileID: 0}
+  hardBtnStyle: {fileID: 0}
   descriptionText: {fileID: 0}
-  selectedColor: {r: 0.2, g: 1, b: 0.3, a: 1}
-  unselectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
 --- !u!4 &817937824
 Transform:
   m_ObjectHideFlags: 0
