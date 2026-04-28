@@ -35,14 +35,7 @@ public class ColorJumpGameUDP : MonoBehaviour
     public AudioClip wrongClip;
 
     private readonly string[] colorNames = { "RED", "BLUE", "GREEN", "YELLOW", "ORANGE", "PURPLE" };
-    private readonly Color[] colorValues = {
-        new Color(0.94f, 0.33f, 0.31f),
-        new Color(0.31f, 0.76f, 0.97f),
-        new Color(0.40f, 0.73f, 0.42f),
-        new Color(1.00f, 0.84f, 0.31f),
-        new Color(1.00f, 0.60f, 0.20f),
-        new Color(0.67f, 0.28f, 0.74f)
-    };
+    private readonly Color[] colorValues = UITheme.GameColors;
 
     private int score = 0;
     private int targetIndex;
@@ -159,7 +152,7 @@ public class ColorJumpGameUDP : MonoBehaviour
             score += 10;
             if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
             UpdateScoreUI();
-            ShowFeedback("Great job!", Color.green);
+            ShowFeedback("Great job!", UITheme.Success);
             PlayClip(correctClip);
 
             if (CelebrationBurst.Instance != null)
@@ -167,7 +160,7 @@ public class ColorJumpGameUDP : MonoBehaviour
         }
         else
         {
-            ShowFeedback("Try again!", Color.yellow);
+            ShowFeedback("Try again!", UITheme.Warning);
             PlayClip(wrongClip);
         }
         roundActive = false;

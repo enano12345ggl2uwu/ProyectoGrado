@@ -63,14 +63,7 @@ public class BalloonPopGameUDP : MonoBehaviour
     public AudioClip   wrongClip;
 
     private readonly string[] colorNames = { "RED", "BLUE", "GREEN", "YELLOW", "ORANGE", "PURPLE" };
-    private readonly Color[]  colorValues = {
-        new Color(0.94f, 0.33f, 0.31f),
-        new Color(0.31f, 0.76f, 0.97f),
-        new Color(0.40f, 0.73f, 0.42f),
-        new Color(1.00f, 0.84f, 0.31f),
-        new Color(1.00f, 0.60f, 0.20f),
-        new Color(0.67f, 0.28f, 0.74f)
-    };
+    private readonly Color[]  colorValues = UITheme.GameColors;
 
     private readonly List<Balloon> _live = new List<Balloon>();
     private int   _score = 0;
@@ -220,7 +213,7 @@ public class BalloonPopGameUDP : MonoBehaviour
         {
             _score += 10;
             if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
-            ShowFeedback("Great!", Color.green);
+            ShowFeedback("Great!", UITheme.Success);
             PlayClip(popClip);
             if (CelebrationBurst.Instance != null)
                 CelebrationBurst.Instance.Trigger(b.transform.position);
@@ -228,7 +221,7 @@ public class BalloonPopGameUDP : MonoBehaviour
         else
         {
             _score = Mathf.Max(0, _score - (int)_wrongPenalty);
-            ShowFeedback("Wrong color!", Color.yellow);
+            ShowFeedback("Wrong color!", UITheme.Warning);
             PlayClip(wrongClip);
         }
         UpdateScoreUI();

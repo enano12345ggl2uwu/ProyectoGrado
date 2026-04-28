@@ -17,7 +17,7 @@ using TMPro;
 /// Setup minimo en Unity:
 ///   1. GameObject "SizeSortManager" con este script.
 ///   2. GameObject "SizeContour" con SizeContourDisplay.cs en posicion (0, 2, 0).
-///   3. Canvas con: wordText, scoreText, feedbackText, countdownText, holdFillBar.
+///   3. Canvas con: wordText, scoreText, feedbackText, countdownText, holdBar.
 ///   4. Arrastra SizeContourDisplay al campo "contour" y los textos a los suyos.
 ///   5. Opcional: DifficultySelector con boton que llame SizeSortGameUDP.StartGame(level).
 /// </summary>
@@ -38,7 +38,7 @@ public class SizeSortGameUDP : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI countdownText;
-    public Image           holdFillBar;
+    public HoldFillBar     holdBar;
 
     [Header("Referencias")]
     public SizeContourDisplay contour;
@@ -60,10 +60,6 @@ public class SizeSortGameUDP : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip   correctClip;
     public AudioClip   wrongClip;
-
-    [Header("Colores feedback")]
-    public Color colorOk  = new Color(0.2f, 1f, 0.3f, 1f);
-    public Color colorBad = new Color(1f, 0.2f, 0.25f, 1f);
 
     // Vocabulario: dimensiones en "unidades normalizadas" (x shoulderWidth).
     // width ~= armSpan/sw, height ~= (nose-hipMid)/sw. Shoulder-width ≈ 1.0 de base.
@@ -88,7 +84,7 @@ public class SizeSortGameUDP : MonoBehaviour
     void Start()
     {
         if (feedbackText) feedbackText.text = "";
-        if (holdFillBar)  holdFillBar.fillAmount = 0f;
+        if (holdBar)  holdBar.ResetBar();
         UpdateScoreUI();
 
         if (FindObjectOfType<DifficultySelector>() == null)
@@ -145,14 +141,14 @@ public class SizeSortGameUDP : MonoBehaviour
                 if (matching)
                 {
                     holdTimer += Time.deltaTime;
-                    if (holdFillBar) holdFillBar.fillAmount = holdTimer / holdTime;
+                    if (holdBar) holdBar.SetProgress(holdTimer / holdTime);
 
                     if (feedbackText)
                     {
                         feedbackText.text  = "HOLD IT!";
-                        feedbackText.color = colorOk;
+                        feedbackText.color = UITheme.Success;
                     }
-                    if (wordText) wordText.color = Color.Lerp(Color.white, colorOk, holdTimer / holdTime);
+                    if (wordText) wordText.color = Color.Lerp(Color.white, UITheme.Success, holdTimer / holdTime);
 
                     if (holdTimer >= holdTime)
                     {
@@ -163,7 +159,7 @@ public class SizeSortGameUDP : MonoBehaviour
                 else
                 {
                     holdTimer = 0f;
-                    if (holdFillBar)  holdFillBar.fillAmount = 0f;
+                    if (holdBar)  holdBar.ResetBar();
                     if (feedbackText) feedbackText.text = "";
                     if (wordText)     wordText.color = Color.white;
                 }
@@ -179,7 +175,7 @@ public class SizeSortGameUDP : MonoBehaviour
                 roundActive = false;
             }
 
-            if (holdFillBar) holdFillBar.fillAmount = 0f;
+            if (holdBar) holdBar.ResetBar();
             if (wordText)    wordText.color = Color.white;
 
             yield return new WaitForSeconds(feedbackTime);
@@ -235,7 +231,7 @@ public class SizeSortGameUDP : MonoBehaviour
         score += 10;
         if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
         UpdateScoreUI();
-        ShowFeedback("Perfect!", colorOk);
+        ShowFeedback("Perfect!", UITheme.Success);
         PlayClip(correctClip);
 
         if (CelebrationBurst.Instance != null)

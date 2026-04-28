@@ -20,7 +20,7 @@ public class MirrorWordGameUDP : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI countdownText;
-    public Image holdFillBar;
+    public HoldFillBar holdBar;
 
     [Header("Referencias")]
     public StickFigureUDP  stickFigure;
@@ -35,10 +35,6 @@ public class MirrorWordGameUDP : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip   correctClip;
     public AudioClip   wrongClip;
-
-    [Header("Colores feedback")]
-    public Color colorOk  = new Color(0.2f, 1f, 0.3f, 1f);
-    public Color colorBad = new Color(1f, 0.2f, 0.25f, 1f);
 
     private float tolMult = 1f;
 
@@ -67,7 +63,7 @@ public class MirrorWordGameUDP : MonoBehaviour
     void Start()
     {
         if (feedbackText) feedbackText.text = "";
-        if (holdFillBar)  holdFillBar.fillAmount = 0f;
+        if (holdBar)  holdBar.ResetBar();
         UpdateScoreUI();
         
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
@@ -122,15 +118,15 @@ public class MirrorWordGameUDP : MonoBehaviour
                 if (allOk)
                 {
                     holdTimer += Time.deltaTime;
-                    if (holdFillBar) holdFillBar.fillAmount = holdTimer / holdTime;
+                    if (holdBar) holdBar.SetProgress(holdTimer / holdTime);
 
                     if (feedbackText)
                     {
                         feedbackText.text  = "HOLD IT!";
-                        feedbackText.color = colorOk;
+                        feedbackText.color = UITheme.Success;
                     }
 
-                    if (wordText) wordText.color = Color.Lerp(Color.white, colorOk, holdTimer / holdTime);
+                    if (wordText) wordText.color = Color.Lerp(Color.white, UITheme.Success, holdTimer / holdTime);
 
                     if (holdTimer >= holdTime)
                     {
@@ -141,7 +137,7 @@ public class MirrorWordGameUDP : MonoBehaviour
                 else
                 {
                     holdTimer = 0f;
-                    if (holdFillBar) holdFillBar.fillAmount = 0f;
+                    if (holdBar) holdBar.ResetBar();
                     if (feedbackText) feedbackText.text = "";
                     if (wordText) wordText.color = Color.white;
                 }
@@ -160,7 +156,7 @@ public class MirrorWordGameUDP : MonoBehaviour
             if (stickFigure) stickFigure.ResetColors();
             paintedJoints.Clear();
             paintedBones.Clear();
-            if (holdFillBar)  holdFillBar.fillAmount  = 0f;
+            if (holdBar)  holdBar.ResetBar();
             if (wordText)     wordText.color          = Color.white;
 
             yield return new WaitForSeconds(feedbackTime);
@@ -204,7 +200,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         {
             bool ok = p.validator();
             if (!ok) allOk = false;
-            Color c = ok ? colorOk : colorBad;
+            Color c = ok ? UITheme.Success : UITheme.Failure;
 
             if (stickFigure)
             {
@@ -364,13 +360,13 @@ public class MirrorWordGameUDP : MonoBehaviour
         score += 10;
         if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
         UpdateScoreUI();
-        ShowFeedback("Perfect!", colorOk);
+        ShowFeedback("Perfect!", UITheme.Success);
         PlayClip(correctClip);
 
         if (stickFigure)
         {
-            stickFigure.SetAllJointsColor(colorOk);
-            stickFigure.SetAllBonesColor(colorOk);
+            stickFigure.SetAllJointsColor(UITheme.Success);
+            stickFigure.SetAllBonesColor(UITheme.Success);
         }
 
         if (CelebrationBurst.Instance != null)

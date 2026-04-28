@@ -44,18 +44,18 @@ public class CalibrationScreen : MonoBehaviour
         if (PoseReceiverUDP.Instance == null)
         {
             statusText.text  = "NO RECEIVER";
-            statusText.color = Color.red;
+            statusText.color = UITheme.Failure;
             return;
         }
         if (PoseReceiverUDP.Instance.poseDetected)
         {
             statusText.text  = "CAMERA OK";
-            statusText.color = new Color(0.2f, 1f, 0.3f, 1f);
+            statusText.color = UITheme.Success;
         }
         else
         {
             statusText.text  = "NO POSE DETECTED";
-            statusText.color = new Color(1f, 0.85f, 0.2f, 1f);
+            statusText.color = UITheme.Warning;
         }
     }
 

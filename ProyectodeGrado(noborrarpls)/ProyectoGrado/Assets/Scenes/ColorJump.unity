@@ -1192,6 +1192,7 @@ GameObject:
   - component: {fileID: 168114856}
   - component: {fileID: 168114855}
   - component: {fileID: 168114854}
+  - component: {fileID: 168114857}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -1314,6 +1315,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168114852}
   m_CullTransparentMesh: 1
+--- !u!114 &168114857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168114852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632d7c280ed8864db645d11dbcbc221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texWidth: 128
+  texHeight: 64
+  cornerRadius: 24
+  baseColor: {r: 0.15, g: 0.15, b: 0.3, a: 1}
+  brightnessBoost: 0.28
+  hoverScale: 1.08
+  animSpeed: 0.1
 --- !u!1001 &174011310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2292,6 +2312,7 @@ GameObject:
   - component: {fileID: 313269221}
   - component: {fileID: 313269222}
   - component: {fileID: 313269220}
+  - component: {fileID: 313269223}
   m_Layer: 5
   m_Name: EasyBtn
   m_TagString: Untagged
@@ -2414,6 +2435,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &313269223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313269218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632d7c280ed8864db645d11dbcbc221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texWidth: 128
+  texHeight: 64
+  cornerRadius: 24
+  baseColor: {r: 0.15, g: 0.15, b: 0.3, a: 1}
+  brightnessBoost: 0.28
+  hoverScale: 1.08
+  animSpeed: 0.1
 --- !u!1001 &316154911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4459,12 +4499,10 @@ MonoBehaviour:
   sizeSortGame: {fileID: 0}
   balloonPopGame: {fileID: 0}
   numberBalloonGame: {fileID: 0}
-  easyBtnImage: {fileID: 313269222}
-  mediumBtnImage: {fileID: 1017782710}
-  hardBtnImage: {fileID: 1950135834}
+  easyBtnStyle: {fileID: 313269223}
+  mediumBtnStyle: {fileID: 1017782711}
+  hardBtnStyle: {fileID: 1950135838}
   descriptionText: {fileID: 0}
-  selectedColor: {r: 0.2, g: 1, b: 0.3, a: 1}
-  unselectedColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
 --- !u!4 &643229199
 Transform:
   m_ObjectHideFlags: 0
@@ -5635,6 +5673,7 @@ GameObject:
   - component: {fileID: 1017782709}
   - component: {fileID: 1017782710}
   - component: {fileID: 1017782708}
+  - component: {fileID: 1017782711}
   m_Layer: 5
   m_Name: MediumBtn
   m_TagString: Untagged
@@ -5757,6 +5796,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1017782711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017782706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632d7c280ed8864db645d11dbcbc221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texWidth: 128
+  texHeight: 64
+  cornerRadius: 24
+  baseColor: {r: 0.15, g: 0.15, b: 0.3, a: 1}
+  brightnessBoost: 0.28
+  hoverScale: 1.08
+  animSpeed: 0.1
 --- !u!1001 &1021148985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10145,6 +10203,7 @@ GameObject:
   - component: {fileID: 1950135836}
   - component: {fileID: 1950135834}
   - component: {fileID: 1950135835}
+  - component: {fileID: 1950135838}
   m_Layer: 5
   m_Name: HardBtn
   m_TagString: Untagged
@@ -10267,6 +10326,25 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 300}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1950135838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950135833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632d7c280ed8864db645d11dbcbc221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texWidth: 128
+  texHeight: 64
+  cornerRadius: 24
+  baseColor: {r: 0.15, g: 0.15, b: 0.3, a: 1}
+  brightnessBoost: 0.28
+  hoverScale: 1.08
+  animSpeed: 0.1
 --- !u!1001 &1958469124
 PrefabInstance:
   m_ObjectHideFlags: 0

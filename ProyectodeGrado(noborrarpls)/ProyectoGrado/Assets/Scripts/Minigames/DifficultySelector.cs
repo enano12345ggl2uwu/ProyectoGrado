@@ -13,10 +13,9 @@ using TMPro;
 ///  3. El resto de la UI del juego va en otro Panel "GamePanel" (o el Canvas raiz)
 ///  4. Asignar en Inspector:
 ///       difficultyPanel -> DifficultyPanel
-///       gamePanel       -> GamePanel  (o el Canvas del juego)
-///       colorJumpGame   -> ColorJumpManager  (si es ColorJump, si no dejar vacio)
-///       mirrorWordGame  -> MirrorGame        (si es MirrorWord, si no dejar vacio)
-///       easyBtn/mediumBtn/hardBtn -> los 3 botones
+///       gamePanel       -> GamePanel
+///       easyBtnStyle / mediumBtnStyle / hardBtnStyle -> el componente UIButtonStyle de cada boton
+///       (Si los botones no tienen UIButtonStyle, asigna easyBtnImage etc. como fallback)
 ///  5. Conectar OnClick de cada boton:
 ///       EasyBtn   -> DifficultySelector.SelectEasy()
 ///       MediumBtn -> DifficultySelector.SelectMedium()
@@ -30,27 +29,24 @@ public class DifficultySelector : MonoBehaviour
     public GameObject gamePanel;
 
     [Header("Juego (asignar solo el que este en la escena)")]
-    public ColorJumpGameUDP colorJumpGame;
-    public MirrorWordGameUDP mirrorWordGame;
-    public SizeSortGameUDP sizeSortGame;
-    public BalloonPopGameUDP balloonPopGame;
-    public NumberBalloonGameUDP numberBalloonGame;
+    public ColorJumpGameUDP      colorJumpGame;
+    public MirrorWordGameUDP     mirrorWordGame;
+    public SizeSortGameUDP       sizeSortGame;
+    public BalloonPopGameUDP     balloonPopGame;
+    public NumberBalloonGameUDP  numberBalloonGame;
 
-    [Header("Botones de dificultad")]
-    public Image easyBtnImage;
-    public Image mediumBtnImage;
-    public Image hardBtnImage;
+    [Header("Botones de dificultad — asignar UIButtonStyle de cada boton")]
+    public UIButtonStyle easyBtnStyle;
+    public UIButtonStyle mediumBtnStyle;
+    public UIButtonStyle hardBtnStyle;
 
     [Header("Textos de descripcion (opcional)")]
     public TextMeshProUGUI descriptionText;
 
-    [Header("Colores")]
-    public Color selectedColor   = new Color(0.2f, 1f, 0.3f, 1f);
-    public Color unselectedColor = new Color(0.25f, 0.25f, 0.25f, 1f);
+    private int  _selectedLevel  = 0; // 0=Easy, 1=Medium, 2=Hard
+    private bool _initialized    = false; // evita que UpdateUI corra antes de Start()
 
-    private int selectedLevel = 0; // 0=Easy, 1=Medium, 2=Hard
-
-    private readonly string[] descriptions = {
+    private readonly string[] _descriptions = {
         "EASY\nMore time, forgiving poses",
         "MEDIUM\nBalanced challenge",
         "HARD\nFast rounds, strict poses"
@@ -60,46 +56,75 @@ public class DifficultySelector : MonoBehaviour
     {
         if (difficultyPanel) difficultyPanel.SetActive(true);
         if (gamePanel)       gamePanel.SetActive(false);
+
+        // Marcamos como inicializado ANTES de llamar SelectEasy para que
+        // UpdateUI pueda ejecutarse. UIButtonStyle ya tiene _originalScale
+        // capturado en su Awake(), asi que SetSelected() es seguro aqui.
+        _initialized = true;
         SelectEasy();
     }
 
-    public void SelectEasy()
-    {
-        selectedLevel = 0;
-        UpdateUI();
-    }
+    // -------------------------------------------------------------------------
+    // Seleccion de dificultad
+    // -------------------------------------------------------------------------
 
-    public void SelectMedium()
-    {
-        selectedLevel = 1;
-        UpdateUI();
-    }
+    /// <summary>Selecciona dificultad Facil y actualiza los botones.</summary>
+    public void SelectEasy()   { _selectedLevel = 0; UpdateUI(); }
 
-    public void SelectHard()
-    {
-        selectedLevel = 2;
-        UpdateUI();
-    }
+    /// <summary>Selecciona dificultad Media y actualiza los botones.</summary>
+    public void SelectMedium() { _selectedLevel = 1; UpdateUI(); }
 
+    /// <summary>Selecciona dificultad Dificil y actualiza los botones.</summary>
+    public void SelectHard()   { _selectedLevel = 2; UpdateUI(); }
+
+    // -------------------------------------------------------------------------
+    // Inicio del juego
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Oculta el panel de seleccion e inicia el minijuego con la dificultad elegida.
+    /// </summary>
     public void StartGame()
     {
         if (difficultyPanel) difficultyPanel.SetActive(false);
         if (gamePanel)       gamePanel.SetActive(true);
 
-        if (colorJumpGame      != null) colorJumpGame.StartGame(selectedLevel);
-        if (mirrorWordGame     != null) mirrorWordGame.StartGame(selectedLevel);
-        if (sizeSortGame       != null) sizeSortGame.StartGame(selectedLevel);
-        if (balloonPopGame     != null) balloonPopGame.StartGame(selectedLevel);
-        if (numberBalloonGame  != null) numberBalloonGame.StartGame(selectedLevel);
+        if (colorJumpGame     != null) colorJumpGame.StartGame(_selectedLevel);
+        if (mirrorWordGame    != null) mirrorWordGame.StartGame(_selectedLevel);
+        if (sizeSortGame      != null) sizeSortGame.StartGame(_selectedLevel);
+        if (balloonPopGame    != null) balloonPopGame.StartGame(_selectedLevel);
+        if (numberBalloonGame != null) numberBalloonGame.StartGame(_selectedLevel);
     }
 
-    void UpdateUI()
-    {
-        if (easyBtnImage)   easyBtnImage.color   = selectedLevel == 0 ? selectedColor : unselectedColor;
-        if (mediumBtnImage) mediumBtnImage.color = selectedLevel == 1 ? selectedColor : unselectedColor;
-        if (hardBtnImage)   hardBtnImage.color   = selectedLevel == 2 ? selectedColor : unselectedColor;
+    // -------------------------------------------------------------------------
+    // Logica interna
+    // -------------------------------------------------------------------------
 
-        if (descriptionText && selectedLevel < descriptions.Length)
-            descriptionText.text = descriptions[selectedLevel];
+    /// <summary>
+    /// Actualiza el estado visual de los tres botones de dificultad.
+    /// Solo se ejecuta si Start() ya corrio (_initialized == true).
+    /// </summary>
+    private void UpdateUI()
+    {
+        // Proteccion: si alguna funcion Select* se llama antes del Start() de este
+        // componente, no hacemos nada. UIButtonStyle tampoco estaria lista.
+        if (!_initialized) return;
+
+        SetBtn(easyBtnStyle,   _selectedLevel == 0);
+        SetBtn(mediumBtnStyle, _selectedLevel == 1);
+        SetBtn(hardBtnStyle,   _selectedLevel == 2);
+
+        if (descriptionText && _selectedLevel < _descriptions.Length)
+            descriptionText.text = _descriptions[_selectedLevel];
+    }
+
+    /// <summary>
+    /// Aplica estado seleccionado/deseleccionado a un boton.
+    /// Si el boton no esta asignado en el Inspector, lo ignora silenciosamente.
+    /// </summary>
+    private void SetBtn(UIButtonStyle btn, bool selected)
+    {
+        if (btn == null) return;
+        btn.SetSelected(selected);
     }
 }
