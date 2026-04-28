@@ -16,7 +16,7 @@ import cv2
 import mediapipe as mp
 import socket
 import json
-import sys
+import sys  
 
 # Config
 UDP_IP = "127.0.0.1"

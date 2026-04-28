@@ -28,6 +28,10 @@ public class DifficultySelector : MonoBehaviour
     public GameObject difficultyPanel;
     public GameObject gamePanel;
 
+    [Header("Pose cursor (opcional — solo para el panel de dificultad)")]
+    [Tooltip("Arrastra el GameObject PoseCursor. Se desactiva cuando arranca el juego.")]
+    public GameObject poseCursor;
+
     [Header("Juego (asignar solo el que este en la escena)")]
     public ColorJumpGameUDP      colorJumpGame;
     public MirrorWordGameUDP     mirrorWordGame;
@@ -56,6 +60,7 @@ public class DifficultySelector : MonoBehaviour
     {
         if (difficultyPanel) difficultyPanel.SetActive(true);
         if (gamePanel)       gamePanel.SetActive(false);
+        if (poseCursor)      poseCursor.SetActive(true);
 
         // Marcamos como inicializado ANTES de llamar SelectEasy para que
         // UpdateUI pueda ejecutarse. UIButtonStyle ya tiene _originalScale
@@ -88,6 +93,7 @@ public class DifficultySelector : MonoBehaviour
     {
         if (difficultyPanel) difficultyPanel.SetActive(false);
         if (gamePanel)       gamePanel.SetActive(true);
+        if (poseCursor)      poseCursor.SetActive(false);
 
         if (colorJumpGame     != null) colorJumpGame.StartGame(_selectedLevel);
         if (mirrorWordGame    != null) mirrorWordGame.StartGame(_selectedLevel);

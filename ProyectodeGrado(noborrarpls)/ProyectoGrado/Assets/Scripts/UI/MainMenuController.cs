@@ -21,6 +21,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Paneles")]
     public GameObject mainPanel;
     public GameObject instructionsPanel;
+    public GameObject settingsPanel;
 
     [Header("UI opcional")]
     public TextMeshProUGUI bestScoreText;
@@ -32,10 +33,12 @@ public class MainMenuController : MonoBehaviour
     public string sizeSortScene    = "SizeSort";
     public string balloonPopScene  = "BalloonPop";
     public string calibrationScene = "Calibration";
+    public string islandSelectorScene = "IslandSelector";
 
     void Start()
     {
         if (instructionsPanel) instructionsPanel.SetActive(false);
+        if (settingsPanel)     settingsPanel.SetActive(false);
         if (mainPanel)         mainPanel.SetActive(true);
         UpdateBestScores();
     }
@@ -58,6 +61,19 @@ public class MainMenuController : MonoBehaviour
     public void PlaySizeSort()    { SceneManager.LoadScene(sizeSortScene); }
     public void PlayBalloonPop()  { SceneManager.LoadScene(balloonPopScene); }
     public void OpenCalibration() { SceneManager.LoadScene(calibrationScene); }
+    public void OpenIslandSelector() { SceneManager.LoadScene(islandSelectorScene); }
+
+    public void OpenSettings()
+    {
+        if (mainPanel)     mainPanel.SetActive(false);
+        if (settingsPanel) settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        if (settingsPanel) settingsPanel.SetActive(false);
+        if (mainPanel)     mainPanel.SetActive(true);
+    }
 
     public void OpenInstructions()
     {
