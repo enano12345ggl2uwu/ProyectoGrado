@@ -107,8 +107,9 @@ public class UIButtonStyle : MonoBehaviour,
 
         if (selected)
         {
-            // Arrancamos el pulso continuo (solo si no esta en hover)
-            _selectPulseCoroutine = StartCoroutine(SelectPulse());
+            // Solo arrancamos coroutine si el GameObject esta activo
+            if (isActiveAndEnabled)
+                _selectPulseCoroutine = StartCoroutine(SelectPulse());
         }
         else
         {
@@ -136,6 +137,7 @@ public class UIButtonStyle : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!isActiveAndEnabled) return;
         _hovered = true;
 
         // Detenemos animacion de escala previa (hover saliente o click), pero
@@ -143,18 +145,19 @@ public class UIButtonStyle : MonoBehaviour,
         PararAnimScale();
 
         _animScaleCoroutine = StartCoroutine(AnimScale(_originalScale * hoverScale, animSpeed));
-        _img.color          = Brighten(_currentBase, brightnessBoost);
+        if (_img) _img.color = Brighten(_currentBase, brightnessBoost);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!isActiveAndEnabled) return;
         _hovered = false;
 
         // Detenemos animacion de escala de hover/click
         PararAnimScale();
 
         _animScaleCoroutine = StartCoroutine(AnimScale(_originalScale, animSpeed));
-        _img.color          = _currentBase;
+        if (_img) _img.color = _currentBase;
 
         // Si el boton esta seleccionado y el pulso fue interrumpido por el hover,
         // lo reiniciamos ahora que el mouse salio.
@@ -164,9 +167,19 @@ public class UIButtonStyle : MonoBehaviour,
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!isActiveAndEnabled) return;
         // Detenemos animacion de escala activa (no el pulso de seleccion)
         PararAnimScale();
         _animScaleCoroutine = StartCoroutine(ClickPulse());
+    }
+
+    void OnDisable()
+    {
+        // Al desactivarse, todas las coroutines se detienen automaticamente.
+        // Limpiamos las referencias para que no queden colgando.
+        _animScaleCoroutine   = null;
+        _selectPulseCoroutine = null;
+        _hovered              = false;
     }
 
     // -------------------------------------------------------------------------
