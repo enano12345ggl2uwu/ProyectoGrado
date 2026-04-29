@@ -31,6 +31,12 @@ public class MirrorWordGameUDP : MonoBehaviour
     public float holdTime     = 1.5f;
     public float feedbackTime = 1.8f;
 
+    [Header("Session")]
+    [Tooltip("Cantidad de rondas antes de mostrar el panel final.")]
+    public int totalRounds = 6;
+    [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
+    public ResultsScreen results;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip   correctClip;
@@ -52,6 +58,7 @@ public class MirrorWordGameUDP : MonoBehaviour
 
     private readonly HashSet<int> paintedJoints = new HashSet<int>();
     private readonly HashSet<int> paintedBones  = new HashSet<int>();
+    private int _roundsPlayed = 0;
 
     private class PosePart
     {
@@ -102,7 +109,8 @@ public class MirrorWordGameUDP : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        while (true)
+        _roundsPlayed = 0;
+        while (_roundsPlayed < totalRounds)
         {
             SetupRound();
             float timer = roundTime;
@@ -159,9 +167,14 @@ public class MirrorWordGameUDP : MonoBehaviour
             if (holdBar)  holdBar.ResetBar();
             if (wordText)     wordText.color          = Color.white;
 
+            _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
         }
+
+        if (countdownText) countdownText.text = "";
+        if (results != null)
+            results.Show(score, _roundsPlayed, totalRounds * 10);
     }
 
     void SetupRound()

@@ -29,6 +29,12 @@ public class ColorJumpGameUDP : MonoBehaviour
     [Header("Difficulty")]
     public DifficultyMode difficulty = DifficultyMode.Medium;
 
+    [Header("Session")]
+    [Tooltip("Cantidad de rondas antes de mostrar el panel final.")]
+    public int totalRounds = 8;
+    [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
+    public ResultsScreen results;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip correctClip;
@@ -43,6 +49,7 @@ public class ColorJumpGameUDP : MonoBehaviour
     private bool roundActive = false;
     private bool targetOnLeft;
     private int activeColorCount;
+    private int _roundsPlayed = 0;
 
     void Start()
     {
@@ -83,7 +90,8 @@ public class ColorJumpGameUDP : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        while (true)
+        _roundsPlayed = 0;
+        while (_roundsPlayed < totalRounds)
         {
             SetupRound();
             float timer = roundTime;
@@ -104,9 +112,16 @@ public class ColorJumpGameUDP : MonoBehaviour
                 roundActive = false;
             }
 
+            _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
         }
+
+        if (countdownText) countdownText.text = "";
+        if (results != null)
+            results.Show(score, _roundsPlayed, totalRounds * 10);
+        else
+            Debug.LogError("[ColorJump] results NO esta asignado en el Inspector. Arrastra ResultsPanel al campo 'Results' del ColorJumpManager.");
     }
 
     void SetupRound()

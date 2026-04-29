@@ -48,9 +48,15 @@ public class SizeSortGameUDP : MonoBehaviour
     public float holdTime     = 1.2f;
     public float feedbackTime = 1.8f;
 
+    [Header("Session")]
+    [Tooltip("Cantidad de rondas antes de mostrar el panel final.")]
+    public int totalRounds = 6;
+    [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
+    public ResultsScreen results;
+
     [Header("Escala live (norm -> unidades del mundo)")]
     [Tooltip("Factor que convierte (distancia / shoulderWidth) en unidades visuales.")]
-    public float worldScale = 0.6f;
+    public float worldScale = 1.0f;
 
     [Header("Tolerancia")]
     [Tooltip("Porcentaje aceptado como 'match'. 0.18 = +/-18% en ancho Y alto.")]
@@ -80,6 +86,7 @@ public class SizeSortGameUDP : MonoBehaviour
     private bool   roundActive  = false;
     private float  holdTimer    = 0f;
     private float  tolMult      = 1f;
+    private int    _roundsPlayed = 0;
 
     void Start()
     {
@@ -125,7 +132,8 @@ public class SizeSortGameUDP : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        while (true)
+        _roundsPlayed = 0;
+        while (_roundsPlayed < totalRounds)
         {
             SetupRound();
             float timer = roundTime;
@@ -178,9 +186,14 @@ public class SizeSortGameUDP : MonoBehaviour
             if (holdBar) holdBar.ResetBar();
             if (wordText)    wordText.color = Color.white;
 
+            _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
         }
+
+        if (countdownText) countdownText.text = "";
+        if (results != null)
+            results.Show(score, _roundsPlayed, totalRounds * 10);
     }
 
     void SetupRound()

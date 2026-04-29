@@ -38,6 +38,10 @@ public class PoseCursor : MonoBehaviour
     [Header("Hand")]
     [Tooltip("16 = muneca derecha, 15 = muneca izquierda, 20 = indice derecho")]
     public int handLandmark = 16;
+    [Tooltip("Si ON, usa automaticamente la mano que este mas arriba. Util para zurdos o ninos que cambian de mano.")]
+    public bool autoSwitchHand = false;
+    [Tooltip("Diferencia minima en Y entre manos para cambiar (evita parpadeo). 0.05 = 5% de la pantalla.")]
+    public float autoSwitchThreshold = 0.05f;
 
     [Header("Smoothing")]
     [Tooltip("Mas alto = mas rapido/1:1 con la mano. Mas bajo = mas suave/lento. 25 = casi directo.")]
@@ -45,17 +49,17 @@ public class PoseCursor : MonoBehaviour
     [Tooltip("Pixeles de movimiento minimo para reaccionar (filtra micro-temblor de la mano).")]
     public float deadzonePixels = 2f;
 
-    [Header("Push click")]
-    [Tooltip("Velocidad minima (Z por segundo, hacia camara) para contar como push. Mas bajo = mas sensible.")]
+    [Header("Click mode")]
+    [Tooltip("Si esta ON, mantener el cursor sobre un boton X segundos lo activa. MODO PRINCIPAL.")]
+    public bool  dwellEnabled = true;
+    [Tooltip("Segundos que hay que mantener el cursor sobre un boton para hacer click.")]
+    public float dwellTime = 1.2f;
+    [Tooltip("Si esta ON, ademas del dwell, un push hacia la camara tambien hace click. Recomendado OFF (Z es ruidoso).")]
+    public bool  pushClickEnabled = false;
+    [Tooltip("Velocidad minima (Z por segundo, hacia camara) para contar como push.")]
     public float pushVelocityThreshold = 1.2f;
     [Tooltip("Segundos de cooldown tras un click para evitar dobles.")]
     public float clickCooldown = 0.8f;
-
-    [Header("Dwell fallback")]
-    [Tooltip("Si esta OFF, el cursor solo hace click por push (gesto hacia camara). Recomendado OFF.")]
-    public bool  dwellFallbackEnabled = false;
-    [Tooltip("Segundos que hay que mantener el cursor sobre un boton para hacer click.")]
-    public float dwellTime = 3.5f;
 
     [Header("Screen mapping")]
     [Tooltip("Expande el area util — 1.0 = mapeo directo. >1 amplifica (mas rapido). <1 ralentiza.")]
@@ -85,8 +89,31 @@ public class PoseCursor : MonoBehaviour
         if (dwellRingImage != null)
         {
             dwellRingImage.fillAmount = 0f;
-            dwellRingImage.gameObject.SetActive(dwellFallbackEnabled);
+            dwellRingImage.gameObject.SetActive(dwellEnabled);
         }
+
+        // CRITICO: el cursor y sus hijos NUNCA deben bloquear el raycast a los botones.
+        // Apaga raycastTarget en todas las Image/Text del cursor automaticamente.
+        DisableRaycastOnSelfAndChildren();
+    }
+
+    void DisableRaycastOnSelfAndChildren()
+    {
+        if (cursorRect == null) return;
+        var graphics = cursorRect.GetComponentsInChildren<UnityEngine.UI.Graphic>(true);
+        foreach (var g in graphics) g.raycastTarget = false;
+    }
+
+    /// <summary>Cambia manualmente entre mano derecha (16) y izquierda (15).</summary>
+    public void SwitchHand()
+    {
+        handLandmark = handLandmark == 16 ? 15 : 16;
+    }
+
+    /// <summary>Fuerza una mano especifica. 16=derecha, 15=izquierda.</summary>
+    public void SetHand(int landmark)
+    {
+        handLandmark = landmark;
     }
 
     void Update()
@@ -97,6 +124,17 @@ public class PoseCursor : MonoBehaviour
             return;
         }
         if (cursorRect) cursorRect.gameObject.SetActive(true);
+
+        // 0. auto-switch: usar la mano que este mas arriba (Y mas baja en MediaPipe)
+        if (autoSwitchHand)
+        {
+            Vector3 rWrist = PoseReceiverUDP.Instance.GetLandmark(16);
+            Vector3 lWrist = PoseReceiverUDP.Instance.GetLandmark(15);
+            // En MediaPipe Y crece hacia abajo. Y mas chico = mano mas arriba.
+            float diff = lWrist.y - rWrist.y;
+            if (diff >  autoSwitchThreshold) handLandmark = 16; // derecha mas arriba
+            if (diff < -autoSwitchThreshold) handLandmark = 15; // izquierda mas arriba
+        }
 
         // 1. leer mano
         Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(handLandmark);
@@ -126,17 +164,17 @@ public class PoseCursor : MonoBehaviour
         // 5. raycast UI
         _hoveredButton = RaycastButton(_cursorSmoothed);
 
-        // 6. click por push
+        // 6. click por push (opcional, OFF por defecto)
         bool canClick = Time.time >= _clickLockUntil;
-        if (canClick && _zVelocity > pushVelocityThreshold && _hoveredButton != null)
+        if (pushClickEnabled && canClick && _zVelocity > pushVelocityThreshold && _hoveredButton != null)
         {
             InvokeButton(_hoveredButton);
             ResetDwell();
             return;
         }
 
-        // 7. fallback dwell
-        if (dwellFallbackEnabled && _hoveredButton != null)
+        // 7. dwell (modo principal)
+        if (dwellEnabled && _hoveredButton != null)
         {
             if (_hoveredButton == _lastDwellButton)
             {

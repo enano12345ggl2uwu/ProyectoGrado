@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SizeSort.unity
     guid: 460ca956103dcb3458195ef622e95ab6
+  - enabled: 1
+    path: Assets/Scenes/BalloonPop.unity
+    guid: ac50e3a2c572e854d87ec31d35ff6694
   m_configObjects: {}

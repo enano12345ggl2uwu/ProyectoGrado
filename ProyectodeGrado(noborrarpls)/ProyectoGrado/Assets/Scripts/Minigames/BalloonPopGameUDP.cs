@@ -57,6 +57,12 @@ public class BalloonPopGameUDP : MonoBehaviour
     public float totalGameTime = 60f;
     public DifficultyMode difficulty = DifficultyMode.Medium;
 
+    [Header("Session")]
+    [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
+    public ResultsScreen results;
+    [Tooltip("Score esperado (para calcular estrellas). 0 = se ignora.")]
+    public int expectedMaxScore = 200;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip   popClip;
@@ -146,9 +152,14 @@ public class BalloonPopGameUDP : MonoBehaviour
         }
 
         _running = false;
-        ShowFeedback($"Final: {_score} pts", Color.cyan);
+        if (countdownText) countdownText.text = "";
         foreach (var b in _live) if (b) Destroy(b.gameObject);
         _live.Clear();
+
+        if (results != null)
+            results.Show(_score, Mathf.RoundToInt(totalGameTime), expectedMaxScore);
+        else
+            ShowFeedback($"Final: {_score} pts", Color.cyan);
     }
 
     IEnumerator SpawnLoop()
