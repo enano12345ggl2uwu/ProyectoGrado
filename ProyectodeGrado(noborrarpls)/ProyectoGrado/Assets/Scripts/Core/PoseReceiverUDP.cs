@@ -17,15 +17,27 @@ public class PoseReceiverUDP : MonoBehaviour
     public static PoseReceiverUDP Instance { get; private set; }
 
     [Header("Network")]
-    public int port = 5052;
+    public int port = 7777;
 
-    [Header("Smoothing")]
-    [Range(0f, 1f)]
-    public float smoothing = 0.5f;
+    [Header("One-Euro Filter")]
+    public float minCutoff = 1.0f;
+    public float beta = 0.007f;
+    public float dCutoff = 1.0f;
+
+    [Header("Connection")]
+    [Tooltip("Tiempo sin paquetes antes de marcar desconectado (segundos)")]
+    public float connectionTimeout = 1.0f;
 
     [Header("State")]
     public bool poseDetected = false;
     public Vector3[] landmarks = new Vector3[33];
+
+    public bool IsConnected => Time.realtimeSinceStartup - lastPacketTime < connectionTimeout;
+    public float PacketsPerSecond { get; private set; }
+    public float LastPacketAge => Time.realtimeSinceStartup - lastPacketTime;
+
+    public event Action OnConnectionLost;
+    public event Action OnConnectionRestored;
 
     private UdpClient udpClient;
     private Thread receiveThread;
@@ -35,12 +47,29 @@ public class PoseReceiverUDP : MonoBehaviour
     private bool newDataAvailable = false;
     private bool tempDetected = false;
 
+    private OneEuroFilter[] filtersX = new OneEuroFilter[33];
+    private OneEuroFilter[] filtersY = new OneEuroFilter[33];
+    private OneEuroFilter[] filtersZ = new OneEuroFilter[33];
+
+    private float lastPacketTime = -999f;
+    private bool wasConnected = false;
+    private int packetCount = 0;
+    private float packetTimer = 0f;
+
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); enabled = false; return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        for (int i = 0; i < 33; i++) { landmarks[i] = Vector3.zero; rawLandmarks[i] = Vector3.zero; }
+
+        for (int i = 0; i < 33; i++)
+        {
+            landmarks[i] = Vector3.zero;
+            rawLandmarks[i] = Vector3.zero;
+            filtersX[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
+            filtersY[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
+            filtersZ[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
+        }
     }
 
     void Start() { StartReceiving(); }
@@ -70,8 +99,8 @@ public class PoseReceiverUDP : MonoBehaviour
             try
             {
                 byte[] data = udpClient.Receive(ref remoteEP);
-            string json = Encoding.UTF8.GetString(data);
-            ParseJson(json); 
+                string json = Encoding.UTF8.GetString(data);
+                ParseJson(json);
             }
             catch (SocketException) { break; }
             catch (ThreadAbortException) { break; }
@@ -83,27 +112,23 @@ public class PoseReceiverUDP : MonoBehaviour
     {
         try
         {
-            // Parser manual robusto: busca todos los grupos [x,y,z]
             bool detected = json.Contains("\"detected\": true") || json.Contains("\"detected\":true");
 
             int idx = 0;
             int landmarkIdx = 0;
             Vector3[] tempLandmarks = new Vector3[33];
 
-            // Saltar hasta encontrar "landmarks"
             int lmStart = json.IndexOf("\"landmarks\"");
             if (lmStart < 0) return;
             idx = json.IndexOf("[[", lmStart);
             if (idx < 0) return;
-            idx += 2; // saltar [[
+            idx += 2;
 
             while (landmarkIdx < 33 && idx < json.Length)
             {
-                // Buscar 3 numeros separados por coma
                 float[] coords = new float[3];
                 for (int c = 0; c < 3; c++)
                 {
-                    // Saltar espacios y caracteres no numericos hasta encontrar digito o signo
                     while (idx < json.Length && json[idx] != '-' && (json[idx] < '0' || json[idx] > '9')) idx++;
                     int numStart = idx;
                     while (idx < json.Length && (json[idx] == '-' || json[idx] == '.' || (json[idx] >= '0' && json[idx] <= '9') || json[idx] == 'e' || json[idx] == 'E' || json[idx] == '+')) idx++;
@@ -114,16 +139,12 @@ public class PoseReceiverUDP : MonoBehaviour
                 tempLandmarks[landmarkIdx] = new Vector3(coords[0], coords[1], coords[2]);
                 landmarkIdx++;
 
-                // Buscar siguiente '[' o salir si encuentra ']]'
-                // Saltar el ']' de cierre del landmark actual
-                    while (idx < json.Length && json[idx] != ']') idx++;
-                    if (idx >= json.Length) break;
-                    idx++; // saltar el ']'
-
-                    // Ahora buscar el siguiente '[' o el ']' final del array
-                    while (idx < json.Length && json[idx] != '[' && json[idx] != ']') idx++;
-                    if (idx >= json.Length || json[idx] == ']') break;
-                    idx++; // saltar el '['
+                while (idx < json.Length && json[idx] != ']') idx++;
+                if (idx >= json.Length) break;
+                idx++;
+                while (idx < json.Length && json[idx] != '[' && json[idx] != ']') idx++;
+                if (idx >= json.Length || json[idx] == ']') break;
+                idx++;
             }
 
             lock (lockObj)
@@ -131,6 +152,8 @@ public class PoseReceiverUDP : MonoBehaviour
                 for (int i = 0; i < 33; i++) rawLandmarks[i] = tempLandmarks[i];
                 tempDetected = detected;
                 newDataAvailable = true;
+                lastPacketTime = Time.realtimeSinceStartup;
+                packetCount++;
             }
         }
         catch (Exception e) { Debug.LogWarning($"[PoseReceiverUDP] Parse error: {e.Message}"); }
@@ -138,12 +161,31 @@ public class PoseReceiverUDP : MonoBehaviour
 
     void Update()
     {
+        packetTimer += Time.unscaledDeltaTime;
+        if (packetTimer >= 1f)
+        {
+            PacketsPerSecond = packetCount / packetTimer;
+            packetCount = 0;
+            packetTimer = 0f;
+        }
+
+        bool nowConnected = IsConnected;
+        if (wasConnected && !nowConnected) OnConnectionLost?.Invoke();
+        else if (!wasConnected && nowConnected) OnConnectionRestored?.Invoke();
+        wasConnected = nowConnected;
+
         lock (lockObj)
         {
             if (newDataAvailable)
             {
                 for (int i = 0; i < 33; i++)
-                    landmarks[i] = Vector3.Lerp(landmarks[i], rawLandmarks[i], smoothing);
+                {
+                    landmarks[i] = new Vector3(
+                        filtersX[i].Filter(rawLandmarks[i].x),
+                        filtersY[i].Filter(rawLandmarks[i].y),
+                        filtersZ[i].Filter(rawLandmarks[i].z)
+                    );
+                }
                 poseDetected = tempDetected;
                 newDataAvailable = false;
             }
