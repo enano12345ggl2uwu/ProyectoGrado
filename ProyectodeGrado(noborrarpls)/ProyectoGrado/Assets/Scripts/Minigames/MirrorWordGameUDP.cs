@@ -72,7 +72,10 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (feedbackText) feedbackText.text = "";
         if (holdBar)  holdBar.ResetBar();
         UpdateScoreUI();
-        
+
+        if (stickFigure)
+            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 1.5f, stickFigure.offset.z);
+
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
         if (FindObjectOfType<DifficultySelector>() == null)
             StartGame(1);

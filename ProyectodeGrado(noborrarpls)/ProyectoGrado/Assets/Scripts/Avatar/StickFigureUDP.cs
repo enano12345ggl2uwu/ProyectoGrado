@@ -25,7 +25,7 @@ public class StickFigureUDP : MonoBehaviour
     [Range(1f, 40f)] public float boneSmoothing = 18f;
 
     [Header("Head Settings")]
-    public float headSize  = 0.55f;
+    public float headSize  = 1.1f;
     public Color headColor = new Color(0.15f, 0.15f, 0.15f, 1f);
     public float eyeSize   = 0.13f;
     public Color eyeColor  = new Color(0.5f, 0.9f, 0.9f, 1f);
