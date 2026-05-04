@@ -24,12 +24,18 @@ public class OneEuroFilter
     {
         x_prev = 0f;
         dx_prev = 0f;
-        lastTime = Time.realtimeSinceStartup;
+        lastTime = -1f;
     }
 
     public float Filter(float x)
     {
         float now = Time.realtimeSinceStartup;
+        if (lastTime < 0f)
+        {
+            lastTime = now;
+            x_prev = x;
+            return x;
+        }
         float dt = now - lastTime;
         lastTime = now;
 
