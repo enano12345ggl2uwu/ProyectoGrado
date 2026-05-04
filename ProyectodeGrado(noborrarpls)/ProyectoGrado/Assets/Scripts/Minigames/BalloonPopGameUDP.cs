@@ -42,10 +42,11 @@ public class BalloonPopGameUDP : MonoBehaviour
     public GameObject balloonPrefab;
     public Transform  spawnArea;
     public float      spawnXRange   = 2.8f;
+    public float      spawnStartY   = -6f;
     public float      floatUpSpeed  = 1f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
-    public float      popRadius     = 2.0f;
+    public float      popRadius     = 1.2f;
     public float      balloonScale  = 2.5f;
 
     [Header("UI")]
@@ -179,8 +180,8 @@ public class BalloonPopGameUDP : MonoBehaviour
     Balloon SpawnAt(float xOffset)
     {
         if (balloonPrefab == null || spawnArea == null) return null;
-        // X centrado en 0 (no usa spawnArea.x) para coincidir con el mapeo de las munecas
-        Vector3 pos = new Vector3(xOffset, spawnArea.position.y, 0f);
+        // X centrado en 0, Y fija abajo para que los globos suban desde fuera de pantalla
+        Vector3 pos = new Vector3(xOffset, spawnStartY, 0f);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
         go.transform.localScale *= balloonScale;
         var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
@@ -194,12 +195,6 @@ public class BalloonPopGameUDP : MonoBehaviour
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
         Vector3 lw = LandmarkToWorld(15);
         Vector3 rw = LandmarkToWorld(16);
-
-        string dbg = $"LW({lw.x:F1},{lw.y:F1}) RW({rw.x:F1},{rw.y:F1})";
-        if (_leftBalloon)  dbg += $" | BL({_leftBalloon.transform.position.x:F1},{_leftBalloon.transform.position.y:F1})";
-        if (_rightBalloon) dbg += $" | BR({_rightBalloon.transform.position.x:F1},{_rightBalloon.transform.position.y:F1})";
-        if (feedbackText) { feedbackText.text = dbg; feedbackText.color = Color.white; }
-
         TryPop(ref _leftBalloon,  lw, rw);
         TryPop(ref _rightBalloon, lw, rw);
     }
