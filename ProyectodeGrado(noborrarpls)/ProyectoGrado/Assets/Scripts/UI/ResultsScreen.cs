@@ -36,6 +36,10 @@ public class ResultsScreen : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestText;
 
+    [Header("Music")]
+    [Tooltip("Clip que suena cuando se muestra el panel de resultados (ej. panel.mp3).")]
+    public AudioClip panelMusic;
+
     [Header("Stars (3)")]
     public Image[] stars;
     public Color   starOnColor  = new Color(1f, 0.85f, 0.2f, 1f);
@@ -79,6 +83,12 @@ public class ResultsScreen : MonoBehaviour
             return;
         }
         panel.SetActive(true);
+
+        if (panelMusic != null && MusicManager.Instance != null)
+        {
+            MusicManager.Instance.SetClip(panelMusic);
+        }
+
         if (titleText)    titleText.text    = "GREAT JOB!";
         if (subtitleText) subtitleText.text = PrettyName(minigameKey);
         if (scoreText)    scoreText.text    = $"Score: {finalScore}\nRounds: {rounds}";
