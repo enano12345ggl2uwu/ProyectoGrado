@@ -180,6 +180,9 @@ public class PoseReceiverUDP : MonoBehaviour
                 lastPacketTime = Time.realtimeSinceStartup;
                 for (int i = 0; i < 33; i++)
                 {
+                    if (filtersX[i] == null) filtersX[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
+                    if (filtersY[i] == null) filtersY[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
+                    if (filtersZ[i] == null) filtersZ[i] = new OneEuroFilter { minCutoff = minCutoff, beta = beta, dCutoff = dCutoff };
                     landmarks[i] = new Vector3(
                         filtersX[i].Filter(rawLandmarks[i].x),
                         filtersY[i].Filter(rawLandmarks[i].y),
