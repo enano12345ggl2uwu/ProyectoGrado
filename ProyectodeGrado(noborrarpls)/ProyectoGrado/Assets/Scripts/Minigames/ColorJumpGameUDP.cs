@@ -52,6 +52,7 @@ public class ColorJumpGameUDP : MonoBehaviour
     private int _roundsPlayed = 0;
 
     private readonly ActionDebouncer _answerDebouncer = new ActionDebouncer();
+    private bool _lastAnswerCorrect = false;
 
     // Colores de highlight para la plataforma hovereada
     private Color _leftBaseColor;
@@ -127,6 +128,8 @@ public class ColorJumpGameUDP : MonoBehaviour
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
+            if (_lastAnswerCorrect)
+                yield return WaitForCenter();
         }
 
         if (countdownText) countdownText.text = "";
@@ -203,6 +206,7 @@ public class ColorJumpGameUDP : MonoBehaviour
         if (!_answerDebouncer.TryFire(feedbackTime + 0.3f)) return;
 
         bool correct = (playerWentLeft && targetOnLeft) || (!playerWentLeft && !targetOnLeft);
+        _lastAnswerCorrect = correct;
         if (correct)
         {
             score += 10;
@@ -220,6 +224,25 @@ public class ColorJumpGameUDP : MonoBehaviour
         }
         ClearHighlight();
         roundActive = false;
+    }
+
+    IEnumerator WaitForCenter()
+    {
+        ShowFeedback("Come back!", Color.white);
+        float elapsed = 0f;
+        while (elapsed < 5f)
+        {
+            if (PoseReceiverUDP.Instance != null && PoseReceiverUDP.Instance.poseDetected)
+            {
+                Vector3 lh = PoseReceiverUDP.Instance.GetLandmark(23);
+                Vector3 rh = PoseReceiverUDP.Instance.GetLandmark(24);
+                if (Mathf.Abs((lh.x + rh.x) / 2f - 0.5f) < moveThreshold)
+                    break;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        if (feedbackText) feedbackText.text = "";
     }
 
     void SetHighlight(bool highlightLeft)

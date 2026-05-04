@@ -152,7 +152,6 @@ public class PoseReceiverUDP : MonoBehaviour
                 for (int i = 0; i < 33; i++) rawLandmarks[i] = tempLandmarks[i];
                 tempDetected = detected;
                 newDataAvailable = true;
-                lastPacketTime = Time.realtimeSinceStartup;
                 packetCount++;
             }
         }
@@ -178,6 +177,7 @@ public class PoseReceiverUDP : MonoBehaviour
         {
             if (newDataAvailable)
             {
+                lastPacketTime = Time.realtimeSinceStartup;
                 for (int i = 0; i < 33; i++)
                 {
                     landmarks[i] = new Vector3(
