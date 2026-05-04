@@ -194,6 +194,12 @@ public class BalloonPopGameUDP : MonoBehaviour
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
         Vector3 lw = LandmarkToWorld(15);
         Vector3 rw = LandmarkToWorld(16);
+
+        string dbg = $"LW({lw.x:F1},{lw.y:F1}) RW({rw.x:F1},{rw.y:F1})";
+        if (_leftBalloon)  dbg += $" | BL({_leftBalloon.transform.position.x:F1},{_leftBalloon.transform.position.y:F1})";
+        if (_rightBalloon) dbg += $" | BR({_rightBalloon.transform.position.x:F1},{_rightBalloon.transform.position.y:F1})";
+        if (feedbackText) { feedbackText.text = dbg; feedbackText.color = Color.white; }
+
         TryPop(ref _leftBalloon,  lw, rw);
         TryPop(ref _rightBalloon, lw, rw);
     }
