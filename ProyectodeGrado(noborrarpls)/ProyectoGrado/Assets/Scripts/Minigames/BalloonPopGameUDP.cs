@@ -41,11 +41,11 @@ public class BalloonPopGameUDP : MonoBehaviour
     [Header("Prefab & Spawn")]
     public GameObject balloonPrefab;
     public Transform  spawnArea;
-    public float      spawnXRange   = 2.4f;
+    public float      spawnXRange   = 2.8f;
     public float      floatUpSpeed  = 1f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
-    public float      popRadius     = 1.8f;
+    public float      popRadius     = 2.0f;
     public float      balloonScale  = 2.5f;
 
     [Header("UI")]
@@ -179,7 +179,8 @@ public class BalloonPopGameUDP : MonoBehaviour
     Balloon SpawnAt(float xOffset)
     {
         if (balloonPrefab == null || spawnArea == null) return null;
-        Vector3 pos = new Vector3(spawnArea.position.x + xOffset, spawnArea.position.y, 0f);
+        // X centrado en 0 (no usa spawnArea.x) para coincidir con el mapeo de las munecas
+        Vector3 pos = new Vector3(xOffset, spawnArea.position.y, 0f);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
         go.transform.localScale *= balloonScale;
         var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
