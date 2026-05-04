@@ -39,15 +39,16 @@ public class BalloonPopGameUDP : MonoBehaviour
     public enum DifficultyMode { Easy, Medium, Hard }
 
     [Header("Prefab & Spawn")]
-    public GameObject balloonPrefab;
-    public Transform  spawnArea;
-    public float      spawnXRange   = 2.8f;
-    public float      spawnStartY   = -6f;
-    public float      floatUpSpeed  = 1f;
-    public float      spawnInterval = 1.4f;
-    public float      despawnY      = 6f;
-    public float      popRadius     = 1.2f;
-    public float      balloonScale  = 2.5f;
+    public GameObject    balloonPrefab;
+    public Transform     spawnArea;
+    public StickFigureUDP stickFigure;
+    public float         spawnXRange   = 2.8f;
+    public float         spawnStartY   = -6f;
+    public float         floatUpSpeed  = 1f;
+    public float         spawnInterval = 1.4f;
+    public float         despawnY      = 6f;
+    public float         popRadius     = 1.2f;
+    public float         balloonScale  = 2.5f;
 
     [Header("UI")]
     public TextMeshProUGUI targetColorText;
@@ -92,6 +93,14 @@ public class BalloonPopGameUDP : MonoBehaviour
     {
         difficulty = (DifficultyMode)level;
         ApplyDifficulty();
+        // Ajustar spawn según el stickfigure real de la escena
+        if (stickFigure != null)
+        {
+            spawnXRange  = stickFigure.scale * 0.6f;
+            spawnStartY  = stickFigure.offset.y - stickFigure.scale * 1.5f;
+            despawnY     = stickFigure.offset.y + stickFigure.scale;
+        }
+
         _running = true;
         StartCoroutine(GameLoop());
     }
@@ -210,11 +219,10 @@ public class BalloonPopGameUDP : MonoBehaviour
 
     Vector3 LandmarkToWorld(int idx)
     {
-        Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(idx);
-        const float scale = 5f;
-        Vector3 offset = new Vector3(0f, 2f, 0f);
-        // Z=0 para que coincida con el plano de los globos (evita fallos de distancia por profundidad)
-        return new Vector3((lm.x - 0.5f) * scale, (0.5f - lm.y) * scale, 0f) + offset;
+        Vector3 lm  = PoseReceiverUDP.Instance.GetLandmark(idx);
+        float   s   = stickFigure != null ? stickFigure.scale  : 5f;
+        Vector3 off = stickFigure != null ? stickFigure.offset : new Vector3(0f, 2f, 0f);
+        return new Vector3((lm.x - 0.5f) * s, (0.5f - lm.y) * s + off.y, 0f);
     }
 
     void PopBalloon(Balloon b)
