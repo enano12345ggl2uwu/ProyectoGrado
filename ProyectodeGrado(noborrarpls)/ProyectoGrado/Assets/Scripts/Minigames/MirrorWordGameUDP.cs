@@ -77,8 +77,8 @@ public class MirrorWordGameUDP : MonoBehaviour
             stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 8.0f, stickFigure.offset.z);
         if (silhouette)
         {
-            silhouette.scale  = 11f;
-            silhouette.offset = new Vector3(-4f, silhouette.offset.y, silhouette.offset.z);
+            silhouette.scale  = 10f;
+            silhouette.offset = new Vector3(-4f, silhouette.offset.y + 3f, silhouette.offset.z);
         }
 
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
