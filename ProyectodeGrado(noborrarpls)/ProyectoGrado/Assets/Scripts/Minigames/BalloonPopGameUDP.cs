@@ -39,13 +39,16 @@ public class BalloonPopGameUDP : MonoBehaviour
     public enum DifficultyMode { Easy, Medium, Hard }
 
     [Header("Prefab & Spawn")]
-    public GameObject balloonPrefab;
-    public Transform  spawnArea;
-    public float      spawnXRange   = 4f;
-    public float      floatUpSpeed  = 2f;
-    public float      spawnInterval = 1.4f;
-    public float      despawnY      = 6f;
-    public float      popRadius     = 0.8f;
+    public GameObject    balloonPrefab;
+    public Transform     spawnArea;
+    public StickFigureUDP stickFigure;
+    public float         spawnXRange   = 2.8f;
+    public float         spawnStartY   = -6f;
+    public float         floatUpSpeed  = 1f;
+    public float         spawnInterval = 1.4f;
+    public float         despawnY      = 6f;
+    public float         popRadius     = 1.2f;
+    public float         balloonScale  = 2.5f;
 
     [Header("UI")]
     public TextMeshProUGUI targetColorText;
@@ -71,7 +74,8 @@ public class BalloonPopGameUDP : MonoBehaviour
     private readonly string[] colorNames = { "RED", "BLUE", "GREEN", "YELLOW", "ORANGE", "PURPLE" };
     private readonly Color[]  colorValues = UITheme.GameColors;
 
-    private readonly List<Balloon> _live = new List<Balloon>();
+    private Balloon _leftBalloon;
+    private Balloon _rightBalloon;
     private int   _score = 0;
     private int   _targetColorIdx;
     private int   _activeColors;
@@ -89,9 +93,18 @@ public class BalloonPopGameUDP : MonoBehaviour
     {
         difficulty = (DifficultyMode)level;
         ApplyDifficulty();
+        // Ajustar spawn según el stickfigure real de la escena
+        if (stickFigure != null)
+        {
+            spawnXRange  = stickFigure.scale * 0.6f;
+            // Pies del stickman ≈ offset.y - scale*0.5; spawneamos 2 escalas MÁS abajo
+            float feetY  = stickFigure.offset.y - stickFigure.scale * 0.5f;
+            spawnStartY  = feetY - stickFigure.scale * 2f;
+            despawnY     = stickFigure.offset.y + stickFigure.scale * 1.2f;
+        }
+
         _running = true;
         StartCoroutine(GameLoop());
-        StartCoroutine(SpawnLoop());
     }
 
     void ApplyDifficulty()
@@ -100,20 +113,17 @@ public class BalloonPopGameUDP : MonoBehaviour
         {
             case DifficultyMode.Easy:
                 _activeColors = 3;
-                floatUpSpeed  = 1.5f;
-                spawnInterval = 2.0f;
+                floatUpSpeed  = 0.8f;
                 _wrongPenalty = 0f;
                 break;
             case DifficultyMode.Medium:
                 _activeColors = 4;
-                floatUpSpeed  = 2.0f;
-                spawnInterval = 1.4f;
+                floatUpSpeed  = 1.2f;
                 _wrongPenalty = 5f;
                 break;
             case DifficultyMode.Hard:
                 _activeColors = colorNames.Length;
-                floatUpSpeed  = 2.8f;
-                spawnInterval = 0.9f;
+                floatUpSpeed  = 1.8f;
                 _wrongPenalty = 10f;
                 break;
         }
@@ -138,6 +148,7 @@ public class BalloonPopGameUDP : MonoBehaviour
         while (_running && timer > 0f)
         {
             if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+            EnsureBalloons();
             CheckHandPops();
 
             targetSwitchTimer -= Time.deltaTime;
@@ -153,8 +164,9 @@ public class BalloonPopGameUDP : MonoBehaviour
 
         _running = false;
         if (countdownText) countdownText.text = "";
-        foreach (var b in _live) if (b) Destroy(b.gameObject);
-        _live.Clear();
+        if (_leftBalloon)  Destroy(_leftBalloon.gameObject);
+        if (_rightBalloon) Destroy(_rightBalloon.gameObject);
+        _leftBalloon = _rightBalloon = null;
 
         if (results != null)
             results.Show(_score, Mathf.RoundToInt(totalGameTime), expectedMaxScore);
@@ -162,59 +174,79 @@ public class BalloonPopGameUDP : MonoBehaviour
             ShowFeedback($"Final: {_score} pts", Color.cyan);
     }
 
-    IEnumerator SpawnLoop()
+    void EnsureBalloons()
     {
-        while (_running)
+        if (_leftBalloon == null || _leftBalloon.OffScreen)
         {
-            SpawnBalloon();
-            yield return new WaitForSeconds(spawnInterval);
+            if (_leftBalloon != null) Destroy(_leftBalloon.gameObject);
+            _leftBalloon = SpawnAt(-spawnXRange);
+        }
+        if (_rightBalloon == null || _rightBalloon.OffScreen)
+        {
+            if (_rightBalloon != null) Destroy(_rightBalloon.gameObject);
+            _rightBalloon = SpawnAt(spawnXRange);
         }
     }
 
-    void SpawnBalloon()
+    Balloon SpawnAt(float xOffset)
     {
-        if (balloonPrefab == null || spawnArea == null) return;
-        float x = spawnArea.position.x + Random.Range(-spawnXRange, spawnXRange);
-        Vector3 pos = new Vector3(x, spawnArea.position.y, spawnArea.position.z);
+        if (balloonPrefab == null || spawnArea == null) return null;
+        // X centrado en 0, Y fija abajo para que los globos suban desde fuera de pantalla
+        Vector3 pos = new Vector3(xOffset, spawnStartY, 0f);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
-        var b = go.GetComponent<Balloon>();
-        if (b == null) b = go.AddComponent<Balloon>();
+        go.transform.localScale *= balloonScale;
+
+        // Rigidbody cinemático: hace que el broadphase de física actualice la posición
+        // cada frame aunque el objeto se mueva por transform.position (no por física).
+        // Sin esto, Physics.OverlapSphere usa posiciones desactualizadas del collider.
+        var rb = go.GetComponent<Rigidbody>() ?? go.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity  = false;
+
+        // SphereCollider trigger para que OverlapSphere lo detecte
+        if (go.GetComponent<Collider>() == null)
+        {
+            var col = go.AddComponent<SphereCollider>();
+            col.radius    = 0.5f;
+            col.isTrigger = true;
+        }
+        else
+        {
+            go.GetComponent<Collider>().isTrigger = true;
+        }
+
+        var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
         int colorIdx = Random.Range(0, _activeColors);
         b.Init(colorIdx, colorValues[colorIdx], floatUpSpeed, despawnY);
-        _live.Add(b);
+        return b;
     }
 
     void CheckHandPops()
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
+        CheckOverlapPop(LandmarkToWorld(15));
+        CheckOverlapPop(LandmarkToWorld(16));
+    }
 
-        Vector3 leftWrist  = LandmarkToWorld(15);
-        Vector3 rightWrist = LandmarkToWorld(16);
-
-        for (int i = _live.Count - 1; i >= 0; i--)
+    void CheckOverlapPop(Vector3 wristPos)
+    {
+        // OverlapSphere detecta cualquier collider dentro del radio sin importar Z
+        Collider[] hits = Physics.OverlapSphere(wristPos, popRadius, ~0, QueryTriggerInteraction.Collide);
+        foreach (var hit in hits)
         {
-            var b = _live[i];
-            if (b == null) { _live.RemoveAt(i); continue; }
-
-            if (b.OffScreen) { Destroy(b.gameObject); _live.RemoveAt(i); continue; }
-
-            float distL = Vector3.Distance(b.transform.position, leftWrist);
-            float distR = Vector3.Distance(b.transform.position, rightWrist);
-            if (Mathf.Min(distL, distR) < popRadius)
-            {
-                PopBalloon(b);
-                _live.RemoveAt(i);
-            }
+            Balloon b = hit.GetComponent<Balloon>();
+            if (b == null) continue;
+            if (b == _leftBalloon)  { PopBalloon(_leftBalloon);  _leftBalloon  = null; return; }
+            if (b == _rightBalloon) { PopBalloon(_rightBalloon); _rightBalloon = null; return; }
         }
     }
 
     Vector3 LandmarkToWorld(int idx)
     {
-        // convierte coords normalizadas de MediaPipe a mundo usando mismo mapeo que StickFigure
-        Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(idx);
-        const float scale = 5f;
-        Vector3 offset = new Vector3(0f, 2f, 0f);
-        return new Vector3((lm.x - 0.5f) * scale, (0.5f - lm.y) * scale, lm.z * scale) + offset;
+        Vector3 lm  = PoseReceiverUDP.Instance.GetLandmark(idx);
+        float   s   = stickFigure != null ? stickFigure.scale  : 5f;
+        Vector3 off = stickFigure != null ? stickFigure.offset : new Vector3(0f, 2f, 0f);
+        return new Vector3((lm.x - 0.5f) * s, (0.5f - lm.y) * s + off.y, 0f);
     }
 
     void PopBalloon(Balloon b)
@@ -234,6 +266,8 @@ public class BalloonPopGameUDP : MonoBehaviour
             _score = Mathf.Max(0, _score - (int)_wrongPenalty);
             ShowFeedback("Wrong color!", UITheme.Warning);
             PlayClip(wrongClip);
+            if (CelebrationBurst.Instance != null)
+                CelebrationBurst.Instance.Trigger(b.transform.position);
         }
         UpdateScoreUI();
         Destroy(b.gameObject);

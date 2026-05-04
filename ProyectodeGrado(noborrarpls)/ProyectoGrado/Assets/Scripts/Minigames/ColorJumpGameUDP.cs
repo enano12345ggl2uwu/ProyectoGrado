@@ -4,7 +4,7 @@ using TMPro;
 
 /// <summary>
 /// Minijuego 1: Color Jump
-/// El niño se mueve izquierda o derecha para pararse sobre la plataforma del color correcto.
+/// El niño se mueve izquierda/derecha con el cuerpo para pararse sobre el color correcto.
 /// Detección basada en caderas (landmarks 23 y 24).
 /// </summary>
 public class ColorJumpGameUDP : MonoBehaviour
@@ -51,14 +51,21 @@ public class ColorJumpGameUDP : MonoBehaviour
     private int activeColorCount;
     private int _roundsPlayed = 0;
 
+    private readonly ActionDebouncer _answerDebouncer = new ActionDebouncer();
+    private bool _lastAnswerCorrect = false;
+
+    // Colores de highlight para la plataforma hovereada
+    private Color _leftBaseColor;
+    private Color _rightBaseColor;
+    private bool _highlightLeft = false;
+    private bool _highlightRight = false;
+
     void Start()
     {
         if (feedbackText) feedbackText.text = "";
         UpdateScoreUI();
-        // No arranca solo: espera StartGame()
     }
 
-    /// <summary>Llamado por DifficultySelector. level: 0=Easy 1=Medium 2=Hard</summary>
     public void StartGame(int level)
     {
         difficulty = (DifficultyMode)level;
@@ -72,16 +79,19 @@ public class ColorJumpGameUDP : MonoBehaviour
         {
             case DifficultyMode.Easy:
                 roundTime        = 6f;
+                feedbackTime     = 1.8f;
                 moveThreshold    = 0.10f;
                 activeColorCount = 4;
                 break;
             case DifficultyMode.Medium:
                 roundTime        = 4f;
+                feedbackTime     = 1.3f;
                 moveThreshold    = 0.15f;
                 activeColorCount = colorNames.Length;
                 break;
             case DifficultyMode.Hard:
                 roundTime        = 2.5f;
+                feedbackTime     = 1.0f;
                 moveThreshold    = 0.20f;
                 activeColorCount = colorNames.Length;
                 break;
@@ -94,6 +104,8 @@ public class ColorJumpGameUDP : MonoBehaviour
         while (_roundsPlayed < totalRounds)
         {
             SetupRound();
+            _answerDebouncer.Reset();
+
             float timer = roundTime;
             roundActive = true;
 
@@ -107,6 +119,7 @@ public class ColorJumpGameUDP : MonoBehaviour
 
             if (roundActive)
             {
+                ClearHighlight();
                 ShowFeedback("Try again!", Color.white);
                 PlayClip(wrongClip);
                 roundActive = false;
@@ -115,13 +128,16 @@ public class ColorJumpGameUDP : MonoBehaviour
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
+            if (_lastAnswerCorrect)
+                yield return WaitForCenter();
         }
 
         if (countdownText) countdownText.text = "";
+        ClearHighlight();
         if (results != null)
             results.Show(score, _roundsPlayed, totalRounds * 10);
         else
-            Debug.LogError("[ColorJump] results NO esta asignado en el Inspector. Arrastra ResultsPanel al campo 'Results' del ColorJumpManager.");
+            Debug.LogError("[ColorJump] results NO esta asignado en el Inspector.");
     }
 
     void SetupRound()
@@ -135,33 +151,62 @@ public class ColorJumpGameUDP : MonoBehaviour
         leftIndex = targetOnLeft ? targetIndex : other;
         rightIndex = targetOnLeft ? other : targetIndex;
 
-        if (leftPlatform) leftPlatform.material.color = colorValues[leftIndex];
-        if (rightPlatform) rightPlatform.material.color = colorValues[rightIndex];
+        if (leftPlatform)
+        {
+            leftPlatform.material.color = colorValues[leftIndex];
+            _leftBaseColor = colorValues[leftIndex];
+        }
+        if (rightPlatform)
+        {
+            rightPlatform.material.color = colorValues[rightIndex];
+            _rightBaseColor = colorValues[rightIndex];
+        }
 
         if (colorWordText)
         {
             colorWordText.text = colorNames[targetIndex];
             colorWordText.color = colorValues[targetIndex];
         }
+
+        ClearHighlight();
     }
 
     void CheckPlayerPosition()
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
 
-        Vector3 leftHip = PoseReceiverUDP.Instance.GetLandmark(23);
+        Vector3 leftHip  = PoseReceiverUDP.Instance.GetLandmark(23);
         Vector3 rightHip = PoseReceiverUDP.Instance.GetLandmark(24);
         float centerX = (leftHip.x + rightHip.x) / 2f - 0.5f;
 
         if (centerX < -moveThreshold)
+        {
             EvaluateAnswer(true);
+        }
         else if (centerX > moveThreshold)
+        {
             EvaluateAnswer(false);
+        }
+        else if (centerX < 0f)
+        {
+            SetHighlight(true);
+        }
+        else if (centerX > 0f)
+        {
+            SetHighlight(false);
+        }
+        else
+        {
+            ClearHighlight();
+        }
     }
 
     void EvaluateAnswer(bool playerWentLeft)
     {
+        if (!_answerDebouncer.TryFire(feedbackTime + 0.3f)) return;
+
         bool correct = (playerWentLeft && targetOnLeft) || (!playerWentLeft && !targetOnLeft);
+        _lastAnswerCorrect = correct;
         if (correct)
         {
             score += 10;
@@ -169,7 +214,6 @@ public class ColorJumpGameUDP : MonoBehaviour
             UpdateScoreUI();
             ShowFeedback("Great job!", UITheme.Success);
             PlayClip(correctClip);
-
             if (CelebrationBurst.Instance != null)
                 CelebrationBurst.Instance.Trigger(transform.position);
         }
@@ -178,7 +222,53 @@ public class ColorJumpGameUDP : MonoBehaviour
             ShowFeedback("Try again!", UITheme.Warning);
             PlayClip(wrongClip);
         }
+        ClearHighlight();
         roundActive = false;
+    }
+
+    IEnumerator WaitForCenter()
+    {
+        ShowFeedback("Come back!", Color.white);
+        float elapsed = 0f;
+        while (elapsed < 5f)
+        {
+            if (PoseReceiverUDP.Instance != null && PoseReceiverUDP.Instance.poseDetected)
+            {
+                Vector3 lh = PoseReceiverUDP.Instance.GetLandmark(23);
+                Vector3 rh = PoseReceiverUDP.Instance.GetLandmark(24);
+                if (Mathf.Abs((lh.x + rh.x) / 2f - 0.5f) < moveThreshold)
+                    break;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        if (feedbackText) feedbackText.text = "";
+    }
+
+    void SetHighlight(bool highlightLeft)
+    {
+        if (_highlightLeft == highlightLeft && _highlightRight == !highlightLeft) return;
+
+        _highlightLeft = highlightLeft;
+        _highlightRight = !highlightLeft;
+
+        if (leftPlatform)
+            leftPlatform.material.color = highlightLeft
+                ? Color.Lerp(_leftBaseColor, Color.white, 0.4f)
+                : _leftBaseColor;
+
+        if (rightPlatform)
+            rightPlatform.material.color = !highlightLeft
+                ? Color.Lerp(_rightBaseColor, Color.white, 0.4f)
+                : _rightBaseColor;
+    }
+
+    void ClearHighlight()
+    {
+        _highlightLeft = false;
+        _highlightRight = false;
+        if (leftPlatform && _leftBaseColor != default) leftPlatform.material.color = _leftBaseColor;
+        if (rightPlatform && _rightBaseColor != default) rightPlatform.material.color = _rightBaseColor;
     }
 
     void ShowFeedback(string msg, Color color)

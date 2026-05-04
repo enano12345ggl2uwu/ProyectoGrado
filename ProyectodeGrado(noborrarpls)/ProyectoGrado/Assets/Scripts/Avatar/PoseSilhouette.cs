@@ -14,7 +14,7 @@ using System.Collections.Generic;
 public class PoseSilhouette : MonoBehaviour
 {
     [Header("Visual")]
-    public float sphereSize = 0.14f;
+    public float sphereSize = 0.07f;
     public float lineWidth  = 0.05f;
     public Color color = new Color(0.85f, 0.85f, 0.85f, 1f);
 

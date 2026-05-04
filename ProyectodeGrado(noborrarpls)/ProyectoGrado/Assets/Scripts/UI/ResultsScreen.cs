@@ -144,13 +144,14 @@ public class ResultsScreen : MonoBehaviour
         }
         else
         {
-            // fallback sin maxScore: 1 estrella por cada 3 puntos
             starCount = Mathf.Clamp(finalScore / 3, 0, 3);
         }
         for (int i = 0; i < stars.Length; i++)
         {
             if (stars[i] == null) continue;
-            stars[i].color = i < starCount ? starOnColor : starOffColor;
+            Transform yellowChild = stars[i].transform.Find("StarYellow");
+            if (yellowChild != null)
+                yellowChild.gameObject.SetActive(i < starCount);
         }
     }
 

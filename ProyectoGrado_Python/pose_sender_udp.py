@@ -1,6 +1,6 @@
 """
 pose_sender_udp.py
-Envia los 33 landmarks de MediaPipe Pose por UDP a Unity (puerto 5052).
+Envia los 33 landmarks de MediaPipe Pose por UDP a Unity (puerto 7777).
 Con ventana de preview para ver camara y esqueleto.
 
 Requisitos:
@@ -16,7 +16,7 @@ import cv2
 import mediapipe as mp
 import socket
 import json
-import sys  
+import sys
 
 # Config
 UDP_IP = "127.0.0.1"
@@ -25,7 +25,8 @@ CAM_WIDTH = 640
 CAM_HEIGHT = 480
 CAM_FPS = 30
 MIRROR = True
-SHOW_PREVIEW = True  # Poner False para ocultar ventana
+SHOW_PREVIEW = True
+
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -40,7 +41,6 @@ def main():
         smooth_landmarks=True
     )
 
-    # Probar varios indices de camara
     cap = None
     for idx in [0, 1, 2]:
         print(f"[INFO] Probando camara index {idx}...")
@@ -115,6 +115,7 @@ def main():
         sock.close()
         pose.close()
         cv2.destroyAllWindows()
+
 
 if __name__ == "__main__":
     main()

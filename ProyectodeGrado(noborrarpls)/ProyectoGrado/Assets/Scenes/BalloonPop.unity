@@ -522,7 +522,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   port: 7777
-  smoothing: 0.5
+  minCutoff: 1
+  beta: 0.007
+  dCutoff: 1
+  connectionTimeout: 1
   poseDetected: 0
   landmarks:
   - {x: 0, y: 0, z: 0}
