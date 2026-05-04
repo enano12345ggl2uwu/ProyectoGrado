@@ -97,8 +97,10 @@ public class BalloonPopGameUDP : MonoBehaviour
         if (stickFigure != null)
         {
             spawnXRange  = stickFigure.scale * 0.6f;
-            spawnStartY  = stickFigure.offset.y - stickFigure.scale * 1.5f;
-            despawnY     = stickFigure.offset.y + stickFigure.scale;
+            // Pies del stickman ≈ offset.y - scale*0.5; spawneamos 2 escalas MÁS abajo
+            float feetY  = stickFigure.offset.y - stickFigure.scale * 0.5f;
+            spawnStartY  = feetY - stickFigure.scale * 2f;
+            despawnY     = stickFigure.offset.y + stickFigure.scale * 1.2f;
         }
 
         _running = true;
@@ -193,6 +195,26 @@ public class BalloonPopGameUDP : MonoBehaviour
         Vector3 pos = new Vector3(xOffset, spawnStartY, 0f);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
         go.transform.localScale *= balloonScale;
+
+        // Rigidbody cinemático: hace que el broadphase de física actualice la posición
+        // cada frame aunque el objeto se mueva por transform.position (no por física).
+        // Sin esto, Physics.OverlapSphere usa posiciones desactualizadas del collider.
+        var rb = go.GetComponent<Rigidbody>() ?? go.AddComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity  = false;
+
+        // SphereCollider trigger para que OverlapSphere lo detecte
+        if (go.GetComponent<Collider>() == null)
+        {
+            var col = go.AddComponent<SphereCollider>();
+            col.radius    = 0.5f;
+            col.isTrigger = true;
+        }
+        else
+        {
+            go.GetComponent<Collider>().isTrigger = true;
+        }
+
         var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
         int colorIdx = Random.Range(0, _activeColors);
         b.Init(colorIdx, colorValues[colorIdx], floatUpSpeed, despawnY);
@@ -202,19 +224,21 @@ public class BalloonPopGameUDP : MonoBehaviour
     void CheckHandPops()
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
-        Vector3 lw = LandmarkToWorld(15);
-        Vector3 rw = LandmarkToWorld(16);
-        TryPop(ref _leftBalloon,  lw, rw);
-        TryPop(ref _rightBalloon, lw, rw);
+        CheckOverlapPop(LandmarkToWorld(15));
+        CheckOverlapPop(LandmarkToWorld(16));
     }
 
-    void TryPop(ref Balloon b, Vector3 lw, Vector3 rw)
+    void CheckOverlapPop(Vector3 wristPos)
     {
-        if (b == null) return;
-        Vector2 bPos = new Vector2(b.transform.position.x, b.transform.position.y);
-        float dist = Mathf.Min(Vector2.Distance(bPos, new Vector2(lw.x, lw.y)),
-                               Vector2.Distance(bPos, new Vector2(rw.x, rw.y)));
-        if (dist < popRadius) { PopBalloon(b); b = null; }
+        // OverlapSphere detecta cualquier collider dentro del radio sin importar Z
+        Collider[] hits = Physics.OverlapSphere(wristPos, popRadius, ~0, QueryTriggerInteraction.Collide);
+        foreach (var hit in hits)
+        {
+            Balloon b = hit.GetComponent<Balloon>();
+            if (b == null) continue;
+            if (b == _leftBalloon)  { PopBalloon(_leftBalloon);  _leftBalloon  = null; return; }
+            if (b == _rightBalloon) { PopBalloon(_rightBalloon); _rightBalloon = null; return; }
+        }
     }
 
     Vector3 LandmarkToWorld(int idx)
@@ -242,6 +266,8 @@ public class BalloonPopGameUDP : MonoBehaviour
             _score = Mathf.Max(0, _score - (int)_wrongPenalty);
             ShowFeedback("Wrong color!", UITheme.Warning);
             PlayClip(wrongClip);
+            if (CelebrationBurst.Instance != null)
+                CelebrationBurst.Instance.Trigger(b.transform.position);
         }
         UpdateScoreUI();
         Destroy(b.gameObject);
