@@ -71,7 +71,8 @@ public class BalloonPopGameUDP : MonoBehaviour
     private readonly string[] colorNames = { "RED", "BLUE", "GREEN", "YELLOW", "ORANGE", "PURPLE" };
     private readonly Color[]  colorValues = UITheme.GameColors;
 
-    private readonly List<Balloon> _live = new List<Balloon>();
+    private Balloon _leftBalloon;
+    private Balloon _rightBalloon;
     private int   _score = 0;
     private int   _targetColorIdx;
     private int   _activeColors;
@@ -91,7 +92,6 @@ public class BalloonPopGameUDP : MonoBehaviour
         ApplyDifficulty();
         _running = true;
         StartCoroutine(GameLoop());
-        StartCoroutine(SpawnLoop());
     }
 
     void ApplyDifficulty()
@@ -138,6 +138,7 @@ public class BalloonPopGameUDP : MonoBehaviour
         while (_running && timer > 0f)
         {
             if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+            EnsureBalloons();
             CheckHandPops();
 
             targetSwitchTimer -= Time.deltaTime;
@@ -153,8 +154,9 @@ public class BalloonPopGameUDP : MonoBehaviour
 
         _running = false;
         if (countdownText) countdownText.text = "";
-        foreach (var b in _live) if (b) Destroy(b.gameObject);
-        _live.Clear();
+        if (_leftBalloon)  Destroy(_leftBalloon.gameObject);
+        if (_rightBalloon) Destroy(_rightBalloon.gameObject);
+        _leftBalloon = _rightBalloon = null;
 
         if (results != null)
             results.Show(_score, Mathf.RoundToInt(totalGameTime), expectedMaxScore);
@@ -162,50 +164,46 @@ public class BalloonPopGameUDP : MonoBehaviour
             ShowFeedback($"Final: {_score} pts", Color.cyan);
     }
 
-    IEnumerator SpawnLoop()
+    void EnsureBalloons()
     {
-        while (_running)
+        if (_leftBalloon == null || _leftBalloon.OffScreen)
         {
-            SpawnBalloon();
-            yield return new WaitForSeconds(spawnInterval);
+            if (_leftBalloon != null) Destroy(_leftBalloon.gameObject);
+            _leftBalloon = SpawnAt(-spawnXRange);
+        }
+        if (_rightBalloon == null || _rightBalloon.OffScreen)
+        {
+            if (_rightBalloon != null) Destroy(_rightBalloon.gameObject);
+            _rightBalloon = SpawnAt(spawnXRange);
         }
     }
 
-    void SpawnBalloon()
+    Balloon SpawnAt(float xOffset)
     {
-        if (balloonPrefab == null || spawnArea == null) return;
-        float x = spawnArea.position.x + Random.Range(-spawnXRange, spawnXRange);
-        Vector3 pos = new Vector3(x, spawnArea.position.y, spawnArea.position.z);
+        if (balloonPrefab == null || spawnArea == null) return null;
+        Vector3 pos = new Vector3(spawnArea.position.x + xOffset, spawnArea.position.y, spawnArea.position.z);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
-        var b = go.GetComponent<Balloon>();
-        if (b == null) b = go.AddComponent<Balloon>();
+        var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
         int colorIdx = Random.Range(0, _activeColors);
         b.Init(colorIdx, colorValues[colorIdx], floatUpSpeed, despawnY);
-        _live.Add(b);
+        return b;
     }
 
     void CheckHandPops()
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected) return;
+        Vector3 lw = LandmarkToWorld(15);
+        Vector3 rw = LandmarkToWorld(16);
+        TryPop(ref _leftBalloon,  lw, rw);
+        TryPop(ref _rightBalloon, lw, rw);
+    }
 
-        Vector3 leftWrist  = LandmarkToWorld(15);
-        Vector3 rightWrist = LandmarkToWorld(16);
-
-        for (int i = _live.Count - 1; i >= 0; i--)
-        {
-            var b = _live[i];
-            if (b == null) { _live.RemoveAt(i); continue; }
-
-            if (b.OffScreen) { Destroy(b.gameObject); _live.RemoveAt(i); continue; }
-
-            float distL = Vector3.Distance(b.transform.position, leftWrist);
-            float distR = Vector3.Distance(b.transform.position, rightWrist);
-            if (Mathf.Min(distL, distR) < popRadius)
-            {
-                PopBalloon(b);
-                _live.RemoveAt(i);
-            }
-        }
+    void TryPop(ref Balloon b, Vector3 lw, Vector3 rw)
+    {
+        if (b == null) return;
+        float dist = Mathf.Min(Vector3.Distance(b.transform.position, lw),
+                               Vector3.Distance(b.transform.position, rw));
+        if (dist < popRadius) { PopBalloon(b); b = null; }
     }
 
     Vector3 LandmarkToWorld(int idx)
