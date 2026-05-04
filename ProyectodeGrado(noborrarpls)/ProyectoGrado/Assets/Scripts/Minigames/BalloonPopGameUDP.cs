@@ -41,7 +41,7 @@ public class BalloonPopGameUDP : MonoBehaviour
     [Header("Prefab & Spawn")]
     public GameObject balloonPrefab;
     public Transform  spawnArea;
-    public float      spawnXRange   = 2f;
+    public float      spawnXRange   = 2.4f;
     public float      floatUpSpeed  = 1f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
