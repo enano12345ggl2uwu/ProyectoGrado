@@ -41,11 +41,11 @@ public class BalloonPopGameUDP : MonoBehaviour
     [Header("Prefab & Spawn")]
     public GameObject balloonPrefab;
     public Transform  spawnArea;
-    public float      spawnXRange   = 4f;
-    public float      floatUpSpeed  = 2f;
+    public float      spawnXRange   = 6f;
+    public float      floatUpSpeed  = 1f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
-    public float      popRadius     = 0.8f;
+    public float      popRadius     = 1.5f;
 
     [Header("UI")]
     public TextMeshProUGUI targetColorText;
@@ -100,20 +100,17 @@ public class BalloonPopGameUDP : MonoBehaviour
         {
             case DifficultyMode.Easy:
                 _activeColors = 3;
-                floatUpSpeed  = 1.5f;
-                spawnInterval = 2.0f;
+                floatUpSpeed  = 0.8f;
                 _wrongPenalty = 0f;
                 break;
             case DifficultyMode.Medium:
                 _activeColors = 4;
-                floatUpSpeed  = 2.0f;
-                spawnInterval = 1.4f;
+                floatUpSpeed  = 1.2f;
                 _wrongPenalty = 5f;
                 break;
             case DifficultyMode.Hard:
                 _activeColors = colorNames.Length;
-                floatUpSpeed  = 2.8f;
-                spawnInterval = 0.9f;
+                floatUpSpeed  = 1.8f;
                 _wrongPenalty = 10f;
                 break;
         }
@@ -208,11 +205,11 @@ public class BalloonPopGameUDP : MonoBehaviour
 
     Vector3 LandmarkToWorld(int idx)
     {
-        // convierte coords normalizadas de MediaPipe a mundo usando mismo mapeo que StickFigure
         Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(idx);
         const float scale = 5f;
         Vector3 offset = new Vector3(0f, 2f, 0f);
-        return new Vector3((lm.x - 0.5f) * scale, (0.5f - lm.y) * scale, lm.z * scale) + offset;
+        // Z=0 para que coincida con el plano de los globos (evita fallos de distancia por profundidad)
+        return new Vector3((lm.x - 0.5f) * scale, (0.5f - lm.y) * scale, 0f) + offset;
     }
 
     void PopBalloon(Balloon b)
