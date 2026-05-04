@@ -74,7 +74,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         UpdateScoreUI();
 
         if (stickFigure)
-            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 5.0f, stickFigure.offset.z);
+            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 8.0f, stickFigure.offset.z);
 
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
         if (FindObjectOfType<DifficultySelector>() == null)
