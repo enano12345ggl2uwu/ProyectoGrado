@@ -41,11 +41,12 @@ public class BalloonPopGameUDP : MonoBehaviour
     [Header("Prefab & Spawn")]
     public GameObject balloonPrefab;
     public Transform  spawnArea;
-    public float      spawnXRange   = 6f;
+    public float      spawnXRange   = 8f;
     public float      floatUpSpeed  = 1f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
-    public float      popRadius     = 1.5f;
+    public float      popRadius     = 1.8f;
+    public float      balloonScale  = 2.5f;
 
     [Header("UI")]
     public TextMeshProUGUI targetColorText;
@@ -178,8 +179,9 @@ public class BalloonPopGameUDP : MonoBehaviour
     Balloon SpawnAt(float xOffset)
     {
         if (balloonPrefab == null || spawnArea == null) return null;
-        Vector3 pos = new Vector3(spawnArea.position.x + xOffset, spawnArea.position.y, spawnArea.position.z);
+        Vector3 pos = new Vector3(spawnArea.position.x + xOffset, spawnArea.position.y, 0f);
         GameObject go = Instantiate(balloonPrefab, pos, Quaternion.identity);
+        go.transform.localScale *= balloonScale;
         var b = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
         int colorIdx = Random.Range(0, _activeColors);
         b.Init(colorIdx, colorValues[colorIdx], floatUpSpeed, despawnY);
@@ -198,8 +200,9 @@ public class BalloonPopGameUDP : MonoBehaviour
     void TryPop(ref Balloon b, Vector3 lw, Vector3 rw)
     {
         if (b == null) return;
-        float dist = Mathf.Min(Vector3.Distance(b.transform.position, lw),
-                               Vector3.Distance(b.transform.position, rw));
+        Vector2 bPos = new Vector2(b.transform.position.x, b.transform.position.y);
+        float dist = Mathf.Min(Vector2.Distance(bPos, new Vector2(lw.x, lw.y)),
+                               Vector2.Distance(bPos, new Vector2(rw.x, rw.y)));
         if (dist < popRadius) { PopBalloon(b); b = null; }
     }
 
