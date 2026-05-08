@@ -9462,6 +9462,8 @@ MonoBehaviour:
   scoreText: {fileID: 1296649020}
   bestText: {fileID: 924478748}
   panelMusic: {fileID: 0}
+  celebrationAudioSource: {fileID: 0}
+  celebrationClip: {fileID: 0}
   stars:
   - {fileID: 569722352}
   - {fileID: 1088903628}
@@ -9474,7 +9476,7 @@ MonoBehaviour:
   minigameKey: color
   mainMenuScene: MainMenu
   levelSelectScene: Islandselector
-  nextSceneName: SizeSort
+  nextSceneName: mirror
   oneStarPct: 0.33
   twoStarsPct: 0.66
   threeStarsPct: 0.95

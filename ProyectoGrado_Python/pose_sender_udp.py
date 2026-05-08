@@ -18,7 +18,6 @@ import socket
 import json
 import sys
 
-# Config
 UDP_IP = "127.0.0.1"
 UDP_PORT = 7777
 CAM_WIDTH = 640
@@ -26,7 +25,6 @@ CAM_HEIGHT = 480
 CAM_FPS = 30
 MIRROR = True
 SHOW_PREVIEW = True
-
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

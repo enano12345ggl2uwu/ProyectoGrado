@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2217727, g: 0.7096865, b: 0.781853, a: 1}
+  m_IndirectSpecularColor: {r: 0.22177267, g: 0.7096865, b: 0.781853, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -961,6 +961,8 @@ MonoBehaviour:
   scoreText: {fileID: 85203856}
   bestText: {fileID: 2057655531}
   panelMusic: {fileID: 0}
+  celebrationAudioSource: {fileID: 0}
+  celebrationClip: {fileID: 0}
   stars:
   - {fileID: 1262674430}
   - {fileID: 688009898}
@@ -973,7 +975,7 @@ MonoBehaviour:
   minigameKey: mirror
   mainMenuScene: MainMenu
   levelSelectScene: Islandselector
-  nextSceneName: BalloonPop
+  nextSceneName: MainMenu
   oneStarPct: 0.33
   twoStarsPct: 0.66
   threeStarsPct: 0.95
@@ -3422,7 +3424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &851720029
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3454,7 +3456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851720028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
