@@ -74,11 +74,11 @@ public class MirrorWordGameUDP : MonoBehaviour
         UpdateScoreUI();
 
         if (stickFigure)
-            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 8.0f, stickFigure.offset.z);
+            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 5.0f, stickFigure.offset.z);
         if (silhouette)
         {
-            silhouette.scale  = 10f;
-            silhouette.offset = new Vector3(-4f, silhouette.offset.y + 3f, silhouette.offset.z);
+            silhouette.scale  = 12f;
+            silhouette.offset = new Vector3(-6f, silhouette.offset.y + 3f, silhouette.offset.z);
         }
 
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente

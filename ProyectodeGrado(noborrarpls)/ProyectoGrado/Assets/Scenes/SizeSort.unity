@@ -23592,7 +23592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8736a2c646f67794485ce2beb600807d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneClip: {fileID: 8300000, guid: 83b296f59f5c7a14084747cf74ff822a, type: 3}
+  sceneClip: {fileID: 8300000, guid: 48c08e28d4112ff4e8d0faea4d00da1e, type: 3}
   volume: 0.35
 --- !u!4 &1912675937
 Transform:

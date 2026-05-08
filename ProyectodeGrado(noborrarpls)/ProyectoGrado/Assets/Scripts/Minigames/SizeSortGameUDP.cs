@@ -59,25 +59,27 @@ public class SizeSortGameUDP : MonoBehaviour
     public float worldScale = 1.0f;
 
     [Header("Tolerancia")]
-    [Tooltip("Porcentaje aceptado como 'match'. 0.18 = +/-18% en ancho Y alto.")]
-    public float matchTolerance = 0.18f;
+    [Tooltip("Porcentaje aceptado para ancho (wrist-wrist). 0.18 = +/-18%.")]
+    public float widthTolerance  = 0.18f;
+    [Tooltip("Porcentaje aceptado para alto (nariz-cadera). Mayor porque es mas dificil de controlar verticalmente.")]
+    public float heightTolerance = 0.30f;
 
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip   correctClip;
     public AudioClip   wrongClip;
 
-    // Vocabulario: dimensiones en "unidades normalizadas" (x shoulderWidth).
-    // width ~= armSpan/sw, height ~= (nose-hipMid)/sw. Shoulder-width ≈ 1.0 de base.
-    // Typical armSpan en niño relajado ~= 2.2*sw. Typical (nose-hip) ~= 2.8*sw de pie.
+    // Vocabulario: dimensiones normalizadas (/ shoulderWidth).
+    // width = distancia muñeca-muñeca / sw.  Relajado ~2.0, brazos muy abiertos ~3.2.
+    // height = distancia nariz-cadera / sw.   De pie normal ~2.0, agachado ~1.1, muy estirado ~2.7.
     private readonly TargetSize[] targets =
     {
-        new TargetSize("TALL",    2.0f, 3.4f),
-        new TargetSize("SHORT",   2.0f, 1.4f),
-        new TargetSize("WIDE",    3.4f, 2.4f),
-        new TargetSize("NARROW",  1.0f, 2.4f),
-        new TargetSize("BIG",     3.0f, 3.2f),
-        new TargetSize("SMALL",   1.2f, 1.4f),
+        new TargetSize("TALL",    2.0f, 2.7f),   // de pie muy recto / de puntillas
+        new TargetSize("SHORT",   2.0f, 1.1f),   // agacharse bien
+        new TargetSize("WIDE",    3.2f, 2.0f),   // brazos muy abiertos, altura normal
+        new TargetSize("NARROW",  1.0f, 2.0f),   // brazos pegados al cuerpo
+        new TargetSize("BIG",     3.0f, 2.6f),   // brazos abiertos Y estirado
+        new TargetSize("SMALL",   1.0f, 1.1f),   // brazos pegados Y agachado
     };
 
     private int    score        = 0;
@@ -112,19 +114,22 @@ public class SizeSortGameUDP : MonoBehaviour
             case 0: // Easy
                 holdTime       = 1.8f;
                 roundTime      = 10f;
-                matchTolerance = 0.25f;
+                widthTolerance  = 0.28f;
+                heightTolerance = 0.38f;
                 tolMult        = 1.5f;
                 break;
             case 2: // Hard
                 holdTime       = 0.9f;
                 roundTime      = 6f;
-                matchTolerance = 0.12f;
+                widthTolerance  = 0.14f;
+                heightTolerance = 0.24f;
                 tolMult        = 0.75f;
                 break;
             default: // Medium
                 holdTime       = 1.2f;
                 roundTime      = 8f;
-                matchTolerance = 0.18f;
+                widthTolerance  = 0.18f;
+                heightTolerance = 0.30f;
                 tolMult        = 1f;
                 break;
         }
@@ -229,10 +234,9 @@ public class SizeSortGameUDP : MonoBehaviour
         float heightNorm = Mathf.Abs(I.GetLandmark(0).y - midHip.y) / sw;
 
         var t = targets[currentIdx];
-        float tol = matchTolerance * tolMult;
 
-        bool okW = Mathf.Abs(widthNorm  - t.width)  / Mathf.Max(0.1f, t.width)  <= tol;
-        bool okH = Mathf.Abs(heightNorm - t.height) / Mathf.Max(0.1f, t.height) <= tol;
+        bool okW = Mathf.Abs(widthNorm  - t.width)  / Mathf.Max(0.1f, t.width)  <= widthTolerance  * tolMult;
+        bool okH = Mathf.Abs(heightNorm - t.height) / Mathf.Max(0.1f, t.height) <= heightTolerance * tolMult;
         bool matching = okW && okH;
 
         contour.SetLiveSize(widthNorm * worldScale, heightNorm * worldScale, matching);

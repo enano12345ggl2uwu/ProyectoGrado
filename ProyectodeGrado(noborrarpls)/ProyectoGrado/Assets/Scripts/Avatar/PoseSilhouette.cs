@@ -72,6 +72,8 @@ public class PoseSilhouette : MonoBehaviour
             lr.positionCount = 2;
             bones[i] = lr;
         }
+
+        Hide();
     }
 
     public void ShowPose(string poseName)
