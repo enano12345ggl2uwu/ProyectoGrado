@@ -873,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294.8, y: -108.7}
+  m_AnchoredPosition: {x: -2, y: -70.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &302000003
@@ -1171,7 +1171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91, y: 2}
+  m_AnchoredPosition: {x: 91, y: 49}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &390682029
@@ -1551,13 +1551,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balloonPrefab: {fileID: 1350981231}
-  spawnArea: {fileID: 286702985}
-  spawnXRange: 10
-  deadZone: 2
-  floatUpSpeed: 1
-  spawnInterval: 0.5
-  despawnY: 6
+  balloonCount: 4
+  slotSpacingX: 3
+  anchorY: 1
+  anchorZ: 0
+  bobAmplitude: 0.18
+  bobFrequency: 1.5
   popRadius: 0.8
+  respawnDelay: 0.5
   targetText: {fileID: 1773261368}
   scoreText: {fileID: 896616849}
   feedbackText: {fileID: 527695524}
@@ -2528,7 +2529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -21}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &587906948
@@ -3903,6 +3904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 910500764}
+  gamePanel: {fileID: 0}
   titleText: {fileID: 533184586}
   subtitleText: {fileID: 460235351}
   scoreText: {fileID: 892393808}
@@ -3916,6 +3918,7 @@ MonoBehaviour:
   - {fileID: 1164052419}
   starOnColor: {r: 1, g: 0.85, b: 0.2, a: 1}
   starOffColor: {r: 1, g: 1, b: 1, a: 0.25}
+  starYellowScale: 1.3
   nextCountdownRing: {fileID: 512223969}
   autoAdvanceSeconds: 10
   autoAdvanceEnabled: 1
@@ -4086,6 +4089,14 @@ MonoBehaviour:
   scale: 5
   offset: {x: 0, y: 2, z: 0}
   boneSmoothing: 18
+  swimEnabled: 1
+  swimFrequency: 2.5
+  swimAmplitude: 0.18
+  swimSpeedThreshold: 0.008
+  swimAudioSource: {fileID: 0}
+  swimClip: {fileID: 0}
+  shakeIntensity: 0.12
+  shakeDuration: 0.35
   headSize: 0.55
   headColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
   eyeSize: 0.13
@@ -6954,7 +6965,7 @@ RectTransform:
   m_GameObject: {fileID: 1987208640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 390682028}
