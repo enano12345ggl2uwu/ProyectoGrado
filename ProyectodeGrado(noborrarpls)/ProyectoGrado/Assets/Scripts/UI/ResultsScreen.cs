@@ -29,6 +29,8 @@ public class ResultsScreen : MonoBehaviour
 {
     [Header("Panel")]
     public GameObject panel;
+    [Tooltip("Panel del juego (stickfigure, HUD). Se oculta cuando aparece el resultado.")]
+    public GameObject gamePanel;
 
     [Header("Texts")]
     public TextMeshProUGUI titleText;
@@ -92,6 +94,7 @@ public class ResultsScreen : MonoBehaviour
             Debug.LogError("[ResultsScreen] El campo 'Panel' NO esta asignado. Arrastra el GameObject ResultsPanel a si mismo en el Inspector.");
             return;
         }
+        if (gamePanel) gamePanel.SetActive(false);
         panel.SetActive(true);
         if (poseCursor) poseCursor.SetActive(true);
 
