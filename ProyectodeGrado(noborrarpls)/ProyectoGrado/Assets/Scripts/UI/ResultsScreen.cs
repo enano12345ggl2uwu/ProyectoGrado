@@ -52,6 +52,8 @@ public class ResultsScreen : MonoBehaviour
     public Image[] stars;
     public Color   starOnColor  = new Color(1f, 0.85f, 0.2f, 1f);
     public Color   starOffColor = new Color(1f, 1f, 1f, 0.25f);
+    [Tooltip("Escala de StarYellow respecto al padre (1.3 = 30% más grande).")]
+    public float   starYellowScale = 1.3f;
 
     [Header("Auto-advance")]
     [Tooltip("Imagen Filled/Radial360 hija del boton Next. Se llena durante el countdown.")]
@@ -166,9 +168,14 @@ public class ResultsScreen : MonoBehaviour
         for (int i = 0; i < stars.Length; i++)
         {
             if (stars[i] == null) continue;
+            bool earned = i < starCount;
+            stars[i].enabled = !earned;          // oculta silueta cuando está ganada
             Transform yellowChild = stars[i].transform.Find("StarYellow");
             if (yellowChild != null)
-                yellowChild.gameObject.SetActive(i < starCount);
+            {
+                yellowChild.gameObject.SetActive(earned);
+                if (earned) yellowChild.localScale = Vector3.one * starYellowScale;
+            }
         }
     }
 

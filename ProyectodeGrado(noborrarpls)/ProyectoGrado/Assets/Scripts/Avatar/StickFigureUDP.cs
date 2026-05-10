@@ -24,8 +24,22 @@ public class StickFigureUDP : MonoBehaviour
     [Header("Smoothing")]
     [Range(1f, 40f)] public float boneSmoothing = 18f;
 
+    [Header("Swim Bob")]
+    public bool  swimEnabled        = true;
+    [Range(0.5f, 5f)]  public float swimFrequency      = 2.5f;
+    [Range(0f,   0.5f)] public float swimAmplitude     = 0.18f;
+    [Range(0f,   0.05f)] public float swimSpeedThreshold = 0.008f;
+    [Tooltip("AudioSource del stickfigure (o de la escena).")]
+    public AudioSource swimAudioSource;
+    [Tooltip("Clip que suena mientras se desplaza (loop).")]
+    public AudioClip   swimClip;
+
+    [Header("Correct Shake")]
+    [Range(0f, 0.4f)] public float shakeIntensity = 0.12f;
+    [Range(0f, 1f)]   public float shakeDuration  = 0.35f;
+
     [Header("Head Settings")]
-    public float headSize  = 1.6f;
+    public float headSize  = 2.4f;
     public Color headColor = new Color(0.15f, 0.15f, 0.15f, 1f);
     public float eyeSize   = 0.13f;
     public Color eyeColor  = new Color(0.5f, 0.9f, 0.9f, 1f);
@@ -41,6 +55,13 @@ public class StickFigureUDP : MonoBehaviour
     private Quaternion[]  _boneRotSmooth;
     private Vector3[]     _boneScaleSmooth;
     private bool          _boneInitialized = false;
+
+    // Swim + Shake
+    private float _prevHipX    = 0f;
+    private float _swimPhase   = 0f;
+    private float _swimBlend   = 0f;
+    private float _shakeTimer  = 0f;
+    private float _shakeY      = 0f;
 
     // Cabeza, ojos, cuello
     private Material  _headMat;
@@ -198,13 +219,48 @@ public class StickFigureUDP : MonoBehaviour
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected)
             return;
 
+        // ─── Swim bob ───
+        float hipX     = (PoseReceiverUDP.Instance.GetLandmark(23).x +
+                          PoseReceiverUDP.Instance.GetLandmark(24).x) * 0.5f;
+        float hipSpeed = Mathf.Abs(hipX - _prevHipX) / Mathf.Max(Time.deltaTime, 0.001f);
+        _prevHipX      = hipX;
+        float swimTarget = (swimEnabled && hipSpeed > swimSpeedThreshold) ? 1f : 0f;
+        _swimBlend = Mathf.Lerp(_swimBlend, swimTarget, Time.deltaTime * 4f);
+        if (_swimBlend > 0.01f)
+            _swimPhase += Time.deltaTime * swimFrequency * Mathf.PI * 2f;
+        float swimY = Mathf.Sin(_swimPhase) * swimAmplitude * _swimBlend;
+
+        if (swimAudioSource && swimClip)
+        {
+            if (_swimBlend > 0.2f && !swimAudioSource.isPlaying)
+            {
+                swimAudioSource.clip = swimClip;
+                swimAudioSource.loop = true;
+                swimAudioSource.Play();
+            }
+            else if (_swimBlend <= 0.2f && swimAudioSource.isPlaying)
+            {
+                swimAudioSource.Stop();
+            }
+        }
+
+        // ─── Correct shake ───
+        if (_shakeTimer > 0f)
+        {
+            _shakeTimer -= Time.deltaTime;
+            _shakeY = Random.Range(-shakeIntensity, shakeIntensity);
+        }
+        else { _shakeY = 0f; }
+
+        float extraY = swimY + _shakeY;
+
         // ─── Joints mapeados directo desde coordenadas de cámara [0..1] ───
         for (int i = 0; i < 33; i++)
         {
             Vector3 lm  = PoseReceiverUDP.Instance.GetLandmark(i);
             Vector3 pos = new Vector3(
                 (lm.x - 0.5f) * scale,
-                (0.5f - lm.y) * scale,
+                (0.5f - lm.y) * scale + extraY,
                 lm.z * scale
             ) + offset;
 
@@ -255,6 +311,8 @@ public class StickFigureUDP : MonoBehaviour
         }
         _boneInitialized = true;
     }
+
+    public void TriggerShake() => _shakeTimer = shakeDuration;
 
     private void UpdateCylinder(Transform cyl, Vector3 a, Vector3 b)
     {

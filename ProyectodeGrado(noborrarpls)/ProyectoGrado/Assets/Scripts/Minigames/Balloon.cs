@@ -59,15 +59,42 @@ public class Balloon : MonoBehaviour
         if (_label != null) _label.text = (numberIdx + 1).ToString();
     }
 
+    // --- Modo estático: flota en su anclaje sin irse por pantalla ---
+    private bool    _static;
+    private Vector3 _anchor;
+    private float   _bobFreq;
+    private float   _bobAmp;
+    private float   _bobPhase;
+
+    /// <summary>Globo fijo que sólo se balancea suavemente sobre su posición inicial.</summary>
+    public void InitStatic(int numberIdx, Color color, float bobFreq = 1.5f, float bobAmp = 0.18f)
+    {
+        Init(numberIdx, color, 0f, float.MaxValue);
+        NumberIndex = numberIdx;
+        _label = GetComponentInChildren<TextMeshPro>();
+        if (_label != null) _label.text = (numberIdx + 1).ToString();
+        _static   = true;
+        _anchor   = transform.position;
+        _bobFreq  = bobFreq;
+        _bobAmp   = bobAmp;
+        _bobPhase = Random.Range(0f, Mathf.PI * 2f);
+    }
+
     void Update()
     {
-        transform.position += Vector3.up * _speed * Time.deltaTime;
-        float sway = Mathf.Sin(Time.time * 2f + transform.position.x) * 0.3f * Time.deltaTime;
-        transform.position += Vector3.right * sway;
+        if (_static)
+        {
+            float y = _anchor.y + Mathf.Sin((Time.time + _bobPhase) * _bobFreq) * _bobAmp;
+            transform.position = new Vector3(_anchor.x, y, _anchor.z);
+        }
+        else
+        {
+            transform.position += Vector3.up * _speed * Time.deltaTime;
+            float sway = Mathf.Sin(Time.time * 2f + transform.position.x) * 0.3f * Time.deltaTime;
+            transform.position += Vector3.right * sway;
+            if (transform.position.y > _despawnY) OffScreen = true;
+        }
 
-        if (transform.position.y > _despawnY) OffScreen = true;
-
-        // Billboard del label hacia la camara para que el niño lea el numero.
         if (_label != null && Camera.main != null)
             _label.transform.rotation = Camera.main.transform.rotation;
     }

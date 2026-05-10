@@ -35,6 +35,10 @@ public class ColorJumpGameUDP : MonoBehaviour
     [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
     public ResultsScreen results;
 
+    [Header("Avatar")]
+    [Tooltip("StickFigureUDP de la escena. Recibe el shake al acertar.")]
+    public StickFigureUDP stickFigure;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip correctClip;
@@ -214,6 +218,7 @@ public class ColorJumpGameUDP : MonoBehaviour
             UpdateScoreUI();
             ShowFeedback("Great job!", UITheme.Success);
             PlayClip(correctClip);
+            if (stickFigure) stickFigure.TriggerShake();
             if (CelebrationBurst.Instance != null)
                 CelebrationBurst.Instance.Trigger(transform.position);
         }

@@ -26,6 +26,12 @@ public class MirrorWordGameUDP : MonoBehaviour
     public StickFigureUDP  stickFigure;
     public PoseSilhouette  silhouette;
 
+    [Header("Depth (Z)")]
+    [Tooltip("Cuánto mover hacia atrás en Z al stickFigure y la silueta al arrancar.")]
+    public float depthZ = 4f;
+    [Tooltip("Posición X de la silueta (negativo = izquierda, positivo = derecha).")]
+    public float silhouetteX = -3f;
+
     [Header("Config base")]
     public float roundTime    = 8f;
     public float holdTime     = 1.5f;
@@ -74,11 +80,11 @@ public class MirrorWordGameUDP : MonoBehaviour
         UpdateScoreUI();
 
         if (stickFigure)
-            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 5.0f, stickFigure.offset.z);
+            stickFigure.offset = new Vector3(stickFigure.offset.x, stickFigure.offset.y + 5.0f, stickFigure.offset.z + depthZ);
         if (silhouette)
         {
             silhouette.scale  = 12f;
-            silhouette.offset = new Vector3(-6f, silhouette.offset.y + 3f, silhouette.offset.z);
+            silhouette.offset = new Vector3(silhouetteX, silhouette.offset.y + 3f, silhouette.offset.z + depthZ);
         }
 
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
@@ -388,6 +394,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         {
             stickFigure.SetAllJointsColor(UITheme.Success);
             stickFigure.SetAllBonesColor(UITheme.Success);
+            stickFigure.TriggerShake();
         }
 
         if (CelebrationBurst.Instance != null)

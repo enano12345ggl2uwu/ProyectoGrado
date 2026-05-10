@@ -1,46 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 /// <summary>
-/// Minijuego: Number Balloon Pop.
-/// Globos con un numero (1-10) suben desde abajo. La UI muestra una palabra como "POP THREE!"
-/// y el niño debe pinchar el globo con el numero correspondiente usando sus muñecas
-/// (landmarks 15 y 16). Refuerza vocabulario de numeros en ingles + asociacion palabra/cantidad.
-///
-/// SETUP en Unity:
-///  1. Crea un prefab de globo con:
-///       - Sphere 3D + SphereCollider radio 0.5
-///       - Hijo TextMeshPro (3D, NO UGUI) centrado, font size grande, color blanco
-///       - Script Balloon
-///  2. Crea GameObject "NumberBalloonManager" con este script.
-///  3. Asigna en Inspector:
-///       balloonPrefab, spawnArea (Transform en la parte baja de la escena),
-///       targetText (TMP grande arriba), scoreText, feedbackText, countdownText,
-///       audioSource, popClip, wrongClip.
-///  4. En DifficultySelector arrastra este GameObject al campo numberBalloonGame.
-///
-/// Dificultad:
-///   Easy   - numeros 1-5,  spawn lento, sin penalidad.
-///   Medium - numeros 1-7,  spawn medio, -5 al fallar.
-///   Hard   - numeros 1-10, spawn rapido, -10 al fallar.
+/// Balloon Pop simplificado: 4 globos fijos que flotan suavemente.
+/// El jugador revienta el que coincide con la palabra mostrada.
+/// Al reventar un globo, reaparece uno nuevo en su lugar.
 /// </summary>
 public class NumberBalloonGameUDP : MonoBehaviour
 {
-    [Header("Prefab & Spawn")]
+    [Header("Prefab")]
     public GameObject balloonPrefab;
-    public Transform  spawnArea;
-    public float      spawnXRange   = 4f;
-    [Tooltip("Zona muerta central (unidades mundo). Los globos solo spawnean fuera de este radio.")]
-    public float      deadZone      = 1.2f;
-    public float      floatUpSpeed  = 2f;
-    public float      spawnInterval = 1.4f;
-    public float      despawnY      = 6f;
-    public float      popRadius     = 0.8f;
+
+    [Header("Layout")]
+    [Tooltip("Cuantos globos hay en pantalla a la vez.")]
+    public int   balloonCount  = 4;
+    [Tooltip("Separacion horizontal entre globos.")]
+    public float slotSpacingX  = 3f;
+    [Tooltip("Altura Y de los globos.")]
+    public float anchorY       = 1f;
+    [Tooltip("Profundidad Z de los globos.")]
+    public float anchorZ       = 0f;
+    [Tooltip("Amplitud del balanceo vertical.")]
+    public float bobAmplitude  = 0.18f;
+    [Tooltip("Velocidad del balanceo.")]
+    public float bobFrequency  = 1.5f;
+    [Tooltip("Radio para reventar con la muñeca.")]
+    public float popRadius     = 0.8f;
+    [Tooltip("Segundos antes de que reaparezca el globo reventado.")]
+    public float respawnDelay  = 0.5f;
 
     [Header("UI")]
-    public TextMeshProUGUI targetText;       // ej: "POP THREE!"
+    public TextMeshProUGUI targetText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI feedbackText;
     public TextMeshProUGUI countdownText;
@@ -58,20 +49,17 @@ public class NumberBalloonGameUDP : MonoBehaviour
     public AudioClip   popClip;
     public AudioClip   wrongClip;
 
-    // Colores asignados por indice de numero (1=rojo, 2=azul, ...). Solo para que cada numero
-    // tenga un globo de color distinto y sea visualmente distinguible. La regla del juego
-    // es por numero, no por color.
     private readonly Color[] _palette = {
-        new Color(0.94f, 0.33f, 0.31f), // 1
-        new Color(0.31f, 0.76f, 0.97f), // 2
-        new Color(0.40f, 0.73f, 0.42f), // 3
-        new Color(1.00f, 0.84f, 0.31f), // 4
-        new Color(1.00f, 0.60f, 0.20f), // 5
-        new Color(0.67f, 0.28f, 0.74f), // 6
-        new Color(0.96f, 0.45f, 0.69f), // 7
-        new Color(0.40f, 0.80f, 0.80f), // 8
-        new Color(0.55f, 0.35f, 0.20f), // 9
-        new Color(0.55f, 0.55f, 0.55f), // 10
+        new Color(0.94f, 0.33f, 0.31f),
+        new Color(0.31f, 0.76f, 0.97f),
+        new Color(0.40f, 0.73f, 0.42f),
+        new Color(1.00f, 0.84f, 0.31f),
+        new Color(1.00f, 0.60f, 0.20f),
+        new Color(0.67f, 0.28f, 0.74f),
+        new Color(0.96f, 0.45f, 0.69f),
+        new Color(0.40f, 0.80f, 0.80f),
+        new Color(0.55f, 0.35f, 0.20f),
+        new Color(0.55f, 0.55f, 0.55f),
     };
 
     private static readonly string[] NumberWords = {
@@ -79,55 +67,49 @@ public class NumberBalloonGameUDP : MonoBehaviour
         "SIX", "SEVEN", "EIGHT", "NINE", "TEN"
     };
 
-    private int  _activeRange  = 5;   // cuantos numeros distintos circulan (1.._activeRange)
-    private int  _targetIdx    = 0;   // 0-based: 0 = "ONE", 9 = "TEN"
-    private int  _score        = 0;
-    private int  _wrongPenalty = 5;
-    private bool _running      = false;
+    private int     _activeRange  = 5;
+    private int     _targetIdx    = 0;
+    private int     _score        = 0;
+    private int     _wrongPenalty = 5;
+    private bool    _running      = false;
 
-    private readonly List<Balloon> _live = new List<Balloon>();
+    private Balloon[] _slots;
+    private Vector3[] _anchors;
 
     void Start()
     {
         if (feedbackText) feedbackText.text = "";
         UpdateScoreUI();
-
         if (FindObjectOfType<DifficultySelector>() == null)
             StartGame(1);
     }
 
-    /// <summary>Llamado por DifficultySelector. level: 0=Easy 1=Medium 2=Hard</summary>
     public void StartGame(int level)
     {
         ApplyDifficulty(level);
         _running = true;
+        _slots   = new Balloon[balloonCount];
+        _anchors = new Vector3[balloonCount];
+
+        float totalWidth = (balloonCount - 1) * slotSpacingX;
+        float startX     = -totalWidth / 2f;
+        for (int i = 0; i < balloonCount; i++)
+            _anchors[i] = new Vector3(startX + i * slotSpacingX, anchorY, anchorZ);
+
         PickNewTarget();
+        for (int i = 0; i < balloonCount; i++)
+            SpawnSlot(i);
+
         StartCoroutine(GameLoop());
-        StartCoroutine(SpawnLoop());
     }
 
     void ApplyDifficulty(int level)
     {
         switch (level)
         {
-            case 0: // Easy
-                _activeRange  = 5;
-                floatUpSpeed  = 1.5f;
-                spawnInterval = 2.0f;
-                _wrongPenalty = 0;
-                break;
-            case 2: // Hard
-                _activeRange  = 10;
-                floatUpSpeed  = 2.8f;
-                spawnInterval = 0.9f;
-                _wrongPenalty = 10;
-                break;
-            default: // Medium
-                _activeRange  = 7;
-                floatUpSpeed  = 2.0f;
-                spawnInterval = 1.4f;
-                _wrongPenalty = 5;
-                break;
+            case 0: _activeRange = 5;  _wrongPenalty = 0;  break;
+            case 2: _activeRange = 10; _wrongPenalty = 10; break;
+            default: _activeRange = 7; _wrongPenalty = 5;  break;
         }
     }
 
@@ -142,6 +124,16 @@ public class NumberBalloonGameUDP : MonoBehaviour
             targetText.text  = $"POP {NumberWords[_targetIdx]}!";
             targetText.color = _palette[_targetIdx];
         }
+    }
+
+    void SpawnSlot(int slot)
+    {
+        if (balloonPrefab == null) return;
+        int idx = Random.value < 0.5f ? _targetIdx : Random.Range(0, _activeRange);
+        var go  = Instantiate(balloonPrefab, _anchors[slot], Quaternion.identity);
+        var b   = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
+        b.InitStatic(idx, _palette[idx], bobFrequency, bobAmplitude);
+        _slots[slot] = b;
     }
 
     IEnumerator GameLoop()
@@ -162,39 +154,13 @@ public class NumberBalloonGameUDP : MonoBehaviour
         }
 
         _running = false;
-        foreach (var b in _live) if (b) Destroy(b.gameObject);
-        _live.Clear();
+        for (int i = 0; i < _slots.Length; i++)
+            if (_slots[i]) Destroy(_slots[i].gameObject);
 
         if (results != null)
             results.Show(_score, Mathf.RoundToInt(totalGameTime), expectedMaxScore);
         else
             ShowFeedback($"Final: {_score} pts", Color.cyan);
-    }
-
-    IEnumerator SpawnLoop()
-    {
-        while (_running)
-        {
-            SpawnBalloon();
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }
-
-    void SpawnBalloon()
-    {
-        if (balloonPrefab == null || spawnArea == null) return;
-        float dead = Mathf.Clamp(deadZone, 0f, spawnXRange - 0.1f);
-        float x = spawnArea.position.x + (Random.value < 0.5f
-            ? Random.Range(-spawnXRange, -dead)
-            :  Random.Range( dead,        spawnXRange));
-        var pos = new Vector3(x, spawnArea.position.y, spawnArea.position.z);
-        var go  = Instantiate(balloonPrefab, pos, Quaternion.identity);
-        var b   = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
-
-        // Sesgo: con probabilidad 0.5 spawneamos el numero objetivo, asi siempre hay opciones validas.
-        int idx = Random.value < 0.5f ? _targetIdx : Random.Range(0, _activeRange);
-        b.InitWithNumber(idx, _palette[idx], floatUpSpeed, despawnY);
-        _live.Add(b);
     }
 
     void CheckHandPops()
@@ -203,48 +169,55 @@ public class NumberBalloonGameUDP : MonoBehaviour
         Vector3 lw = LandmarkToWorld(15);
         Vector3 rw = LandmarkToWorld(16);
 
-        for (int i = _live.Count - 1; i >= 0; i--)
+        for (int i = 0; i < _slots.Length; i++)
         {
-            var b = _live[i];
-            if (b == null)    { _live.RemoveAt(i); continue; }
-            if (b.OffScreen)  { Destroy(b.gameObject); _live.RemoveAt(i); continue; }
-
+            var b = _slots[i];
+            if (b == null) continue;
             float dist = Mathf.Min(Vector3.Distance(b.transform.position, lw),
                                    Vector3.Distance(b.transform.position, rw));
-            if (dist < popRadius) { PopBalloon(b); _live.RemoveAt(i); }
+            if (dist < popRadius) { PopSlot(i); break; }
         }
     }
 
-    Vector3 LandmarkToWorld(int idx)
+    void PopSlot(int slot)
     {
-        // Mismo mapeo que StickFigureUDP / BalloonPopGameUDP para que las muñecas
-        // visualmente correspondan al espacio de los globos.
-        Vector3 lm = PoseReceiverUDP.Instance.GetLandmark(idx);
-        const float scale = 5f;
-        Vector3 offset = new Vector3(0f, 2f, 0f);
-        return new Vector3((lm.x - 0.5f) * scale, (0.5f - lm.y) * scale, lm.z * scale) + offset;
-    }
+        var b = _slots[slot];
+        if (b == null) return;
 
-    void PopBalloon(Balloon b)
-    {
         bool correct = b.NumberIndex == _targetIdx;
+        Vector3 pos  = b.transform.position;
+        Destroy(b.gameObject);
+        _slots[slot] = null;
+
         if (correct)
         {
             _score += 10;
             if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
             ShowFeedback($"{NumberWords[_targetIdx]}! +10", Color.green);
             PlayClip(popClip);
-            if (CelebrationBurst.Instance != null)
-                CelebrationBurst.Instance.Trigger(b.transform.position);
+            if (CelebrationBurst.Instance != null) CelebrationBurst.Instance.Trigger(pos);
         }
         else
         {
             _score = Mathf.Max(0, _score - _wrongPenalty);
-            ShowFeedback("Wrong number!", Color.red);
+            ShowFeedback("Wrong!", Color.red);
             PlayClip(wrongClip);
         }
         UpdateScoreUI();
-        Destroy(b.gameObject);
+        StartCoroutine(RespawnAfterDelay(slot));
+    }
+
+    IEnumerator RespawnAfterDelay(int slot)
+    {
+        yield return new WaitForSeconds(respawnDelay);
+        if (_running) SpawnSlot(slot);
+    }
+
+    Vector3 LandmarkToWorld(int idx)
+    {
+        Vector3 lm     = PoseReceiverUDP.Instance.GetLandmark(idx);
+        const float sc = 5f;
+        return new Vector3((lm.x - 0.5f) * sc, (0.5f - lm.y) * sc, lm.z * sc) + new Vector3(0f, 2f, 0f);
     }
 
     void UpdateScoreUI() { if (scoreText) scoreText.text = $"Score: {_score}"; }
