@@ -32,6 +32,8 @@ public class NumberBalloonGameUDP : MonoBehaviour
     public GameObject balloonPrefab;
     public Transform  spawnArea;
     public float      spawnXRange   = 4f;
+    [Tooltip("Zona muerta central (unidades mundo). Los globos solo spawnean fuera de este radio.")]
+    public float      deadZone      = 1.2f;
     public float      floatUpSpeed  = 2f;
     public float      spawnInterval = 1.4f;
     public float      despawnY      = 6f;
@@ -46,6 +48,10 @@ public class NumberBalloonGameUDP : MonoBehaviour
     [Header("Game")]
     public float totalGameTime     = 60f;
     public float targetSwitchEvery = 8f;
+
+    [Header("Session")]
+    public ResultsScreen results;
+    public int           expectedMaxScore = 150;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -156,9 +162,13 @@ public class NumberBalloonGameUDP : MonoBehaviour
         }
 
         _running = false;
-        ShowFeedback($"Final: {_score} pts", Color.cyan);
         foreach (var b in _live) if (b) Destroy(b.gameObject);
         _live.Clear();
+
+        if (results != null)
+            results.Show(_score, Mathf.RoundToInt(totalGameTime), expectedMaxScore);
+        else
+            ShowFeedback($"Final: {_score} pts", Color.cyan);
     }
 
     IEnumerator SpawnLoop()
@@ -173,7 +183,10 @@ public class NumberBalloonGameUDP : MonoBehaviour
     void SpawnBalloon()
     {
         if (balloonPrefab == null || spawnArea == null) return;
-        float x = spawnArea.position.x + Random.Range(-spawnXRange, spawnXRange);
+        float dead = Mathf.Clamp(deadZone, 0f, spawnXRange - 0.1f);
+        float x = spawnArea.position.x + (Random.value < 0.5f
+            ? Random.Range(-spawnXRange, -dead)
+            :  Random.Range( dead,        spawnXRange));
         var pos = new Vector3(x, spawnArea.position.y, spawnArea.position.z);
         var go  = Instantiate(balloonPrefab, pos, Quaternion.identity);
         var b   = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();

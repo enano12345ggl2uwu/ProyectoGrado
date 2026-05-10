@@ -59,6 +59,10 @@ public class ResultsScreen : MonoBehaviour
     [Tooltip("Si esta en false, queda esperando que el jugador presione Next.")]
     public bool  autoAdvanceEnabled = true;
 
+    [Header("Pose Cursor")]
+    [Tooltip("GameObject PoseCursor (ultimo hijo del Canvas). Se activa al mostrar el panel.")]
+    public GameObject poseCursor;
+
     [Header("Config")]
     public string minigameKey   = "color";       // "color" | "balloon" | "size" | "mirror"
     public string mainMenuScene    = "MainMenu";
@@ -89,6 +93,7 @@ public class ResultsScreen : MonoBehaviour
             return;
         }
         panel.SetActive(true);
+        if (poseCursor) poseCursor.SetActive(true);
 
         if (panelMusic != null && MusicManager.Instance != null)
         {
