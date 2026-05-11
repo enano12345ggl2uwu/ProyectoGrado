@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereSize: 0.2
-  boneWidth: 0.9
+  boneWidth: 0.09
   jointColor: {r: 0, g: 1, b: 1, a: 1}
   boneColor: {r: 1, g: 1, b: 1, a: 1}
   emissionIntensity: 1.8

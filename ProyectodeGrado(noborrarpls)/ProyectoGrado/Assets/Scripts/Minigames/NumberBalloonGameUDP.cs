@@ -27,6 +27,8 @@ public class NumberBalloonGameUDP : MonoBehaviour
     public float bobFrequency  = 1.5f;
     [Tooltip("Radio para reventar con la muñeca.")]
     public float popRadius     = 0.8f;
+    [Tooltip("Escala visual de cada globo (1 = tamaño original del prefab).")]
+    public float balloonScale  = 1f;
     [Tooltip("Segundos antes de que reaparezca el globo reventado.")]
     public float respawnDelay  = 0.5f;
 
@@ -97,8 +99,9 @@ public class NumberBalloonGameUDP : MonoBehaviour
             _anchors[i] = new Vector3(startX + i * slotSpacingX, anchorY, anchorZ);
 
         PickNewTarget();
+        int guaranteed = Random.Range(0, balloonCount);
         for (int i = 0; i < balloonCount; i++)
-            SpawnSlot(i);
+            SpawnSlot(i, i == guaranteed);
 
         StartCoroutine(GameLoop());
     }
@@ -126,14 +129,28 @@ public class NumberBalloonGameUDP : MonoBehaviour
         }
     }
 
-    void SpawnSlot(int slot)
+    void SpawnSlot(int slot, bool forceTarget = false)
     {
         if (balloonPrefab == null) return;
-        int idx = Random.value < 0.5f ? _targetIdx : Random.Range(0, _activeRange);
+        int idx = forceTarget ? _targetIdx
+                : (Random.value < 0.5f ? _targetIdx : Random.Range(0, _activeRange));
         var go  = Instantiate(balloonPrefab, _anchors[slot], Quaternion.identity);
         var b   = go.GetComponent<Balloon>() ?? go.AddComponent<Balloon>();
         b.InitStatic(idx, _palette[idx], bobFrequency, bobAmplitude);
+        go.transform.localScale = Vector3.one * balloonScale;
         _slots[slot] = b;
+    }
+
+    void RespawnAll()
+    {
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i]) Destroy(_slots[i].gameObject);
+            _slots[i] = null;
+        }
+        int guaranteed = Random.Range(0, balloonCount);
+        for (int i = 0; i < balloonCount; i++)
+            SpawnSlot(i, i == guaranteed);
     }
 
     IEnumerator GameLoop()
@@ -147,7 +164,7 @@ public class NumberBalloonGameUDP : MonoBehaviour
             CheckHandPops();
 
             switchTimer -= Time.deltaTime;
-            if (switchTimer <= 0f) { PickNewTarget(); switchTimer = targetSwitchEvery; }
+            if (switchTimer <= 0f) { PickNewTarget(); RespawnAll(); switchTimer = targetSwitchEvery; }
 
             timer -= Time.deltaTime;
             yield return null;
