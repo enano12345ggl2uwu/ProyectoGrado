@@ -13,7 +13,7 @@ using TMPro;
 /// </summary>
 public class MirrorWordGameUDP : MonoBehaviour
 {
-    enum Pose { HandsUp, TPose, TouchHead, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips }
+    enum Pose { HandsUp, TPose, TouchFace, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips }
 
     [Header("UI")]
     public TextMeshProUGUI wordText;
@@ -31,6 +31,8 @@ public class MirrorWordGameUDP : MonoBehaviour
     public float depthZ = 4f;
     [Tooltip("Posición X de la silueta (negativo = izquierda, positivo = derecha).")]
     public float silhouetteX = -3f;
+    [Tooltip("Posición Y de la silueta (positivo = arriba).")]
+    public float silhouetteY = 5f;
 
     [Header("Config base")]
     public float roundTime    = 8f;
@@ -51,7 +53,7 @@ public class MirrorWordGameUDP : MonoBehaviour
     private float tolMult = 1f;
 
     private readonly string[] poseNames = {
-        "HANDS UP", "T POSE", "TOUCH HEAD", "ARMS WIDE", "HANDS DOWN",
+        "HANDS UP", "T POSE", "TOUCH FACE", "ARMS WIDE", "HANDS DOWN",
         "SQUAT", "ONE ARM UP", "HANDS ON HIPS"
     };
 
@@ -84,7 +86,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         if (silhouette)
         {
             silhouette.scale  = 12f;
-            silhouette.offset = new Vector3(silhouetteX, silhouette.offset.y + 3f, silhouette.offset.z + depthZ);
+            silhouette.offset = new Vector3(silhouetteX, silhouette.offset.y + silhouetteY, silhouette.offset.z + depthZ);
         }
 
         // Si no hay DifficultySelector en la escena, arranca con Medium automaticamente
@@ -280,7 +282,7 @@ public class MirrorWordGameUDP : MonoBehaviour
                     }
                 };
             }
-            case Pose.TouchHead:
+            case Pose.TouchFace:
             {
                 float tolDist = sw * 0.35f * tolMult;
                 return new[] {

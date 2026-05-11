@@ -165,6 +165,15 @@ public class ResultsScreen : MonoBehaviour
         {
             starCount = Mathf.Clamp(finalScore / 3, 0, 3);
         }
+
+        // Guarda el mejor resultado de estrellas para la barra de progreso global
+        string starKey  = $"stars_{minigameKey}";
+        int    prevStars = PlayerPrefs.GetInt(starKey, 0);
+        if (starCount > prevStars)
+        {
+            PlayerPrefs.SetInt(starKey, starCount);
+            PlayerPrefs.Save();
+        }
         for (int i = 0; i < stars.Length; i++)
         {
             if (stars[i] == null) continue;
