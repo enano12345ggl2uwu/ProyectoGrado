@@ -1,12 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import mediapipe
+mediapipe_path = mediapipe.__path__[0]
 
 a = Analysis(
     ['pose_sender_udp.py'],
     pathex=[],
     binaries=[],
-    datas=[],
-    hiddenimports=[],
+    datas=[
+        (mediapipe_path, 'mediapipe'),
+    ],
+    hiddenimports=[
+        'mediapipe.python.solutions.pose',
+        'mediapipe.python.solutions.drawing_utils',
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -29,7 +36,7 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,
+    console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
