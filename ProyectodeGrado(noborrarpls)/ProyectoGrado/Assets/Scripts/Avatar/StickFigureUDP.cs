@@ -89,6 +89,13 @@ public class StickFigureUDP : MonoBehaviour
     // Aplica glow multiplicando el color base
     private Color Glow(Color c) => enableGlow ? c * emissionIntensity : c;
 
+    // Unlit/Color puede ser stripeado en builds — usa Standard como fallback
+    private Material MakeUnlitMat(Color c)
+    {
+        var shader = Shader.Find("Unlit/Color") ?? Shader.Find("Standard");
+        return new Material(shader) { color = c };
+    }
+
     void Start()
     {
         // ─── Joints ───
@@ -101,7 +108,7 @@ public class StickFigureUDP : MonoBehaviour
             s.transform.localScale = Vector3.one * sphereSize;
             Destroy(s.GetComponent<Collider>());
 
-            var mat = new Material(Shader.Find("Unlit/Color")) { color = Glow(jointColor) };
+            var mat = MakeUnlitMat(Glow(jointColor));
             s.GetComponent<Renderer>().sharedMaterial = mat;
             _jointMats[i] = mat;
             joints[i]     = s;
@@ -126,7 +133,7 @@ public class StickFigureUDP : MonoBehaviour
             cyl.transform.parent = transform;
             Destroy(cyl.GetComponent<Collider>());
 
-            var mat = new Material(Shader.Find("Unlit/Color")) { color = Glow(boneColor) };
+            var mat = MakeUnlitMat(Glow(boneColor));
             cyl.GetComponent<Renderer>().sharedMaterial = mat;
             _boneMats[i]        = mat;
             boneTransforms[i]   = cyl.transform;
@@ -140,12 +147,12 @@ public class StickFigureUDP : MonoBehaviour
         head.transform.parent = transform;
         head.transform.localScale = Vector3.one * headSize;
         Destroy(head.GetComponent<Collider>());
-        _headMat = new Material(Shader.Find("Unlit/Color")) { color = headColor };
+        _headMat = MakeUnlitMat(headColor);
         head.GetComponent<Renderer>().sharedMaterial = _headMat;
         _headTransform = head.transform;
 
         // ─── Ojos ───
-        _eyeMat   = new Material(Shader.Find("Unlit/Color")) { color = Glow(eyeColor) };
+        _eyeMat   = MakeUnlitMat(Glow(eyeColor));
         _leftEye  = CreateSphere("Eye_L", eyeSize, _eyeMat);
         _rightEye = CreateSphere("Eye_R", eyeSize, _eyeMat);
 
@@ -154,7 +161,7 @@ public class StickFigureUDP : MonoBehaviour
         neck.name            = "Neck";
         neck.transform.parent = transform;
         Destroy(neck.GetComponent<Collider>());
-        _neckMat = new Material(Shader.Find("Unlit/Color")) { color = Glow(boneColor) };
+        _neckMat = MakeUnlitMat(Glow(boneColor));
         neck.GetComponent<Renderer>().sharedMaterial = _neckMat;
         _neckBone = neck.transform;
     }

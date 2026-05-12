@@ -1,18 +1,22 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_all, collect_data_files
 
-import mediapipe
-mediapipe_path = mediapipe.__path__[0]
+# Recolecta TODO de mediapipe (modelos .tflite, metadata, etc.)
+mp_datas, mp_binaries, mp_hiddenimports = collect_all('mediapipe')
+
+# Recolecta datos de opencv (haarcascades, etc.)
+cv2_datas = collect_data_files('cv2')
 
 a = Analysis(
     ['pose_sender_udp.py'],
     pathex=[],
-    binaries=[],
-    datas=[
-        (mediapipe_path, 'mediapipe'),
-    ],
-    hiddenimports=[
+    binaries=mp_binaries,
+    datas=mp_datas + cv2_datas,
+    hiddenimports=mp_hiddenimports + [
         'mediapipe.python.solutions.pose',
         'mediapipe.python.solutions.drawing_utils',
+        'mediapipe.python.solutions.drawing_styles',
+        'cv2',
     ],
     hookspath=[],
     hooksconfig={},
@@ -33,7 +37,7 @@ exe = EXE(
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
-    upx=True,
+    upx=False,
     upx_exclude=[],
     runtime_tmpdir=None,
     console=True,
