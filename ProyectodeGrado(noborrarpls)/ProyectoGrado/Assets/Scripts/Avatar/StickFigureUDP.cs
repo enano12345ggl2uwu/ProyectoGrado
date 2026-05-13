@@ -89,9 +89,25 @@ public class StickFigureUDP : MonoBehaviour
     // Aplica glow multiplicando el color base
     private Color Glow(Color c) => enableGlow ? c * emissionIntensity : c;
 
-    // Unlit/Color puede ser stripeado en builds — usa Standard como fallback
+    // Anti-shader-stripping: prioriza un material asset en Resources/ (su shader
+    // nunca se strippea porque está referenciado por un asset). Cae a Shader.Find
+    // si el asset no existe.
+    private static Material _resourceTemplate;
+    private static bool _resourceLookupDone;
+
     private Material MakeUnlitMat(Color c)
     {
+        if (!_resourceLookupDone)
+        {
+            _resourceTemplate = Resources.Load<Material>("StickFigureMat");
+            _resourceLookupDone = true;
+            if (_resourceTemplate == null)
+                Debug.LogWarning("[StickFigureUDP] Resources/StickFigureMat.mat no encontrado — usando Shader.Find fallback (riesgo de stripping en build).");
+        }
+
+        if (_resourceTemplate != null)
+            return new Material(_resourceTemplate) { color = c };
+
         var shader = Shader.Find("Unlit/Color") ?? Shader.Find("Standard");
         return new Material(shader) { color = c };
     }
