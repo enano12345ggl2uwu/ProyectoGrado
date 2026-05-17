@@ -41,6 +41,8 @@ public class NumberBalloonGameUDP : MonoBehaviour
     [Header("Game")]
     public float totalGameTime     = 60f;
     public float targetSwitchEvery = 8f;
+    [Tooltip("Pausa despues de reventar (correcto o fallo) antes de aceptar el proximo pop. Da aire al niño.")]
+    public float interRoundPause   = 1.2f;
 
     [Header("Session")]
     public ResultsScreen results;
@@ -78,6 +80,7 @@ public class NumberBalloonGameUDP : MonoBehaviour
     private int     _score        = 0;
     private int     _wrongPenalty = 5;
     private bool    _running      = false;
+    private float   _popCooldown  = 0f;
 
     private Balloon[] _slots;
     private Vector3[] _anchors;
@@ -86,16 +89,29 @@ public class NumberBalloonGameUDP : MonoBehaviour
     {
         if (feedbackText) feedbackText.text = "";
         UpdateScoreUI();
-        if (FindObjectOfType<DifficultySelector>() == null)
+        // Incluye inactivos: si DifficultySelector vive dentro de un panel que arranca
+        // desactivado, el find sin flag devolveria null y dispararia un StartGame
+        // duplicado (los del selector y este apilados → globos dobles).
+        if (FindObjectOfType<DifficultySelector>(true) == null)
             StartGame(1);
     }
 
     public void StartGame(int level)
     {
+        // Idempotente: si ya habia globos de una corrida previa, limpialos antes
+        // de recrear _slots — evita orphans cuando StartGame se llama dos veces.
+        if (_slots != null)
+        {
+            for (int i = 0; i < _slots.Length; i++)
+                if (_slots[i] != null) Destroy(_slots[i].gameObject);
+        }
+        StopAllCoroutines();
+
         ApplyDifficulty(level);
-        _running = true;
-        _slots   = new Balloon[balloonCount];
-        _anchors = new Vector3[balloonCount];
+        _running     = true;
+        _popCooldown = 0f;
+        _slots       = new Balloon[balloonCount];
+        _anchors     = new Vector3[balloonCount];
 
         float totalWidth = (balloonCount - 1) * slotSpacingX;
         float startX     = -totalWidth / 2f;
@@ -168,7 +184,16 @@ public class NumberBalloonGameUDP : MonoBehaviour
         {
             if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
             if (roundProgressBar) roundProgressBar.SetProgress(timer / totalGameTime);
-            CheckHandPops();
+
+            if (_popCooldown > 0f)
+            {
+                _popCooldown -= Time.deltaTime;
+                if (_popCooldown <= 0f && feedbackText) feedbackText.text = "";
+            }
+            else
+            {
+                CheckHandPops();
+            }
 
             switchTimer -= Time.deltaTime;
             if (switchTimer <= 0f) { PickNewTarget(); RespawnAll(); switchTimer = targetSwitchEvery; }
@@ -229,13 +254,17 @@ public class NumberBalloonGameUDP : MonoBehaviour
             PlayClip(wrongClip);
         }
         UpdateScoreUI();
+        _popCooldown = interRoundPause;
         StartCoroutine(RespawnAfterDelay(slot));
     }
 
     IEnumerator RespawnAfterDelay(int slot)
     {
         yield return new WaitForSeconds(respawnDelay);
-        if (_running) SpawnSlot(slot);
+        // Guarda: si RespawnAll ya repobló este slot durante el delay,
+        // no spawneamos otro encima (eso causaba globos superpuestos).
+        if (_running && slot >= 0 && slot < _slots.Length && _slots[slot] == null)
+            SpawnSlot(slot);
     }
 
     Vector3 LandmarkToWorld(int idx)

@@ -98,6 +98,13 @@ public class StickFigureUDP : MonoBehaviour
                   hatColor=new Color(0.55f,0.2f,0.8f),
                   shirtEnabled=true, shirtColor=new Color(0.7f,0.35f,0.95f),
                   pantsEnabled=true, pantsColor=new Color(0.45f,0.15f,0.6f) },
+        new Skin{ name="Vanilla",
+                  jointColor=new Color(0.2f,0.2f,0.2f), boneColor=new Color(0.5f,0.9f,0.9f),
+                  eyeColor=new Color(0.5f,0.9f,0.9f),   headColor=new Color(0.15f,0.15f,0.15f),
+                  hat=HatType.None,
+                  hatColor=new Color(1f,1f,1f),
+                  shirtEnabled=false, shirtColor=new Color(0.5f,0.9f,0.9f),
+                  pantsEnabled=false, pantsColor=new Color(0.3f,0.3f,0.5f) },
     };
     public bool persistSkin = true;
 
@@ -167,11 +174,13 @@ public class StickFigureUDP : MonoBehaviour
     private Transform _hatTransform;
     private Material  _hatMat;
     private HatType   _currentHatType  = HatType.None;
+    private Vector3   _hatTargetScale  = Vector3.zero;
     private Transform _shirtTransform;
     private Material  _shirtMat;
     private Transform _pantsLTransform;
     private Transform _pantsRTransform;
     private Material  _pantsMat;
+    private bool      _firstPoseFrame  = true;
 
     // Landmarks de cara — visualmente ocultos, usados para cabeza/ojos
     private readonly int[] FACE_LANDMARKS = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -298,9 +307,12 @@ public class StickFigureUDP : MonoBehaviour
         }
 
         // ─── Camisa (cilindro entre hombros y caderas) ───
+        // Escala 0 hasta que UpdateClothing la posicione con landmarks reales,
+        // si no aparece como cilindro gigante en el origen antes de la primera pose.
         GameObject shirt      = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         shirt.name            = "Shirt";
         shirt.transform.parent = transform;
+        shirt.transform.localScale = Vector3.zero;
         Destroy(shirt.GetComponent<Collider>());
         _shirtMat = MakeUnlitMat(Glow(boneColor));
         shirt.GetComponent<Renderer>().sharedMaterial = _shirtMat;
@@ -311,6 +323,8 @@ public class StickFigureUDP : MonoBehaviour
         _pantsMat        = MakeUnlitMat(Glow(boneColor));
         _pantsLTransform = CreateCylinder("PantsL", _pantsMat);
         _pantsRTransform = CreateCylinder("PantsR", _pantsMat);
+        _pantsLTransform.localScale = Vector3.zero;
+        _pantsRTransform.localScale = Vector3.zero;
         _pantsLTransform.gameObject.SetActive(false);
         _pantsRTransform.gameObject.SetActive(false);
 
@@ -398,6 +412,26 @@ public class StickFigureUDP : MonoBehaviour
 
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected)
             return;
+
+        // ─── Joints mapeados primero (los necesitamos validos antes de tocar trails y ropa) ───
+        // Primer frame de pose: limpia los trails para que no dibujen una linea
+        // desde el origen hasta la primera posicion de las muñecas.
+        if (_firstPoseFrame)
+        {
+            // Aplica posiciones inmediatas a joints antes de habilitar trails
+            for (int i = 0; i < 33; i++)
+            {
+                Vector3 lm0 = PoseReceiverUDP.Instance.GetLandmark(i);
+                Vector3 p0  = new Vector3((lm0.x - 0.5f) * scale, (0.5f - lm0.y) * scale, lm0.z * scale) + offset;
+                joints[i].transform.position = p0;
+                _jointPositions[i]           = p0;
+            }
+            if (_trailL != null) _trailL.Clear();
+            if (_trailR != null) _trailR.Clear();
+            _prevHipX = (PoseReceiverUDP.Instance.GetLandmark(23).x +
+                         PoseReceiverUDP.Instance.GetLandmark(24).x) * 0.5f;
+            _firstPoseFrame = false;
+        }
 
         // ─── Swim bob ───
         float hipX     = (PoseReceiverUDP.Instance.GetLandmark(23).x +
@@ -529,6 +563,8 @@ public class StickFigureUDP : MonoBehaviour
             float lift = headSize * (_currentHatType == HatType.Crown ? 0.5f : 0.65f);
             _hatTransform.position = _headTransform.position + Vector3.up * lift;
             _hatTransform.rotation = Quaternion.identity;
+            if (_hatTransform.localScale.sqrMagnitude < 0.001f)
+                _hatTransform.localScale = _hatTargetScale;
         }
     }
 
@@ -667,7 +703,10 @@ public class StickFigureUDP : MonoBehaviour
         }
         go.name             = $"Hat_{type}";
         go.transform.parent = transform;
-        go.transform.localScale = localScale;
+        _hatTargetScale     = localScale;
+        // Empieza invisible — UpdateClothing lo escala cuando hay pose valida,
+        // si no aparece como cilindro gigante en el origen.
+        go.transform.localScale = Vector3.zero;
         Destroy(go.GetComponent<Collider>());
         go.GetComponent<Renderer>().sharedMaterial = mat;
         return go.transform;
