@@ -169,10 +169,12 @@ public class ResultsScreen : MonoBehaviour
         // Guarda el mejor resultado de estrellas para la barra de progreso global
         string starKey  = $"stars_{minigameKey}";
         int    prevStars = PlayerPrefs.GetInt(starKey, 0);
+        Debug.Log($"[ResultsScreen] minigameKey='{minigameKey}', score={finalScore}/{maxScore}, starCount={starCount}, prevStars={prevStars}");
         if (starCount > prevStars)
         {
             PlayerPrefs.SetInt(starKey, starCount);
             PlayerPrefs.Save();
+            Debug.Log($"[ResultsScreen] Guardado '{starKey}' = {starCount}");
         }
         for (int i = 0; i < stars.Length; i++)
         {
@@ -212,7 +214,7 @@ public class ResultsScreen : MonoBehaviour
         _advanced = true;
         if (_autoCo != null) StopCoroutine(_autoCo);
         if (panel) panel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneTransition.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void NextScene()
@@ -221,21 +223,21 @@ public class ResultsScreen : MonoBehaviour
         _advanced = true;
         if (_autoCo != null) StopCoroutine(_autoCo);
         string target = string.IsNullOrEmpty(nextSceneName) ? mainMenuScene : nextSceneName;
-        SceneManager.LoadScene(target);
+        SceneTransition.LoadScene(target);
     }
 
     public void BackToMenu()
     {
         _advanced = true;
         if (_autoCo != null) StopCoroutine(_autoCo);
-        SceneManager.LoadScene(mainMenuScene);
+        SceneTransition.LoadScene(mainMenuScene);
     }
 
     public void BackToLevelSelect()
     {
         _advanced = true;
         if (_autoCo != null) StopCoroutine(_autoCo);
-        SceneManager.LoadScene(levelSelectScene);
+        SceneTransition.LoadScene(levelSelectScene);
     }
 
     private static string PrettyName(string key)

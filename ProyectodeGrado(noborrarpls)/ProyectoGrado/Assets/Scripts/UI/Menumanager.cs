@@ -19,7 +19,7 @@ public class Menumanager : MonoBehaviour
     public void Jugar()
     {
         
-        SceneManager.LoadScene("Islandselector"); 
+        SceneTransition.LoadScene("Islandselector");
     }
 
     

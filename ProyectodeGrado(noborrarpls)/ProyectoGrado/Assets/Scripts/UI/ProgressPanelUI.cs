@@ -30,9 +30,35 @@ public class ProgressPanelUI : MonoBehaviour
         Refresh();
     }
 
+    void Update()
+    {
+        // Debug: Shift + R resetea todas las estrellas y refresca la barra.
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            && Input.GetKeyDown(KeyCode.R))
+        {
+            ResetAllStars();
+        }
+    }
+
+    public void ResetAllStars()
+    {
+        foreach (var k in Keys) PlayerPrefs.DeleteKey($"stars_{k}");
+        PlayerPrefs.Save();
+        Debug.Log("[ProgressPanelUI] Estrellas reseteadas.");
+        Refresh();
+    }
+
     void BuildUI()
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
+        // Buscar SOLO canvases de la escena activa, ignorando los persistentes
+        // como el de SceneTransition (DontDestroyOnLoad). Si no filtramos, el
+        // panel se parenta al canvas global y viaja entre escenas.
+        Canvas canvas = null;
+        var myScene = gameObject.scene;
+        foreach (var c in FindObjectsOfType<Canvas>())
+        {
+            if (c.gameObject.scene == myScene) { canvas = c; break; }
+        }
         if (canvas == null) { Debug.LogError("[ProgressPanelUI] No hay Canvas en la escena."); return; }
 
         // ── Panel raiz ─────────────────────────────────────────────────────

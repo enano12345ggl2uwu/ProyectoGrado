@@ -10,12 +10,12 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(firstSceneName);
+        SceneTransition.LoadScene(firstSceneName);
     }
 
     public void OpenIslandSelector()
     {
-        SceneManager.LoadScene("IslandSelector");
+        SceneTransition.LoadScene("IslandSelector");
     }
 
     public void ExitGame()

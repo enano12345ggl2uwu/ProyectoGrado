@@ -180,6 +180,7 @@ public class MirrorWordGameUDP : MonoBehaviour
             {
                 ShowFeedback("Try again!", Color.white);
                 PlayClip(wrongClip);
+                if (stickFigure) stickFigure.RegisterWrong();
                 roundActive = false;
             }
 
@@ -404,7 +405,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         {
             stickFigure.SetAllJointsColor(UITheme.Success);
             stickFigure.SetAllBonesColor(UITheme.Success);
-            stickFigure.TriggerShake();
+            stickFigure.RegisterCorrect();
         }
 
         if (CelebrationBurst.Instance != null)

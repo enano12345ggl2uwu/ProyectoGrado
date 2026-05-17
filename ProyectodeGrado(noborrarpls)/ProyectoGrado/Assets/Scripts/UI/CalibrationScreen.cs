@@ -61,6 +61,6 @@ public class CalibrationScreen : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(mainMenuScene);
+        SceneTransition.LoadScene(mainMenuScene);
     }
 }

@@ -280,6 +280,7 @@ public class BalloonPopGameUDP : MonoBehaviour
             if (GameManager.Instance != null) GameManager.Instance.AddScore(10);
             ShowFeedback("Great!", UITheme.Success);
             PlayClip(popClip);
+            if (stickFigure) stickFigure.RegisterCorrect();
             if (CelebrationBurst.Instance != null)
                 CelebrationBurst.Instance.Trigger(b.transform.position);
         }
@@ -288,6 +289,7 @@ public class BalloonPopGameUDP : MonoBehaviour
             _score = Mathf.Max(0, _score - (int)_wrongPenalty);
             ShowFeedback("Wrong color!", UITheme.Warning);
             PlayClip(wrongClip);
+            if (stickFigure) stickFigure.RegisterWrong();
         }
         UpdateScoreUI();
         Destroy(b.gameObject);

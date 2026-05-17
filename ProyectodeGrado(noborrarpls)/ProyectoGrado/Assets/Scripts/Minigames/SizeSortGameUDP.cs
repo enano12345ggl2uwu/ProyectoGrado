@@ -42,6 +42,8 @@ public class SizeSortGameUDP : MonoBehaviour
 
     [Header("Referencias")]
     public SizeContourDisplay contour;
+    [Tooltip("StickFigure de la escena. Recibe feedback de acierto/fallo (combo, expresion).")]
+    public StickFigureUDP stickFigure;
 
     [Header("Config base")]
     public float roundTime    = 8f;
@@ -191,6 +193,7 @@ public class SizeSortGameUDP : MonoBehaviour
             {
                 ShowFeedback("Try again!", Color.white);
                 PlayClip(wrongClip);
+                if (stickFigure) stickFigure.RegisterWrong();
                 roundActive = false;
             }
 
@@ -259,6 +262,7 @@ public class SizeSortGameUDP : MonoBehaviour
         ShowFeedback("Perfect!", UITheme.Success);
         PlayClip(correctClip);
 
+        if (stickFigure) stickFigure.RegisterCorrect();
         if (CelebrationBurst.Instance != null)
             CelebrationBurst.Instance.Trigger(transform.position);
     }

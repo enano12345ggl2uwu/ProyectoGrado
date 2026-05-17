@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
     {
         if (!IsIslandUnlocked(island)) return;
         currentIsland = island;
-        SceneManager.LoadScene($"Island{island}");
+        SceneTransition.LoadScene($"Island{island}");
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneTransition.LoadScene("MainMenu");
     }
 
     public void SaveProgress()

@@ -56,12 +56,12 @@ public class MainMenuController : MonoBehaviour
             $"Size Sort:   {size}";
     }
 
-    public void PlayColorJump()   { SceneManager.LoadScene(colorJumpScene); }
-    public void PlayMirrorWorld() { SceneManager.LoadScene(mirrorWorldScene); }
-    public void PlaySizeSort()    { SceneManager.LoadScene(sizeSortScene); }
-    public void PlayBalloonPop()  { SceneManager.LoadScene(balloonPopScene); }
-    public void OpenCalibration() { SceneManager.LoadScene(calibrationScene); }
-    public void OpenIslandSelector() { SceneManager.LoadScene(islandSelectorScene); }
+    public void PlayColorJump()   { SceneTransition.LoadScene(colorJumpScene); }
+    public void PlayMirrorWorld() { SceneTransition.LoadScene(mirrorWorldScene); }
+    public void PlaySizeSort()    { SceneTransition.LoadScene(sizeSortScene); }
+    public void PlayBalloonPop()  { SceneTransition.LoadScene(balloonPopScene); }
+    public void OpenCalibration() { SceneTransition.LoadScene(calibrationScene); }
+    public void OpenIslandSelector() { SceneTransition.LoadScene(islandSelectorScene); }
 
     public void OpenSettings()
     {

@@ -27,7 +27,7 @@ public class PoseCursor : MonoBehaviour
 
     [Header("Hand")]
     [Tooltip("16 = muneca derecha, 15 = muneca izquierda")]
-    public int  handLandmark      = 16;
+    public int  handLandmark      = 15;
     [Tooltip("Usa automaticamente la mano que este mas arriba.")]
     public bool autoSwitchHand    = false;
     public float autoSwitchThreshold = 0.05f;
@@ -93,6 +93,15 @@ public class PoseCursor : MonoBehaviour
             g.raycastTarget = false;
     }
 
+    // Oculta/muestra los visuales sin deshabilitar el GameObject del script
+    // (necesario porque cursorRect puede ser el propio PoseCursor).
+    void SetCursorVisible(bool visible)
+    {
+        if (cursorRect == null) return;
+        foreach (var g in cursorRect.GetComponentsInChildren<Graphic>(true))
+            g.enabled = visible;
+    }
+
     public void SwitchHand()             => handLandmark = handLandmark == 16 ? 15 : 16;
     public void SetHand(int landmark)    => handLandmark = landmark;
 
@@ -100,11 +109,11 @@ public class PoseCursor : MonoBehaviour
     {
         if (PoseReceiverUDP.Instance == null || !PoseReceiverUDP.Instance.poseDetected)
         {
-            if (cursorRect) cursorRect.gameObject.SetActive(false);
+            SetCursorVisible(false);
             FireExitIfNeeded();
             return;
         }
-        if (cursorRect) cursorRect.gameObject.SetActive(true);
+        SetCursorVisible(true);
 
         // Auto-switch: usa la mano mas arriba (Y mas baja en MediaPipe)
         if (autoSwitchHand)
@@ -127,12 +136,12 @@ public class PoseCursor : MonoBehaviour
         float dist = Vector2.Distance(_cursorScreenPos, _cursorSmoothed);
         if (dist > deadzonePixels)
             _cursorSmoothed = Vector2.Lerp(_cursorSmoothed, _cursorScreenPos,
-                                           Mathf.Clamp01(Time.deltaTime * cursorSmoothing));
+                                           Mathf.Clamp01(Time.unscaledDeltaTime * cursorSmoothing));
         if (cursorRect) cursorRect.position = _cursorSmoothed;
 
         // 3. Velocidad Z (push)
         float zDelta = lm.z - _lastZ;
-        _zVelocity   = Mathf.Lerp(_zVelocity, -zDelta / Mathf.Max(Time.deltaTime, 0.0001f), 0.3f);
+        _zVelocity   = Mathf.Lerp(_zVelocity, -zDelta / Mathf.Max(Time.unscaledDeltaTime, 0.0001f), 0.3f);
         _lastZ       = lm.z;
 
         // 4. Raycast UI → boton hovereado
@@ -166,7 +175,7 @@ public class PoseCursor : MonoBehaviour
         {
             if (_hoveredButton == _lastDwellButton)
             {
-                _dwellAccum += Time.deltaTime;
+                _dwellAccum += Time.unscaledDeltaTime;
                 if (dwellRingImage) dwellRingImage.fillAmount = Mathf.Clamp01(_dwellAccum / dwellTime);
                 if (canClick && _dwellAccum >= dwellTime)
                 {

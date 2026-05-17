@@ -30261,3 +30261,12862 @@ production/session-logs/agent-audit.log
 production/session-logs/session-log.md
 ---
 
+## Archived Session State: 20260512_223531
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_223531
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+---
+
+## Archived Session State: 20260512_224339
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_224339
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_225131
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_225131
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_225354
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_225354
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_231057
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_231057
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/ProjectSettings/GraphicsSettings.asset
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_231219
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_231219
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/ProjectSettings/GraphicsSettings.asset
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_231413
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_231413
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/ProjectSettings/GraphicsSettings.asset
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_231922
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_231922
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_HDRP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_2022.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.0.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.2.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_6000.3.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Nicrom/Shaders/Wind/UpgradePackages/LPW_URP_Core.unitypackage.meta
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/ProjectSettings/GraphicsSettings.asset
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_232355
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_232355
+### Commits
+0822075 Fix: StickFigure invisible en build — Resources fallback + Always Included Shaders
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260512_232403
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260512_232403
+### Commits
+0822075 Fix: StickFigure invisible en build — Resources fallback + Always Included Shaders
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_151810
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_151810
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_153128
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_153128
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_153802
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_153802
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_154628
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_154628
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_160418
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_160418
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_160754
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Multi-Minigame Build
+Feature: ResultsScreen + BalloonPop + PoseCursor
+Task: Pendiente rediseño visual del ResultsPanel
+<!-- /STATUS -->
+
+## Current Task
+ResultsPanel funciona (aparece, oculta el juego) pero al usuario no le gusta el diseño visual.
+Próximo paso: rediseñar el layout/look del ResultsPanel según feedback del usuario.
+
+## Estado por Escena
+
+### ColorJump (Island1) — JUGABLE
+- [x] Scripts, StickFigure, plataformas
+- [x] DifficultySelector conectado
+- [x] ResultsScreen — aparece al terminar, oculta gamePanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### BalloonPop — JUGABLE (usa NumberBalloonGameUDP)
+- [x] NumberBalloonGameUDP: dead zone ajustable (campo deadZone=1.2u)
+- [x] NumberBalloonGameUDP: campo results conectado → muestra ResultsScreen al terminar
+- [x] ResultsScreen: oculta gamePanel al mostrar resultados
+- [ ] Conectar en Inspector: BalloonManager → NumberBalloonGameUDP → campo Results → ResultsPanel
+- [ ] ResultsPanel: diseño visual pendiente de aprobación
+
+### SizeSort (Island2) — FUNCIONAL PARCIAL
+- [x] SizeContourDisplay: fix useWorldSpace=true, sortingOrder=100
+- [x] Escena existe con refs conectadas
+- [ ] Verificar que siluetas se ven en play mode tras ajuste SizeContour Y=1.5
+
+### MirrorWord (Island3) — FUNCIONAL
+- [x] MirrorWordGameUDP funcionando
+- [ ] ResultsPanel diseño visual pendiente
+
+## Scripts modificados esta sesión (2026-05-10)
+- `Assets/Scripts/Avatar/SizeContourDisplay.cs` — useWorldSpace=true, sortingOrder=100
+- `Assets/Scripts/Minigames/BalloonPopGameUDP.cs` — rediseño completo spawn lateral
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` — +ResultsScreen, +deadZone
+- `Assets/Scripts/UI/PoseCursor.cs` — dwell 3s, hover events, gesto brazo arriba
+- `Assets/Scripts/UI/ResultsScreen.cs` — +poseCursor, +gamePanel, oculta gamePanel en Show()
+
+## Decisiones clave
+- BalloonPop escena usa NumberBalloonGameUDP (NO BalloonPopGameUDP)
+- DifficultySelector.balloonPopGame = null en escena; usa numberBalloonGame
+- Puerto UDP: 7777
+- PoseCursor: dwell 3s, armRaiseThreshold=0.25, armRaiseCooldown=1s
+- ResultsScreen.Show() → gamePanel.SetActive(false) antes de panel.SetActive(true)
+
+## Pendiente (usuario decide)
+- Rediseñar visualmente el ResultsPanel (el usuario no le gustó el layout actual)
+- Conectar Results en Inspector de BalloonPop escena
+- Conectar gamePanel en ResultsScreen de cada escena
+---
+
+## Session End: 20260516_160754
+### Uncommitted Changes
+ProyectoGrado_Python/pose_sender_udp.py
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+---
+
+## Archived Session State: 20260516_161417
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_161417
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_161621
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_161621
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_172837
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_172837
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_191435
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_191435
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_195341
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_195341
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_195605
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_195605
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_200519
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_200519
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_200640
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_200640
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_200945
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_200945
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_202132
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_202132
+### Commits
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/MirrorWordGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/NumberBalloonGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/SizeSortGameUDP.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_202230
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_202230
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_202915
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_202915
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_203455
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_203455
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_203729
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_203729
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/RingSpriteApplier.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_204219
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_204219
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/RingSpriteApplier.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_204506
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_204506
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/RingSpriteApplier.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_204718
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_204718
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/RingSpriteApplier.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_205027
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_205027
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_205328
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_205328
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_205711
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_205711
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_205948
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_205948
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_210228
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_210228
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_210424
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_210424
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_210758
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_210758
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_211103
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_211103
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_211138
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_211138
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_211734
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_211734
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_212020
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_212020
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_212336
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_212336
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_212745
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_212745
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_212911
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_212911
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_213121
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_213121
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_213527
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: Tutorial Overlay v2 + Camera Selector
+Task: Esperando videos + narraciones del usuario para integrar TutorialOverlay
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+
+## Plan de Polish — Decisiones del usuario (2026-05-16)
+
+### CONFIRMADO — A implementar
+
+1. **Tutorial Overlay v2** (mejora del actual `TutorialOverlay.cs`)
+   - Formato: **video (PIP gameplay + webcam)** + texto corto + **voz narrada**
+   - **Sin auto-close** — solo cierra al click "Listo" (PoseCursor dwell)
+   - Mostrar solo primera vez por sesión (PlayerPrefs por minijuego)
+   - Opción "Volver a ver tutorial" desde el menú de pausa
+   - Voz narradora **en español** (es la explicación). Voz para palabra inglesa = aparte (ver punto 7).
+   - Texto narración por minijuego (definido en plan):
+     - ColorJump: "Mira la palabra. Salta a la plataforma del color correcto."
+     - BalloonPop: "Lee el número. Toca el globo que muestra ese número."
+     - SizeSort: "Hazte grande o pequeño para que tu silueta encaje en el contorno."
+     - MirrorWord: "Copia la pose que ves. Mantenla hasta completar la palabra."
+
+2. **Menú de Pausa** (nuevo)
+   - Trigger: tecla ESC + gesto brazos en cruz 1.5s
+   - Opciones: Reanudar / Reiniciar / Ver tutorial / Volver al mapa / Salir
+   - Navegación con PoseCursor (ya existe)
+   - Pausa real: `Time.timeScale = 0` + pausa de música
+   - **Auto-pausa por pérdida de tracking >2s: SÍ** (confirmado)
+
+3. **StickFigure visual — TODOS los adicionales**
+   - Cara expresiva: ojos parpadean, sonrisa en acierto, "X" en fallo
+   - Trail en manos (`TrailRenderer`)
+   - Aura de racha: bone color cyan→verde→dorado a partir de x3/x5
+   - **Skins desbloqueables**: sombrero, capa, gafas (estilo Terraria — gusto confirmado)
+
+4. **SFX Audit**
+   - Revisar uso de `AudioSource.PlayOneShot` y `ScreenShake.Instance.Shake` en cada minijuego
+   - Documentar qué eventos tienen sonido/shake y cuáles faltan
+   - Estándar deseado por minijuego: start, hit, miss (suave), tick últimos 5s, round end, UI hover, UI confirm, música con ducking
+
+### De la sección C (recomendaciones) — Confirmado
+
+- **C#2 — Pose lost indicator** (icono cuando MediaPipe pierde tracking)
+- **C#3 — End-of-session summary** ("Hoy aprendiste: X colores, Y números") — pedagógico, vende la tesis
+- **C#4 — Transiciones fade-to-black 0.3s** entre escenas
+- **C#7 — Voz narradora pregrabada para la palabra inglesa** del juego
+- **C#5 — Combo counter visible** ("x3!" con shake)
+- **C#10 — Confirmación antes de salir**
+
+### Descartado / no en scope
+
+- C#1 Picture-in-picture webcam dentro del juego (no pedido)
+- C#6 Stars 1-3 (no pedido)
+- C#8 PoseCursor fill circle visible (no pedido — quizá ya está)
+- C#9 Colorblind mode toggle (no pedido)
+
+## Estado actual de la sesión (2026-05-16)
+
+### Hecho
+- [x] **Camera selector** en `ProyectoGrado_Python/pose_sender_udp.py`
+  - Escanea índices 0..scan-max (default 5)
+  - Si 1 cámara → usa directo. Si 2+ → muestra ventana con grid de previews etiquetadas
+  - CLI flag `--camera N` para saltarse el selector
+  - Si `--camera` falla, cae al selector automáticamente
+  - Funciones nuevas: `scan_cameras`, `_build_thumb`, `select_camera_interactive`, `open_camera`, `resolve_camera`
+  - Útil sobre todo para conmutar entre webcam real y OBS Virtual Camera al grabar tutoriales
+
+### Diseñado, esperando assets del usuario
+- [ ] **TutorialOverlay v2 — script `TutorialOverlay.cs`**
+  - Guía paso a paso (Pasos 0-7) entregada al usuario
+  - Pasos del usuario antes de codear:
+    1. Grabar 4 videos con OBS (gameplay Unity + webcam PIP esquina), 8-12s cada uno
+    2. Generar 4 audios de narración (ElevenLabs / NaturalReaders / voz propia)
+    3. Crear carpetas `Assets/Videos/`, `Assets/Audio/Narration/`, `Assets/RenderTextures/`
+    4. Crear RenderTexture `TutorialVideoRT` (1280×720)
+    5. Importar assets y montar jerarquía Canvas (Background, Title, VideoFrame, Body, CloseButton)
+    6. Agregar componentes VideoPlayer + AudioSource al GameObject TutorialOverlay
+  - Cuando el usuario confirme que tiene assets y jerarquía → escribo `TutorialOverlay.cs` reemplazando el actual
+  - Prueba primero con **ColorJump**, replicar a los otros 3 después
+
+### Pendiente — próximos a tocar (post tutorial)
+- [ ] Menú de pausa (Pasos: diseñar UI → script PauseMenu.cs → integrar con cada minijuego)
+- [ ] SFX audit (grepeable en código, te entrego reporte)
+- [ ] StickFigure: cara expresiva → trail → aura combo → skins (orden ascendente de esfuerzo)
+- [ ] Pose lost indicator
+- [ ] Combo counter visible
+- [ ] Confirmación antes de salir
+- [ ] End-of-session summary
+- [ ] Fade-to-black transitions
+- [ ] Voz narradora para palabra inglesa
+
+## Orden sugerido al usuario (priorizado)
+1. Pausa Menu (bloqueante para demos)
+2. Tutorial Overlay v2 (depende de assets del usuario)
+3. SFX audit + fix mezcla
+4. StickFigure (cara → trail → aura → skins)
+5. Pose lost indicator + auto-pausa
+6. End-of-session summary + combo counter
+7. Voz narradora palabra inglesa + transitions + confirmación salir
+
+## Archivos modificados esta sesión
+- `ProyectoGrado_Python/pose_sender_udp.py` — agregado selector visual de cámara + flag `--camera`
+
+## Decisiones clave de la sesión
+- Tutorial: video + texto + voz, **sin auto-close**
+- Pausa: auto-pausa por tracking lost SÍ
+- StickFigure: todos los adicionales (incluye skins desbloqueables)
+- Voz narradora del tutorial **en español**; voz de la palabra del juego **en inglés** (cuando se implemente)
+- Workflow: prueba en ColorJump → replicar al resto
+
+## Pendientes del usuario antes de seguir
+1. Grabar 4 videos de tutorial con OBS (PIP gameplay + webcam)
+2. Generar 4 audios de narración en español
+3. Decidir si querés que arranque por TutorialOverlay o por Pausa Menu (mientras grabás los videos)
+---
+
+## Session End: 20260516_213527
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260516_220242
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260516_220242
+### Commits
+6480ca8 Feat: RoundProgressBar — anillo radial de tiempo sobre PoseCursor
+9c2d20e Feat: selector visual de camara en pose_sender_udp.py
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_094609
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_094609
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_100215
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_100215
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_100519
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_100519
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_100610
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_100610
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_100816
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_100816
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_101009
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_101009
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_101331
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_101331
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_104430
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_104430
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_104648
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_104648
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_104850
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_104850
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_105825
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_105825
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_110049
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_110049
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_110341
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_110341
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_110827
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_110827
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_111035
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_111035
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_111320
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_111320
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_112454
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_112454
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_113749
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_113749
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_113837
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_113837
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_114324
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_114324
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_114641
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_114641
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_115550
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_115550
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_121453
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_121453
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_122203
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_122203
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_122821
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_122821
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_122910
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_122910
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123032
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123032
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123208
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123208
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123239
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123239
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123425
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123425
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123625
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123625
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_123755
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_123755
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_124325
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_124325
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_124513
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_124513
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_124925
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_124925
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_125345
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_125345
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_125902
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_125902
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_130104
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_130104
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_130329
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_130329
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_130701
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_130701
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_131044
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_131044
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_132706
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_132706
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_133556
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_133556
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_134012
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_134012
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_134421
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_134421
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_134850
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_134850
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_135243
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_135243
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_135439
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_135439
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_135947
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_135947
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_140143
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_140143
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_140342
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_140342
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_141111
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_141111
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/BalloonPopGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/MirrorWordGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/SizeSortGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_141419
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_141419
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/BalloonPopGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/MirrorWordGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/SizeSortGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+
+## Archived Session State: 20260517_141904
+# Session State — Move & Learn
+
+<!-- STATUS -->
+Epic: Polish Phase (Pre-Defensa)
+Feature: TutorialOverlay v2
+Task: Listo para escribir el nuevo TutorialOverlay.cs (propuesta aprobada por usuario)
+<!-- /STATUS -->
+
+## Contexto general
+Fase de polish previa a la defensa de tesis. Presupuesto del usuario: **una tarde + medio día**.
+4 minijuegos ya funcionales (ColorJump, BalloonPop, SizeSort, MirrorWord).
+Sesión actual: 2026-05-16 (continuación + nueva sesión nocturna). Retomar 2026-05-17.
+
+---
+
+## ✅ Hecho en esta sesión (2026-05-16)
+
+### 1. RoundProgressBar — Anillo radial de tiempo sobre PoseCursor (COMMIT 6480ca8, pushed)
+- Nuevo componente `Assets/Scripts/UI/RoundProgressBar.cs` — anillo radial verde→amarillo→rojo con pulso al <20%
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` — genera sprite de anillo hueco por código (con cache)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` — helper que aplica el sprite al Image en Awake
+- Integrado en los 4 minijuegos (ColorJump, NumberBalloon, SizeSort, MirrorWord)
+- **Extra:** ColorJump tiene nuevo `interRoundPause` (2.0/1.5/1.0s Easy/Med/Hard) para dar aire al jugador entre rondas
+
+### 2. PoseCursor debugging + fixes (NO commiteado todavía)
+- **Bug encontrado:** `cursorRect.gameObject.SetActive(false)` desactivaba el GameObject del script cuando `cursorRect` apuntaba al parent PoseCursor — quedaba oculto para siempre
+- **Fix aplicado en `Assets/Scripts/UI/PoseCursor.cs`:** reemplazado `SetActive` por nuevo método `SetCursorVisible(bool)` que toggles `Graphic.enabled` en hijos en vez de desactivar el GameObject
+- **Default Hand Landmark cambiado de 16 → 15** (usuario controlaba con mano equivocada)
+- **OJO:** valores ya serializados en escenas existentes NO se actualizan automáticamente — usuario debe poner Hand Landmark=15 manualmente en Inspector de cada escena
+
+### 3. Setup PoseCursor en escena ColorJump (usuario lo hizo)
+- Jerarquía: `PoseCursor → RoundProgressRing + DwellRing + CursorDot`
+- DwellRing tenía sprite ring funcionando (usuario asignado manualmente, no con RingSpriteApplier)
+- RoundProgressRing al inicio no se dibujaba → causa raíz: `ColorJumpManager.RoundProgressBar` estaba en `None` (sin referencia) → ahora wired
+- Setting recomendado: `Cursor Rect = PoseCursor (parent)` para que los 3 hijos se muevan juntos
+
+### 4. Cosas que se intentaron y se descartaron
+- Agregado `cursorScreenOffsetY` para bajar el cursor → **revertido** (usuario lo rechazó)
+- `img.SetAllDirty()` en RingSpriteApplier → revertido (rompía render)
+
+---
+
+## 📋 Pendiente inmediato — Retomar mañana
+
+### TutorialOverlay v2 — APROBADO por usuario, listo para escribir
+**Cambios al plan original:** SIN audio narrado, solo imagen placeholder hasta tener video real.
+
+**Decisiones finales (2026-05-16 noche):**
+- Formato: **imagen placeholder + texto** (video después cuando esté disponible)
+- **Mouse click TAMBIÉN funciona** (además de dwell del PoseCursor) — para testing
+- **PlayerPrefs persiste por instalación** (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se llama en Start() del IslandSelector — funciona automático
+
+**Textos confirmados (Spanish):**
+| Minijuego | Title | Body |
+|-----------|-------|------|
+| ColorJump | "Color Jump" | "Mira el color en la pantalla. Muévete a la izquierda o derecha para pararte sobre la plataforma del color correcto." |
+| BalloonPop | "Balloon Pop" | "Cuando aparezca un número en inglés, toca el globo con ese número usando tu mano." |
+| SizeSort | "Size Sort" | "Lee la palabra y cambia tu cuerpo: TALL (alto), SHORT (agachado), WIDE (brazos abiertos), NARROW (brazos pegados), BIG (todo grande), SMALL (todo chico)." |
+| MirrorWord | "Mirror Word" | "Imita la pose que aparece en la silueta. Mantén la pose hasta llenar la barra." |
+
+**API del nuevo script:**
+- Campos Inspector: `title`, `body`, `placeholderSprite`, `minigameKey` (color/balloon/size/mirror), `showOnStart`, `pauseGame`, `clickToCloseEnabled`, `fadeDuration`
+- `Start()`: muestra solo si `!PlayerPrefs.GetInt("tutorial_seen_{key}")`
+- Botón "Listo" → fade-out + marca PlayerPrefs + `Time.timeScale = 1`
+- Método estático `TutorialOverlay.ResetAll()` para debug
+- **NO requiere editar managers** — el TutorialOverlay se autogestiona en Start
+
+**Próximo paso al retomar:**
+1. Reescribir `Assets/Scripts/UI/TutorialOverlay.cs` con la nueva API
+2. Pasar guía de setup en escena al usuario (asignar refs, configurar texts)
+3. Probar en ColorJump primero, después replicar en BalloonPop, SizeSort, MirrorWord
+
+---
+
+## 🔜 Pendientes después del Tutorial Overlay
+1. **Pause Menu** — ESC + gesto cruzar brazos 1.5s + auto-pausa por tracking lost >2s
+2. **SFX Audit** — revisar dónde faltan sonidos en los 4 minijuegos
+3. **StickFigure visual** — cara expresiva + trail + aura combo + skins (estilo Terraria)
+4. **Pose lost indicator**
+5. **End-of-session summary** ("Hoy aprendiste: X colores, Y números")
+6. **Fade-to-black transitions** (0.3s entre escenas)
+7. **Combo counter visible** ("x3!" con shake)
+8. **Confirmación antes de salir**
+9. **Voz narradora pregrabada para la palabra inglesa** del juego
+
+---
+
+## Archivos modificados esta sesión
+
+### Commiteados (6480ca8 — pushed a main)
+- `Assets/Scripts/UI/RingSpriteApplier.cs` (NEW)
+- `Assets/Scripts/UI/RingSpriteGenerator.cs` (NEW)
+- `Assets/Scripts/UI/RoundProgressBar.cs` (NEW)
+- `Assets/Scripts/Minigames/ColorJumpGameUDP.cs` (+RoundProgressBar +interRoundPause)
+- `Assets/Scripts/Minigames/MirrorWordGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/NumberBalloonGameUDP.cs` (+RoundProgressBar)
+- `Assets/Scripts/Minigames/SizeSortGameUDP.cs` (+RoundProgressBar)
+
+### Sin commitear (modificados después del commit)
+- `Assets/Scripts/UI/PoseCursor.cs` — fix de visibilidad (SetActive→Graphic.enabled) + default Hand Landmark 16→15
+
+---
+
+## Decisiones clave de la sesión
+- TutorialOverlay v2: **sin audio narrado**, imagen placeholder hasta video real
+- TutorialOverlay v2: mouse click habilitado en paralelo al dwell del PoseCursor
+- PlayerPrefs del tutorial persisten por instalación (no por sesión)
+- `GlobalProgressBar.Refresh()` ya se ejecuta automáticamente en Start del IslandSelector
+- RoundProgressBar usa sprite generado por código (RingSpriteGenerator) — funciona pero usuario tuvo problemas; alternativa válida: usar el mismo sprite que DwellRing (manual)
+- PoseCursor: `Cursor Rect = PoseCursor (parent)` para que los 3 anillos sigan la mano juntos
+- Hand Landmark: 15 (cambio aplicado en código + Inspector de escenas activas)
+---
+
+## Session End: 20260517_141904
+### Uncommitted Changes
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/BalloonPop.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/ColorJump.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Island3.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/Islandselector.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/MainMenu.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scenes/SizeSort.unity
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Avatar/StickFigureUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Core/GameManager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/BalloonPopGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/ColorJumpGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/MirrorWordGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/Minigames/SizeSortGameUDP.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/BotonIsla.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/CalibrationScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenu.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/MainMenuController.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/Menumanager.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/PoseCursor.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ProgressPanelUI.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/ResultsScreen.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/Scripts/UI/TutorialOverlay.cs
+ProyectodeGrado(noborrarpls)/ProyectoGrado/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+production/session-logs/agent-audit.log
+production/session-logs/compaction-log.txt
+production/session-logs/session-log.md
+production/session-state/active.md
+---
+

@@ -7,6 +7,6 @@ public class BotonIsla : MonoBehaviour
     // para escribir a qué escena quieres ir con CADA isla.
     public void IrAEscena(string nombreEscena)
     {
-        SceneManager.LoadScene(nombreEscena);
+        SceneTransition.LoadScene(nombreEscena);
     }
 }

@@ -147,8 +147,7 @@ public class ColorJumpGameUDP : MonoBehaviour
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
-            if (_lastAnswerCorrect)
-                yield return WaitForCenter();
+            yield return WaitForCenter();
             yield return new WaitForSeconds(interRoundPause);
         }
 
@@ -235,7 +234,7 @@ public class ColorJumpGameUDP : MonoBehaviour
             UpdateScoreUI();
             ShowFeedback("Great job!", UITheme.Success);
             PlayClip(correctClip);
-            if (stickFigure) stickFigure.TriggerShake();
+            if (stickFigure) stickFigure.RegisterCorrect();
             if (CelebrationBurst.Instance != null)
                 CelebrationBurst.Instance.Trigger(transform.position);
         }
@@ -243,6 +242,7 @@ public class ColorJumpGameUDP : MonoBehaviour
         {
             ShowFeedback("Try again!", UITheme.Warning);
             PlayClip(wrongClip);
+            if (stickFigure) stickFigure.RegisterWrong();
         }
         ClearHighlight();
         roundActive = false;
@@ -250,19 +250,34 @@ public class ColorJumpGameUDP : MonoBehaviour
 
     IEnumerator WaitForCenter()
     {
-        ShowFeedback("Come back!", Color.white);
+        // Pausa entre rondas: pide al jugador volver al centro,
+        // espera hasta 3s a que llegue, y confirma con "Listo!" antes
+        // de pasar a la siguiente ronda. Para ninos con TDAH: ritmo claro.
+        ShowFeedback("Vuelve al centro", Color.white);
+
+        const float maxWait = 3f;
         float elapsed = 0f;
-        while (elapsed < 5f)
+        bool centered = false;
+        while (elapsed < maxWait)
         {
             if (PoseReceiverUDP.Instance != null && PoseReceiverUDP.Instance.poseDetected)
             {
                 Vector3 lh = PoseReceiverUDP.Instance.GetLandmark(23);
                 Vector3 rh = PoseReceiverUDP.Instance.GetLandmark(24);
                 if (Mathf.Abs((lh.x + rh.x) / 2f - 0.5f) < moveThreshold)
+                {
+                    centered = true;
                     break;
+                }
             }
             elapsed += Time.deltaTime;
             yield return null;
+        }
+
+        if (centered)
+        {
+            ShowFeedback("Listo!", UITheme.Success);
+            yield return new WaitForSeconds(1f);
         }
         if (feedbackText) feedbackText.text = "";
     }
