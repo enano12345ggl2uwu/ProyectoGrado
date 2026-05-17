@@ -46,6 +46,10 @@ public class NumberBalloonGameUDP : MonoBehaviour
     public ResultsScreen results;
     public int           expectedMaxScore = 150;
 
+    [Header("Round Progress Bar")]
+    [Tooltip("Anillo radial sobre el cursor que muestra tiempo restante de la partida.")]
+    public RoundProgressBar roundProgressBar;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip   popClip;
@@ -158,9 +162,12 @@ public class NumberBalloonGameUDP : MonoBehaviour
         float timer       = totalGameTime;
         float switchTimer = targetSwitchEvery;
 
+        if (roundProgressBar) roundProgressBar.Show();
+
         while (_running && timer > 0f)
         {
             if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+            if (roundProgressBar) roundProgressBar.SetProgress(timer / totalGameTime);
             CheckHandPops();
 
             switchTimer -= Time.deltaTime;
@@ -171,6 +178,7 @@ public class NumberBalloonGameUDP : MonoBehaviour
         }
 
         _running = false;
+        if (roundProgressBar) roundProgressBar.Hide();
         for (int i = 0; i < _slots.Length; i++)
             if (_slots[i]) Destroy(_slots[i].gameObject);
 

@@ -39,6 +39,14 @@ public class ColorJumpGameUDP : MonoBehaviour
     [Tooltip("StickFigureUDP de la escena. Recibe el shake al acertar.")]
     public StickFigureUDP stickFigure;
 
+    [Header("Round Progress Bar")]
+    [Tooltip("Anillo radial sobre el cursor que muestra el tiempo restante del round.")]
+    public RoundProgressBar roundProgressBar;
+
+    [Header("Pausa entre rondas (solo ColorJump)")]
+    [Tooltip("Segundos extra despues del feedback antes de la siguiente ronda. Da aire al jugador.")]
+    public float interRoundPause = 1.5f;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip correctClip;
@@ -86,18 +94,21 @@ public class ColorJumpGameUDP : MonoBehaviour
                 feedbackTime     = 1.8f;
                 moveThreshold    = 0.10f;
                 activeColorCount = 4;
+                interRoundPause  = 2.0f;
                 break;
             case DifficultyMode.Medium:
                 roundTime        = 4f;
                 feedbackTime     = 1.3f;
                 moveThreshold    = 0.15f;
                 activeColorCount = colorNames.Length;
+                interRoundPause  = 1.5f;
                 break;
             case DifficultyMode.Hard:
                 roundTime        = 2.5f;
                 feedbackTime     = 1.0f;
                 moveThreshold    = 0.20f;
                 activeColorCount = colorNames.Length;
+                interRoundPause  = 1.0f;
                 break;
         }
     }
@@ -112,10 +123,12 @@ public class ColorJumpGameUDP : MonoBehaviour
 
             float timer = roundTime;
             roundActive = true;
+            if (roundProgressBar) roundProgressBar.Show();
 
             while (timer > 0f && roundActive)
             {
                 if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+                if (roundProgressBar) roundProgressBar.SetProgress(timer / roundTime);
                 CheckPlayerPosition();
                 timer -= Time.deltaTime;
                 yield return null;
@@ -129,15 +142,19 @@ public class ColorJumpGameUDP : MonoBehaviour
                 roundActive = false;
             }
 
+            if (roundProgressBar) roundProgressBar.Hide();
+
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
             if (feedbackText) feedbackText.text = "";
             if (_lastAnswerCorrect)
                 yield return WaitForCenter();
+            yield return new WaitForSeconds(interRoundPause);
         }
 
         if (countdownText) countdownText.text = "";
         ClearHighlight();
+        if (roundProgressBar) roundProgressBar.Hide();
         if (results != null)
             results.Show(score, _roundsPlayed, totalRounds * 10);
         else

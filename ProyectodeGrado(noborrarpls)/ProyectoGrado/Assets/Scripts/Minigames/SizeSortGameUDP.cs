@@ -54,6 +54,10 @@ public class SizeSortGameUDP : MonoBehaviour
     [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
     public ResultsScreen results;
 
+    [Header("Round Progress Bar")]
+    [Tooltip("Anillo radial sobre el cursor que muestra el tiempo restante del round.")]
+    public RoundProgressBar roundProgressBar;
+
     [Header("Escala live (norm -> unidades del mundo)")]
     [Tooltip("Factor que convierte (distancia / shoulderWidth) en unidades visuales.")]
     public float worldScale = 1.0f;
@@ -144,10 +148,12 @@ public class SizeSortGameUDP : MonoBehaviour
             float timer = roundTime;
             roundActive = true;
             holdTimer   = 0f;
+            if (roundProgressBar) roundProgressBar.Show();
 
             while (timer > 0f && roundActive)
             {
                 if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+                if (roundProgressBar) roundProgressBar.SetProgress(timer / roundTime);
 
                 bool matching = UpdateContour();
 
@@ -190,6 +196,7 @@ public class SizeSortGameUDP : MonoBehaviour
 
             if (holdBar) holdBar.ResetBar();
             if (wordText)    wordText.color = Color.white;
+            if (roundProgressBar) roundProgressBar.Hide();
 
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
@@ -197,6 +204,7 @@ public class SizeSortGameUDP : MonoBehaviour
         }
 
         if (countdownText) countdownText.text = "";
+        if (roundProgressBar) roundProgressBar.Hide();
         if (results != null)
             results.Show(score, _roundsPlayed, totalRounds * 10);
     }

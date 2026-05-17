@@ -45,6 +45,10 @@ public class MirrorWordGameUDP : MonoBehaviour
     [Tooltip("Panel final. Arrastra el GameObject con ResultsScreen.")]
     public ResultsScreen results;
 
+    [Header("Round Progress Bar")]
+    [Tooltip("Anillo radial sobre el cursor que muestra el tiempo restante del round.")]
+    public RoundProgressBar roundProgressBar;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip   correctClip;
@@ -132,10 +136,12 @@ public class MirrorWordGameUDP : MonoBehaviour
             float timer = roundTime;
             roundActive = true;
             holdTimer   = 0f;
+            if (roundProgressBar) roundProgressBar.Show();
 
             while (timer > 0f && roundActive)
             {
                 if (countdownText) countdownText.text = Mathf.CeilToInt(timer).ToString();
+                if (roundProgressBar) roundProgressBar.SetProgress(timer / roundTime);
 
                 bool allOk = ValidateAndPaint();
 
@@ -182,6 +188,7 @@ public class MirrorWordGameUDP : MonoBehaviour
             paintedBones.Clear();
             if (holdBar)  holdBar.ResetBar();
             if (wordText)     wordText.color          = Color.white;
+            if (roundProgressBar) roundProgressBar.Hide();
 
             _roundsPlayed++;
             yield return new WaitForSeconds(feedbackTime);
@@ -189,6 +196,7 @@ public class MirrorWordGameUDP : MonoBehaviour
         }
 
         if (countdownText) countdownText.text = "";
+        if (roundProgressBar) roundProgressBar.Hide();
         if (results != null)
             results.Show(score, _roundsPlayed, totalRounds * 10);
     }
