@@ -8496,6 +8496,75 @@ MonoBehaviour:
   headColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
   eyeSize: 0.13
   eyeColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+  expressionDuration: 1
+  mouthSize: 0.18
+  comboFalloffSeconds: 4
+  enableCombo: 1
+  auraMaxRadius: 4.5
+  auraColorLow: {r: 0.3, g: 0.85, b: 0.4, a: 0.25}
+  auraColorMid: {r: 1, g: 0.8, b: 0.2, a: 0.3}
+  auraColorHigh: {r: 1, g: 0.45, b: 0.2, a: 0.35}
+  auraColorMax: {r: 0.7, g: 0.3, b: 1, a: 0.4}
+  enableHandTrails: 1
+  trailTime: 0.4
+  trailWidth: 0.18
+  skins:
+  - name: Default
+    jointColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    boneColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    eyeColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    headColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+    hat: 0
+    hatColor: {r: 1, g: 1, b: 1, a: 1}
+    shirtEnabled: 0
+    shirtColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    pantsEnabled: 0
+    pantsColor: {r: 0.3, g: 0.3, b: 0.5, a: 1}
+  - name: Fire
+    jointColor: {r: 0.3, g: 0.1, b: 0, a: 1}
+    boneColor: {r: 1, g: 0.5, b: 0.1, a: 1}
+    eyeColor: {r: 1, g: 0.85, b: 0.2, a: 1}
+    headColor: {r: 0.25, g: 0.05, b: 0, a: 1}
+    hat: 1
+    hatColor: {r: 1, g: 0.3, b: 0.1, a: 1}
+    shirtEnabled: 1
+    shirtColor: {r: 1, g: 0.5, b: 0.1, a: 1}
+    pantsEnabled: 1
+    pantsColor: {r: 0.7, g: 0.15, b: 0.05, a: 1}
+  - name: Ice
+    jointColor: {r: 0.1, g: 0.2, b: 0.3, a: 1}
+    boneColor: {r: 0.5, g: 0.85, b: 1, a: 1}
+    eyeColor: {r: 0.8, g: 0.95, b: 1, a: 1}
+    headColor: {r: 0.15, g: 0.2, b: 0.3, a: 1}
+    hat: 3
+    hatColor: {r: 0.7, g: 0.9, b: 1, a: 1}
+    shirtEnabled: 1
+    shirtColor: {r: 0.9, g: 0.95, b: 1, a: 1}
+    pantsEnabled: 1
+    pantsColor: {r: 0.3, g: 0.5, b: 0.8, a: 1}
+  - name: Magic
+    jointColor: {r: 0.2, g: 0.05, b: 0.3, a: 1}
+    boneColor: {r: 0.85, g: 0.4, b: 1, a: 1}
+    eyeColor: {r: 1, g: 0.7, b: 1, a: 1}
+    headColor: {r: 0.2, g: 0.05, b: 0.25, a: 1}
+    hat: 1
+    hatColor: {r: 0.55, g: 0.2, b: 0.8, a: 1}
+    shirtEnabled: 1
+    shirtColor: {r: 0.7, g: 0.35, b: 0.95, a: 1}
+    pantsEnabled: 1
+    pantsColor: {r: 0.45, g: 0.15, b: 0.6, a: 1}
+  - name: Vanilla
+    jointColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    boneColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    eyeColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    headColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+    hat: 0
+    hatColor: {r: 1, g: 1, b: 1, a: 1}
+    shirtEnabled: 0
+    shirtColor: {r: 0.5, g: 0.9, b: 0.9, a: 1}
+    pantsEnabled: 0
+    pantsColor: {r: 0.3, g: 0.3, b: 0.5, a: 1}
+  persistSkin: 1
 --- !u!4 &1988242827
 Transform:
   m_ObjectHideFlags: 0
@@ -9480,7 +9549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2130309341
 RectTransform:
   m_ObjectHideFlags: 0
