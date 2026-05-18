@@ -3919,8 +3919,8 @@ RectTransform:
   - {fileID: 1841568840}
   - {fileID: 1036186776}
   - {fileID: 1385540396}
-  - {fileID: 465839965}
   - {fileID: 1118389020}
+  - {fileID: 465839965}
   - {fileID: 460963071}
   m_Father: {fileID: 0}
   m_RootOrder: 70
@@ -4300,7 +4300,7 @@ RectTransform:
   - {fileID: 862917993}
   - {fileID: 891016428}
   m_Father: {fileID: 390651919}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4331,7 +4331,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 465839967}
   titleText: {fileID: 1609184925}
   bodyText: {fileID: 1563529427}
-  placeholderImage: {fileID: 2015861583}
+  placeholderImage: {fileID: 0}
   doneButton: {fileID: 2060860087}
 --- !u!225 &465839967
 CanvasGroup:
@@ -7318,7 +7318,7 @@ RectTransform:
   - {fileID: 1132602039}
   - {fileID: 1368310683}
   m_Father: {fileID: 390651919}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14797,6 +14797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2015861580}
   - component: {fileID: 2015861582}
+  - component: {fileID: 2015861584}
   - component: {fileID: 2015861583}
   m_Layer: 5
   m_Name: VideoFrame
@@ -14822,8 +14823,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3}
-  m_SizeDelta: {x: 990, y: 530}
+  m_AnchoredPosition: {x: -0.0000019073, y: 28.22}
+  m_SizeDelta: {x: 701.816, y: 713.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2015861582
 CanvasRenderer:
@@ -14842,7 +14843,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2015861579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -14853,16 +14854,46 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Texture: {fileID: 8400000, guid: 5f7b3019583e5b745b7b0190126c9864, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!328 &2015861584
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015861579}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: bc2aba836b051094ea0864dd686cd300, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 5f7b3019583e5b745b7b0190126c9864, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &2043351333
 GameObject:
   m_ObjectHideFlags: 0
