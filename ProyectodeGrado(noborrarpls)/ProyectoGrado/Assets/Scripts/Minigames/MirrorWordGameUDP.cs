@@ -13,7 +13,7 @@ using TMPro;
 /// </summary>
 public class MirrorWordGameUDP : MonoBehaviour
 {
-    enum Pose { HandsUp, TPose, TouchFace, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips }
+    enum Pose { HandsUp, TPose, TouchFace, ArmsWide, HandsDown, Squat, OneArmUp, HandsOnHips, StrongMan }
 
     [Header("UI")]
     public TextMeshProUGUI wordText;
@@ -58,7 +58,7 @@ public class MirrorWordGameUDP : MonoBehaviour
 
     private readonly string[] poseNames = {
         "HANDS UP", "T POSE", "TOUCH FACE", "ARMS WIDE", "HANDS DOWN",
-        "SQUAT", "ONE ARM UP", "HANDS ON HIPS"
+        "SQUAT", "ONE ARM UP", "HANDS ON HIPS", "STRONG MAN"
     };
 
     // Estado
@@ -280,26 +280,32 @@ public class MirrorWordGameUDP : MonoBehaviour
             {
                 float tolY  = sw * 0.35f * tolMult;
                 float extTh = sw * 0.8f / tolMult;
+                // Abs en X para ser robusto a si la camara espeja o no: solo
+                // exige que la muneca este lejos del hombro horizontalmente.
                 return new[] {
                     new PosePart {
                         joints = new[] {11,13,15}, bones = new[] {1,2},
-                        validator = () => Mathf.Abs(lm(15).y - lm(11).y) < tolY && (lm(11).x - lm(15).x) > extTh
+                        validator = () => Mathf.Abs(lm(15).y - lm(11).y) < tolY && Mathf.Abs(lm(11).x - lm(15).x) > extTh
                     },
                     new PosePart {
                         joints = new[] {12,14,16}, bones = new[] {3,4},
-                        validator = () => Mathf.Abs(lm(16).y - lm(12).y) < tolY && (lm(16).x - lm(12).x) > extTh
+                        validator = () => Mathf.Abs(lm(16).y - lm(12).y) < tolY && Mathf.Abs(lm(16).x - lm(12).x) > extTh
                     }
                 };
             }
             case Pose.TouchFace:
             {
-                float tolDist = sw * 0.35f * tolMult;
+                // Distancia 2D (sin Z, que en MediaPipe tiene escala distinta y
+                // explota cuando la mano va al frente de la cara). Tolerancia mas
+                // amplia: cualquier punto de la cara, no solo la punta de la nariz.
+                float tolDist = sw * 0.75f * tolMult;
+                Vector2 xy(int k) { var v = lm(k); return new Vector2(v.x, v.y); }
                 return new[] {
                     new PosePart {
                         joints = new[] {0,15,16}, bones = new[] {2,4},
                         validator = () =>
-                            Vector3.Distance(lm(15), lm(0)) < tolDist ||
-                            Vector3.Distance(lm(16), lm(0)) < tolDist
+                            Vector2.Distance(xy(15), xy(0)) < tolDist ||
+                            Vector2.Distance(xy(16), xy(0)) < tolDist
                     }
                 };
             }
@@ -315,16 +321,18 @@ public class MirrorWordGameUDP : MonoBehaviour
             }
             case Pose.HandsDown:
             {
-                float tolY = sw * 0.3f * tolMult;
-                float hipY = (lm(23).y + lm(24).y) * 0.5f;
+                // Referencia: hombro en vez de cadera. Asi solo pedimos que las
+                // munecas esten "abajo del torso", no necesariamente al nivel del
+                // muslo. Pose mas natural de "brazos relajados a los lados".
+                float tolY = sw * 0.6f * tolMult;
                 return new[] {
                     new PosePart {
-                        joints = new[] {15,23}, bones = new[] {1,2},
-                        validator = () => (lm(15).y - hipY) > tolY
+                        joints = new[] {11,15}, bones = new[] {1,2},
+                        validator = () => (lm(15).y - lm(11).y) > tolY
                     },
                     new PosePart {
-                        joints = new[] {16,24}, bones = new[] {3,4},
-                        validator = () => (lm(16).y - hipY) > tolY
+                        joints = new[] {12,16}, bones = new[] {3,4},
+                        validator = () => (lm(16).y - lm(12).y) > tolY
                     }
                 };
             }
@@ -362,21 +370,49 @@ public class MirrorWordGameUDP : MonoBehaviour
             }
             case Pose.HandsOnHips:
             {
-                float tolDist = sw * 0.45f * tolMult;
+                // Tolerancias separadas: en Y un poco mas estrechas (la mano debe
+                // estar cerca de la altura de la cadera), en X mas anchas (el codo
+                // queda flexionado y la muneca puede caer ligeramente afuera de la
+                // cadera). Subimos tolerancia general para no exigir precision quirurgica.
+                float tolY = sw * 0.55f * tolMult;
+                float tolX = sw * 0.85f * tolMult;
                 return new[] {
                     new PosePart {
                         joints = new[] {11,13,15,23},
                         bones  = new[] {1,2,5},
                         validator = () =>
-                            Mathf.Abs(lm(15).y - lm(23).y) < tolDist &&
-                            Mathf.Abs(lm(15).x - lm(23).x) < tolDist
+                            Mathf.Abs(lm(15).y - lm(23).y) < tolY &&
+                            Mathf.Abs(lm(15).x - lm(23).x) < tolX
                     },
                     new PosePart {
                         joints = new[] {12,14,16,24},
                         bones  = new[] {3,4,6},
                         validator = () =>
-                            Mathf.Abs(lm(16).y - lm(24).y) < tolDist &&
-                            Mathf.Abs(lm(16).x - lm(24).x) < tolDist
+                            Mathf.Abs(lm(16).y - lm(24).y) < tolY &&
+                            Mathf.Abs(lm(16).x - lm(24).x) < tolX
+                    }
+                };
+            }
+            case Pose.StrongMan:
+            {
+                // Bicep flex: codo a la altura del hombro, antebrazo vertical
+                // (muneca arriba del codo y aprox sobre el).
+                float tolY = sw * 0.35f * tolMult;
+                float tolX = sw * 0.55f * tolMult;
+                return new[] {
+                    new PosePart {
+                        joints = new[] {11,13,15}, bones = new[] {1,2},
+                        validator = () =>
+                            Mathf.Abs(lm(13).y - lm(11).y) < tolY &&
+                            (lm(13).y - lm(15).y)         > tolY * 0.5f &&
+                            Mathf.Abs(lm(15).x - lm(13).x) < tolX
+                    },
+                    new PosePart {
+                        joints = new[] {12,14,16}, bones = new[] {3,4},
+                        validator = () =>
+                            Mathf.Abs(lm(14).y - lm(12).y) < tolY &&
+                            (lm(14).y - lm(16).y)         > tolY * 0.5f &&
+                            Mathf.Abs(lm(16).x - lm(14).x) < tolX
                     }
                 };
             }

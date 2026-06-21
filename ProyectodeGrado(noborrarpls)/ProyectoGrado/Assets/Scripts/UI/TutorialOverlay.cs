@@ -70,12 +70,55 @@ public class TutorialOverlay : MonoBehaviour
             canvasGroup.blocksRaycasts = false;
         }
 
+        EnsureRaycastBlocker();
+
         // Conectar el boton aqui de forma permanente.
         if (doneButton)
         {
             doneButton.onClick.RemoveListener(OnDonePressed);
             doneButton.onClick.AddListener(OnDonePressed);
         }
+    }
+
+    // CanvasGroup.blocksRaycasts solo bloquea raycasts que ya golpearon un grafico
+    // dentro de este subtree. Sin un Image fullscreen con raycastTarget, los clicks
+    // pasan al DifficultyPanel detras. Y si el RectTransform no esta a fullstretch,
+    // en aspect ratios anchos (4K, Free Aspect) la escena se ve a los lados.
+    // Forzamos ambas cosas aqui.
+    void EnsureRaycastBlocker()
+    {
+        StretchToParent(GetComponent<RectTransform>());
+
+        var ownImage = GetComponent<Image>();
+        if (ownImage != null)
+        {
+            ownImage.raycastTarget = true;
+            return;
+        }
+
+        var existing = transform.Find("__RaycastBlocker");
+        if (existing != null) return;
+
+        var go = new GameObject("__RaycastBlocker", typeof(RectTransform), typeof(Image));
+        var rt = (RectTransform)go.transform;
+        rt.SetParent(transform, false);
+        rt.SetAsFirstSibling();
+        StretchToParent(rt);
+
+        var img = go.GetComponent<Image>();
+        img.color         = new Color(0f, 0f, 0f, 0f);
+        img.raycastTarget = true;
+    }
+
+    static void StretchToParent(RectTransform rt)
+    {
+        if (rt == null) return;
+        rt.anchorMin        = Vector2.zero;
+        rt.anchorMax        = Vector2.one;
+        rt.offsetMin        = Vector2.zero;
+        rt.offsetMax        = Vector2.zero;
+        rt.anchoredPosition = Vector2.zero;
+        rt.localScale       = Vector3.one;
     }
 
     void Start()
@@ -89,6 +132,13 @@ public class TutorialOverlay : MonoBehaviour
     {
         if (_isVisible) return;
         _isVisible = true;
+
+        // Overlay encima de DifficultyPanel; PoseCursor encima del overlay
+        // (asi el cursor sigue visible para hacer dwell sobre el boton Listo).
+        transform.SetAsLastSibling();
+        var cursor = FindObjectOfType<PoseCursor>();
+        if (cursor != null && cursor.transform.parent == transform.parent)
+            cursor.transform.SetAsLastSibling();
 
         if (titleText)        titleText.text   = title;
         if (bodyText)         bodyText.text    = body;

@@ -233,12 +233,12 @@ public class PoseCursor : MonoBehaviour
         _ped.position = screenPos;
         _raycastResults.Clear();
         EventSystem.current.RaycastAll(_ped, _raycastResults);
-        foreach (var r in _raycastResults)
-        {
-            var b = r.gameObject.GetComponentInParent<Button>();
-            if (b != null && b.interactable) return b;
-        }
-        return null;
+        if (_raycastResults.Count == 0) return null;
+        // Solo el hit topmost cuenta: respeta el orden visual y permite que un
+        // panel "blocker" (Image fullscreen con raycastTarget) absorba los clicks
+        // que de otro modo pasarian a botones detras. Comportamiento UI estandar.
+        var b = _raycastResults[0].gameObject.GetComponentInParent<Button>();
+        return (b != null && b.interactable) ? b : null;
     }
 
     void InvokeButton(Button b)

@@ -125,7 +125,7 @@ public class PoseSilhouette : MonoBehaviour
 
         poseData["HANDS UP"]      = MakePose(N, (13,.62f,.20f),(14,.38f,.20f),(15,.60f,.04f),(16,.40f,.04f));
         poseData["T POSE"]        = MakePose(N, (13,.74f,.34f),(14,.26f,.34f),(15,.90f,.34f),(16,.10f,.34f));
-        poseData["TOUCH HEAD"]    = MakePose(N, (13,.60f,.22f),(15,.52f,.08f));
+        poseData["TOUCH FACE"]    = MakePose(N, (13,.60f,.22f),(15,.52f,.08f));
         poseData["ARMS WIDE"]     = MakePose(N, (13,.72f,.40f),(14,.28f,.40f),(15,.92f,.42f),(16,.08f,.42f));
         poseData["HANDS DOWN"]    = MakePose(N, (13,.62f,.54f),(14,.38f,.54f),(15,.59f,.73f),(16,.41f,.73f));
         poseData["SQUAT"]         = MakePose(N, (23,.57f,.70f),(24,.43f,.70f),
@@ -135,6 +135,7 @@ public class PoseSilhouette : MonoBehaviour
                                                 (15,.66f,.68f),(16,.34f,.68f));
         poseData["ONE ARM UP"]    = MakePose(N, (13,.60f,.20f),(15,.58f,.04f));
         poseData["HANDS ON HIPS"] = MakePose(N, (13,.63f,.48f),(14,.37f,.48f),(15,.57f,.62f),(16,.43f,.62f));
+        poseData["STRONG MAN"]    = MakePose(N, (13,.74f,.34f),(14,.26f,.34f),(15,.74f,.18f),(16,.26f,.18f));
     }
 
     static Vector2[] NeutralLandmarks()
